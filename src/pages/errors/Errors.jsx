@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ErrorsPage = () => {
+const Errors = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-6">
       <div className="text-center max-w-xl">
@@ -44,4 +44,4 @@ const ErrorsPage = () => {
   );
 };
 
-export default ErrorsPage;
+export default Errors;
