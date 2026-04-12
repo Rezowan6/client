@@ -22,31 +22,33 @@ const VerifyEmail = () => {
     verify();
   }, [token]);
 
-  return (
-    <div style={styles.container}>
-      {status === "loading" && (
-        <h2>⏳ Verifying your email...</h2>
-      )}
+return (
+  <div style={styles.container}>
+    
+    {status === "loading" && (
+      <h2>⏳ Verifying your email...</h2>
+    )}
 
-      {status !== "loading" && (
-        <div>
-          <h2 style={{ color: "green" }}>
-            ✅ Email Verified Successfully
-          </h2>
-          <p>You can now login to your account.</p>
-        </div>
-      )}
+    {!error && status !== "loading" && (
+      <div>
+        <h2 style={{ color: "green" }}>
+          ✅ {status}
+        </h2>
+        <p>You can now login to your account.</p>
+      </div>
+    )}
 
-      {error && (
-        <div>
-          <h2 style={{ color: "red" }}>
-            ❌ Verification Failed
-          </h2>
-          <p>Invalid or expired token.</p>
-        </div>
-      )}
-    </div>
-  );
+    {error && (
+      <div>
+        <h2 style={{ color: "red" }}>
+          ❌ Verification Failed
+        </h2>
+        <p>{status}</p>
+      </div>
+    )}
+
+  </div>
+);
 };
 
 const styles = {

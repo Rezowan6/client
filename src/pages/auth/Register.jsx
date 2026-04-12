@@ -36,6 +36,8 @@ const Register = () => {
     } catch (error) {
       const message = error.response?.data?.message || "Something went wrong";
 
+      resetForm();
+
       alert(message); // show to user
     }
   };

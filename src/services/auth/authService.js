@@ -12,7 +12,7 @@ export const registerUser = async (data) => {
 // verify email 
 export const verifyEmail = async (token) => {
   const res = await API.get(
-    `/auth/register/${token}`,
+    `/auth/verify-email/${token}`,
   );
   return res.data;
 };
