@@ -26,11 +26,11 @@ const Register = () => {
 
       console.log(res);
 
-      alert(res, "Registration successful");
+      alert(res.message || "Registration successful");
 
       resetForm();
 
-      if (res.success) {
+      if (res?.data?.success) {
         navigate("/login");
       }
     } catch (error) {

@@ -1,16 +1,26 @@
-import { Navigate } from "react-router-dom"
-import Button from "../../components/Button/Button"
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
-const registerPage = () => {
-  <Navigate to='/register' />
-}
 const Home = () => {
-  return (
-    <div>
-      <h1>Welcome My App</h1>
-      <Button type="button" text="Register" onclickHandle={registerPage} />
-    </div>
-  )
-}
+  const navigate = useNavigate();
 
-export default Home
+  const registerPage = () => {
+    navigate("/register");
+  };
+  return (
+    <>
+      <div className="bg-black text-white p-6">
+        <h1 className="text-4xl mb-6">Welcome My App</h1>
+        <div className="lg:max-w-xl">
+          <Button
+            type="button"
+            text="Create Manager"
+            onclickHandle={registerPage}
+          />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Home;

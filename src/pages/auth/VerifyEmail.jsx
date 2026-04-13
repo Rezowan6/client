@@ -5,17 +5,20 @@ import { verifyEmail } from "../../services/auth/authService.js";
 const VerifyEmail = () => {
   const { token } = useParams();
 
-  const [status, setStatus] = useState("loading");
-  const [error, setError] = useState(false);
+const [loading, setLoading] = useState(true);
+const [message, setMessage] = useState("");
+const [error, setError] = useState(false);
 
   useEffect(() => {
     const verify = async () => {
       try {
         const res = await verifyEmail(token);
-        setStatus(res.message || "Verified Successfully");
+        setMessage(res.message || "Verified Successfully");
+        setLoading(false);
       } catch (error) {
-        setStatus(error?.response?.data?.message || "Error occurred");
+        setMessage(error?.response?.data?.message || "Error occurred");
         setError(true);
+        setLoading(false);
       }
     };
 
@@ -25,14 +28,14 @@ const VerifyEmail = () => {
 return (
   <div style={styles.container}>
     
-    {status === "loading" && (
-      <h2>⏳ Verifying your email...</h2>
+    {loading && (
+      <h2> Verifying your email...</h2>
     )}
 
-    {!error && status !== "loading" && (
+    {!error && message !== "loading" && (
       <div>
         <h2 style={{ color: "green" }}>
-          ✅ {status}
+           {message}
         </h2>
         <p>You can now login to your account.</p>
       </div>
@@ -41,9 +44,9 @@ return (
     {error && (
       <div>
         <h2 style={{ color: "red" }}>
-          ❌ Verification Failed
+           Verification Failed
         </h2>
-        <p>{status}</p>
+        <p>{message}</p>
       </div>
     )}
 
