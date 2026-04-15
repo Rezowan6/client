@@ -8,12 +8,13 @@ const Input = ({
   required = false,
   disabled = false,
   placeholder = "",
+  labelStyle,
 }) => {
   return (
     <div className="flex flex-col gap-1 w-full">
       {/* Label */}
       {label && (
-        <label htmlFor={name} className="text-sm font-medium text-gray-700">
+        <label htmlFor={name} className={`text-sm font-medium ${labelStyle}`}>
           {label}:
 
           {required && <span className="text-red-500 ml-1">*</span>}

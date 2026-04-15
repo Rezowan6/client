@@ -11,7 +11,7 @@ export default function useAlert() {
     autoHide: 0,
   });
 
-  const showAlert = (title, message, autoHide = 6000) => {
+  const showAlert = (title, message, autoHide = 10000) => {
     setAlertData({
       show: true,
       title,

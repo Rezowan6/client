@@ -1,67 +1,56 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { verifyEmail } from "../../services/auth/authService.js";
 
 const VerifyEmail = () => {
   const { token } = useParams();
+  const navigate = useNavigate();
 
-const [loading, setLoading] = useState(true);
-const [message, setMessage] = useState("");
-const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
+    let timer;
+
     const verify = async () => {
       try {
         const res = await verifyEmail(token);
         setMessage(res.message || "Verified Successfully");
         setLoading(false);
+
+        timer = setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       } catch (error) {
         setMessage(error?.response?.data?.message || "Error occurred");
-        setError(true);
         setLoading(false);
       }
     };
 
     verify();
-  }, [token]);
 
-return (
-  <div style={styles.container}>
-    
-    {loading && (
-      <h2> Verifying your email...</h2>
-    )}
+    return () => clearTimeout(timer); // cleanup
+  }, [token, navigate]);
 
-    {!error && message !== "loading" && (
-      <div>
-        <h2 style={{ color: "green" }}>
-           {message}
-        </h2>
-        <p>You can now login to your account.</p>
-      </div>
-    )}
+  return (
+    <div className="text-white">
+      {loading && <h2 className="text-xl text-white">Verifying your email...</h2>}
 
-    {error && (
-      <div>
-        <h2 style={{ color: "red" }}>
-           Verification Failed
-        </h2>
-        <p>{message}</p>
-      </div>
-    )}
+      {!loading && message && (
+        <div>
+          <h2 className="text-3xl">{message}</h2>
+          <p>You can now login to your account.</p>
+        </div>
+      )}
 
-  </div>
-);
-};
-
-const styles = {
-  container: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
+      {message && !loading && (
+        <div>
+          <h2 className="text-red-500">Verification Failed</h2>
+          <p className="text-red-500">{message}</p>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default VerifyEmail;

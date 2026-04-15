@@ -19,8 +19,14 @@ export const verifyEmail = async (token) => {
 
 // login user
 export const loginUser = async (data) => {
+
   const res = await API.post("/auth/login", data);
-  console.log({res})
+
+  const { accessToken } = res.data.data;
+
+  localStorage.setItem("accessToken", accessToken);
+
   return res.data;
 };
+
 
