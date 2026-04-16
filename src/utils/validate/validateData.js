@@ -51,3 +51,19 @@ export const validateCost = (values) => {
 
   return errors;
 };
+// Cost
+export const validateIncedentalExpenses = (values) => {
+  const errors = {};
+
+  const { otherCost, egg, } = values;
+
+  // required email
+  if (!otherCost && !egg) {
+    errors.otherCost = "OtherCost is required";
+  }
+  if (!egg && !otherCost) {
+    errors.egg = "Egg is required";
+  }
+
+  return errors;
+};

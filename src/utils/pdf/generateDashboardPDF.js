@@ -7,6 +7,8 @@ export const generateDashboardPDF = ({
   totalExpenses,
   totalMeal,
   expensePerMeal,
+  totalEggCost,
+  totalIncidentalCost,
 }) => {
   if (!students || students.length === 0) {
     alert("No student data to export!");
@@ -41,28 +43,42 @@ export const generateDashboardPDF = ({
   doc.setFillColor(245, 245, 245);
   doc.roundedRect(margin, boxY, boxWidth, boxHeight, 3, 3, "F");
 
-  const summaryItems = [
-    {
-      label: "Total Money",
-      value: totalMoney.toLocaleString(),
-      color: [0, 102, 51],
-    },
-    {
-      label: "Total Expenses",
-      value: totalExpenses.toLocaleString(),
-      color: [204, 0, 0],
-    },
-    {
-      label: "Total Meal",
-      value: totalMeal.toLocaleString(),
-      color: [102, 0, 204],
-    },
-  ];
+const summaryItems = [
+  {
+    label: "Per Meal Expense",
+    value: expensePerMeal.toLocaleString(),
+    color: [204, 0, 0],
+  },
+  {
+    label: "Total Money",
+    value: totalMoney.toLocaleString(),
+    color: [0, 128, 128],
+  },
+  {
+    label: "Total Expenses",
+    value: totalExpenses.toLocaleString(),
+    color: [255, 0, 0],
+  },
+  {
+    label: "Total Meal",
+    value: totalMeal.toLocaleString(),
+    color: [128, 0, 128],
+  },
+  {
+    label: "Total Egg Cost",
+    value: totalEggCost.toLocaleString(),
+    color: [255, 140, 0],
+  },
+  {
+    label: "Total Incidental Cost",
+    value: totalIncidentalCost.toLocaleString(),
+    color: [0, 100, 200],
+  },
+];
 
   const spacing = boxWidth / summaryItems.length;
 
-  doc.setFontSize(12);
-  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8);
 
   summaryItems.forEach((item, index) => {
     const x = margin + spacing * index + 4;
@@ -84,6 +100,8 @@ export const generateDashboardPDF = ({
     "Name",
     "Total Money",
     "Total Meal",
+    "Egg",
+    "Incidental",
     "Expenses",
     "Remaining Balance",
     "Status",
@@ -100,6 +118,8 @@ export const generateDashboardPDF = ({
       student.name,
       student.totalMoney.toLocaleString(),
       student.totalMill.toLocaleString(),
+      student.eggCost.toFixed(2),
+      student.incidentalCost.toFixed(2),
       student.expense.toFixed(2),
       student.balance.toFixed(2),
       status,
@@ -117,7 +137,7 @@ export const generateDashboardPDF = ({
 
     didParseCell: function (data) {
       // Remaining Balance column
-      if (data.column.index === 5 && data.cell.section === "body") {
+      if (data.column.index === 7 && data.cell.section === "body") {
         const value = Number(data.cell.raw);
 
         if (value > 0) {
@@ -132,7 +152,7 @@ export const generateDashboardPDF = ({
       }
 
       // Status column
-      if (data.column.index === 6 && data.cell.section === "body") {
+      if (data.column.index === 8 && data.cell.section === "body") {
         const status = data.cell.raw;
 
         if (status === "Receive") {

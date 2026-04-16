@@ -12,6 +12,7 @@ import useAlert from "../../hooks/useAlert";
 import useCrudManager from "../../hooks/useCrudManager";
 import { validateCost } from "../../utils/validate/validateData";
 import useForm from "./../../hooks/useForm";
+
 const CostAdd = () => {
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
@@ -33,7 +34,6 @@ const CostAdd = () => {
 
   // edit cost
 const editCost = (data) => {
-  console.log(data)
   setEditId(data.day)
   data?.items?.forEach((item) => {
     setValues({cost: item.cost, desc: item.desc, signature: item.signature})
@@ -84,7 +84,7 @@ const editCost = (data) => {
             value={values.desc}
             onChange={handleChange}
             error={errors.desc}
-            placeholder="Enter Cost"
+            placeholder="Enter Desc"
           />
           <Input
             label="Signature"

@@ -2,15 +2,18 @@ import EditBtn from "../../components/Button/EditBtn";
 
 import useCrudManager from "../../hooks/useCrudManager";
 
+import ReusableCrudPage from "../../components/pages/ReusableCrudPage";
+import millConfig from "../../configs/millConfig";
+import {
+  useAddMillMutation,
+  useGetUsersMillQuery,
+  useUpdateMillMutation,
+} from "../../features/mill/millApi";
 import useAlert from "../../hooks/useAlert";
 import useForm from "../../hooks/useForm";
 import { validateMill } from "../../utils/validate/validateData";
-import millConfig from "../../configs/millConfig";
-import { useAddMillMutation, useGetUsersMillQuery, useUpdateMillMutation } from "../../features/mill/millApi";
-import ReusableCrudPage from "../../components/pages/ReusableCrudPage";
 
 const MillUpdate = () => {
-
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
 
@@ -18,12 +21,12 @@ const MillUpdate = () => {
     useForm({ userId: "", mill: "" }, validateMill);
 
   const { items, data, isLoading, editId, submit, editItem } = useCrudManager({
-                                                              useGetQuery: useGetUsersMillQuery,
-                                                              useAddMutation: useAddMillMutation,
-                                                              useUpdateMutation: useUpdateMillMutation,
-                                                              keyField1: "dailyMill",
-                                                              keyField2: "mill",
-                                                            });
+    useGetQuery: useGetUsersMillQuery,
+    useAddMutation: useAddMillMutation,
+    useUpdateMutation: useUpdateMillMutation,
+    keyField1: "dailyMill",
+    keyField2: "mill",
+  });
 
   const millSubmit = () => submit({ values, showAlert, resetForm });
 
@@ -56,6 +59,7 @@ const MillUpdate = () => {
         handleSubmit={handleSubmit(millAddConfirm)}
         actions={actions}
         grandTotal={data?.data?.grandTotalMill || 0}
+        totalText="Total"
         errors={errors}
         alertData={alertData}
         closeAlert={closeAlert}

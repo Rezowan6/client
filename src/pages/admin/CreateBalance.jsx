@@ -57,6 +57,7 @@ const CreateBalance = () => {
         handleChange={handleChange}
         handleSubmit={handleSubmit(balanceAddConfirm)}
         actions={actions}
+        totalText="Total"
         grandTotal={data?.data?.grandTotalTk || 0}
         errors={errors}
         alertData={alertData}

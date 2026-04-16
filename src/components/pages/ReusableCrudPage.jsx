@@ -12,7 +12,9 @@ const ReusableCrudPage = ({
   handleSubmit,
   actions,
   editId,
+  totalText,
   grandTotal,
+  totalEgg=null,
   errors,
   alertData,
   closeAlert,
@@ -55,7 +57,7 @@ const ReusableCrudPage = ({
           }
 
           return (
-            <div className="w-1/2 lg:w-1/4 py-4">
+            <div key={field.name} className="w-1/2 lg:w-1/4 py-4">
               <Input
                 key={field.name}
                 name={field.name}
@@ -74,7 +76,8 @@ const ReusableCrudPage = ({
 
       {/* TOTAL */}
       <div className="text-2xl text-cyan-500 text-end pb-4">
-        <h3>Total: {grandTotal || 0}</h3>
+        <h3>{totalText}: {grandTotal || 0}</h3>
+        {totalEgg ? <p>Total Egg: {totalEgg}</p> : ''}
       </div>
 
       {/* TABLE */}

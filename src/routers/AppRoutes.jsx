@@ -14,6 +14,7 @@ import CreateBalance from "../pages/admin/CreateBalance";
 import MillUpdate from "../pages/admin/MillUpdate";
 import CostAdd from "../pages/admin/CostAdd";
 import AdminDashboard from "../pages/dashboard/AdminDashboard";
+import IncidentalExpenses from "../pages/admin/IncidentalExpenses";
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
       <Route path="/cost" element={<CostAdd />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
       <Route path="/dashboard" element={<UserDashboard />} />
+      <Route path="/incidental-cost" element={<IncidentalExpenses />} />
       <Route path="*" element={<Errors />} />
     </Routes>
   );

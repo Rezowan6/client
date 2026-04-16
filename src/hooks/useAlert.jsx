@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export default function useAlert() {
-  
   const [alertData, setAlertData] = useState({
     show: false,
     title: "",

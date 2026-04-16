@@ -1,5 +1,4 @@
-
-const ReusableTable = ({ columns, data, actions=[] }) => {
+const ReusableTable = ({ columns, data, actions = [] }) => {
   return (
     <table className="w-full text-center border-collapse">
       {/* table header */}
@@ -29,14 +28,15 @@ const ReusableTable = ({ columns, data, actions=[] }) => {
                   </td>
                 ))}
 
-                <td className="border py-2 ">
+                <td className="border py-2">
                   {actions.map((action, i) => (
-                    <div
-                    key={i}
-                    onClick={() => action.onClick(item)}
-                    className={action.className}
-                    >
-                      {action.label}
+                    <div key={i} className={action.className}>
+                      <span
+                        onClick={() => action.onClick(item)}
+                        className="cursor-pointer inline-flex"
+                      >
+                        {action.label}
+                      </span>
                     </div>
                   ))}
                 </td>

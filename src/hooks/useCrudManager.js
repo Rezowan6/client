@@ -5,7 +5,9 @@ const useCrudManager = ({
   useAddMutation,
   useUpdateMutation,
   keyField1 = "value", // tk / mill / etc
-  keyField2 = "value", // tk / mill / etc
+  keyField2 = "value",
+  keyField3 = null,
+  keyField4 = null,
 }) => {
   const [editId, setEditId] = useState(null);
 
@@ -15,7 +17,7 @@ const useCrudManager = ({
 
   const items = data?.data?.users || [];
 
-//   submit
+  //   submit
   const submit = async ({ values, showAlert, resetForm }) => {
     try {
       if (!editId) {
@@ -35,16 +37,28 @@ const useCrudManager = ({
     } catch (err) {
       showAlert("Error", err?.data?.message || "Operation failed");
       resetForm();
+      setEditId(null);
     }
   };
 
-//   edit
+  //   edit
   const editItem = (item, setValues) => {
     setEditId(item.userId);
 
+    const baseData = item[keyField1] || [];
+
+    const extraData = keyField3 ? item[keyField3] || [] : [];
+
     setValues({
       userId: item.userId,
-      [keyField2]: item[keyField1].map((day)=> day[keyField2]) || 0,
+
+      [keyField2]: baseData.map((day) => day[keyField2]),
+
+      ...(keyField4
+        ? {
+            [keyField4]: extraData.map((day) => day[keyField4]),
+          }
+        : {}),
     });
   };
 
