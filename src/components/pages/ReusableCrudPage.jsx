@@ -20,6 +20,7 @@ const ReusableCrudPage = ({
   closeAlert,
   confirmAction,
 }) => {
+  // console.log(alertData)
   const { data: allUser } = useGetUsersQuery();
 
   const users = allUser?.data?.users || [];
@@ -35,6 +36,7 @@ const ReusableCrudPage = ({
     <div className="text-white p-6">
       {/* FORM */}
       <form onSubmit={handleSubmit}>
+
         {config.form.fields.map((field) => {
           if (field.type === "select") {
             return (

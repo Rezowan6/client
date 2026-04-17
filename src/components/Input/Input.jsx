@@ -1,3 +1,5 @@
+import Style from "./input.module.css";
+
 const Input = ({
   label,
   name,
@@ -5,22 +7,10 @@ const Input = ({
   value,
   onChange,
   error,
-  required = false,
   disabled = false,
-  placeholder = "",
-  labelStyle,
 }) => {
   return (
-    <div className="flex flex-col gap-1 w-full">
-      {/* Label */}
-      {label && (
-        <label htmlFor={name} className={`text-sm font-medium ${labelStyle}`}>
-          {label}:
-
-          {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-      )}
-
+    <div className={Style.input_box}>
       {/* Input */}
       <input
         id={name}
@@ -28,31 +18,15 @@ const Input = ({
         type={type}
         value={value}
         onChange={onChange}
-        placeholder={`${placeholder}:`}
         disabled={disabled}
+        required
         className={`
-          w-full
-          px-4 py-2
-          border
-          rounded-lg
-          bg-white
-          text-gray-800
-          placeholder-gray-400
-          
-          focus:outline-none
-          focus:ring-2
-          focus:ring-teal-500
-          focus:border-teal-500
-          
-          disabled:bg-gray-100
-          disabled:cursor-not-allowed
-          
-          transition-all
-          duration-200
-          
-          ${error ? "border-red-500 focus:ring-red-500" : "border-gray-300"}
-        `}
+    bg-[#1d2b3a] text-white
+    ${error ? "border-red-500 focus:ring-red-500" : "border-gray-300"}
+  `}
       />
+      {/* Label */}
+      {label && <span htmlFor={name}>{label}</span>}
 
       {/* Error Message */}
       {error && <p className="text-sm text-red-500 mt-1">{error}</p>}

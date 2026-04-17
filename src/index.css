@@ -1,14 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.yesBtn{
-    @apply bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 text-white px-4 py-2 rounded-md w-1/2 font-medium hover:opacity-90 transition;
+html {
+  scroll-behavior: smooth;
 }
-.noBtn{
-    @apply bg-gradient-to-r from-red-400 via-pink-500 to-purple-500 text-white px-4 py-2 rounded-md w-1/2 font-medium hover:opacity-90 transition;
-}
-.okBtn{
-    @apply bg-gradient-to-r from-teal-400 via-purple-500 to-pink-500 text-white px-4 py-2 rounded-md w-full font-medium hover:opacity-90 transition;
+body {
+  background: linear-gradient(
+    90deg,
+    rgb(8, 8, 67),
+    rgb(8, 6, 40),
+    rgb(8, 8, 67)
+  );
+  color: #fff;
 }
 
+/* body {
+    @apply "tracking-wider"
+} */
+
+nav ul li .active {
+  color: aqua;
+}
+
+#nav_menu ul li NavLink {
+    @apply text-lg font-bold duration-300
+}
+#nav_menu ul li NavLink:hover {
+    @apply text-yellow-500
+}
+
+.yesBtn {
+  @apply bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 text-white px-4 py-2 rounded-md w-1/2 font-medium hover:opacity-90 transition;
+}
+.noBtn {
+  @apply bg-gradient-to-r from-red-400 via-pink-500 to-purple-500 text-white px-4 py-2 rounded-md w-1/2 font-medium hover:opacity-90 transition;
+}
+.okBtn {
+  @apply bg-gradient-to-r from-teal-400 via-purple-500 to-pink-500 text-white px-4 py-2 rounded-md w-full font-medium hover:opacity-90 transition;
+}

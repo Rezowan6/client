@@ -2,9 +2,9 @@ import { BrowserRouter } from "react-router-dom";
 
 // internal import
 import { Provider } from "react-redux";
+import { store } from "./app/store";
 import Navbar from "./components/Navbar/Navbar";
 import AppRoutes from "./routers/AppRoutes";
-import { store } from "./app/store";
 
 function App() {
   return (
@@ -12,7 +12,9 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Navbar />
-          <AppRoutes />
+          <div className="pt-16 sm:pt-20">
+            <AppRoutes />
+          </div>
         </BrowserRouter>
       </Provider>
     </>

@@ -4,7 +4,7 @@ import { MdOutlineDelete } from "react-icons/md";
 const EditBtn = ({ type, action, handleClick }) => {
   return (
     <button
-      className={`${action === "delete" ? "text-white" : "text-cyan-600"} text-xl lg:text-2xl`}
+      className={` ${action === "delete" ? "text-white" : "text-cyan-600"} text-xl lg:text-2xl`}
       type={type}
       onClick={handleClick}
     >
