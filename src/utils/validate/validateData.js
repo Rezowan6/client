@@ -51,7 +51,7 @@ export const validateCost = (values) => {
 
   return errors;
 };
-// Cost
+// other Cost
 export const validateIncedentalExpenses = (values) => {
   const errors = {};
 
@@ -63,6 +63,45 @@ export const validateIncedentalExpenses = (values) => {
   }
   if (!egg && !otherCost) {
     errors.egg = "Egg is required";
+  }
+
+  return errors;
+};
+// permanent info
+export const validatePermanentInfo = (values) => {
+  const errors = {};
+
+  const { location,  mobileNumber, department, semester  } = values;
+
+  // required email
+  if (!location ) {
+    errors.location = "Location is required";
+  }
+  if (!mobileNumber ) {
+    errors.mobileNumber = "MobileNumber is required";
+  }
+  if (!department ) {
+    errors.department = "department is required";
+  }
+  if (!semester ) {
+    errors.semester = "semester is required";
+  }
+
+  return errors;
+};
+
+// role
+export const validateRole = (values) => {
+  const errors = {};
+
+  const {userId, role } = values;
+
+  // required email
+  if (!userId ) {
+    errors.userId = "User id is required";
+  }
+  if (!role ) {
+    errors.role = "Role is required";
   }
 
   return errors;

@@ -10,7 +10,8 @@ import { validateRegister } from "./../../utils/validate/validateRegister";
 const Register = () => {
   const navigate = useNavigate();
 
-  const { alertData, showAlert, showConfirm, closeAlert, confirmAction } = useAlert();
+  const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
+    useAlert();
   const { values, errors, handleChange, resetForm } = useForm(
     {
       name: "",
@@ -41,11 +42,11 @@ const Register = () => {
     }
   };
 
-    const registerConfirm = () => {
+  const registerConfirm = () => {
     showConfirm(
       "Create User",
       "Are you sure you want to create this user?",
-      () => submitRegister(values) // IMPORTANT FIX
+      () => submitRegister(values), // IMPORTANT FIX
     );
   };
 
@@ -53,21 +54,22 @@ const Register = () => {
     <>
       {/* register form */}
 
-      <Form
-        config={registerConfig}
-        submitRegister={submitRegister}
-        values={values}
-        errors={errors}
-        handleChange={handleChange}
-              handleSubmit={(e) => {
-        e.preventDefault();
-        registerConfirm();
-      }}
-        resetForm={resetForm}
-        alertData={alertData}
-        closeAlert={closeAlert}
-        confirmAction={confirmAction}
-      />
+      <div className="mt-32 sm:mt-0">
+        <Form
+          config={registerConfig}
+          values={values}
+          errors={errors}
+          handleChange={handleChange}
+          handleSubmit={(e) => {
+            e.preventDefault();
+            registerConfirm();
+          }}
+          resetForm={resetForm}
+          alertData={alertData}
+          closeAlert={closeAlert}
+          confirmAction={confirmAction}
+        />
+      </div>
     </>
   );
 };

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import mushroom from "../../assets/images/mushroom.png";
 import Button from "../../components/Button/Button";
-import Style from "./home.module.css";
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -12,12 +12,12 @@ const Home = () => {
   };
   return (
     <>
-      <section className={`${Style.container} container min-h-[100vh] flex justify-between items-center`}>
-        <div>
-          <h1 className="text-3xl text-white">Welcome this website</h1>
+      <section className={` mt-10 container w-full sm:h-[100vh] flex flex-col justify-between items-center gap-4 sm:flex-row`}>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-3xl text-cyan-500 font-lobster">Welcome this website</h1>
           <Button text="Create manegar" onclickHandle={registerPage} />
         </div>
-        <div className={Style.right}>
+        <div>
           <img src={mushroom} alt="mushroom" />
         </div>
       </section>

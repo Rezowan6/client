@@ -1,11 +1,10 @@
 const CostTable = ({ columns, data, actions }) => {
   const today = new Date().getDate();
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-2">Monthly Cost Report</h2>
+    <>
       <table className="w-full text-center border-collapse">
         {/* table header */}
-        <thead className="bg-gray-700">
+        <thead>
           <tr>
             <th className="border py-2">SL</th>
             {columns.map((col) => (
@@ -23,10 +22,10 @@ const CostTable = ({ columns, data, actions }) => {
             data?.dailyCosts?.map((dayItem, index) => {
               return dayItem.items.map((item, i) => (
                 <tr key={i}>
-                  <td className="border py-2 bg-yellow-900/50">{index + 1}</td>
+                  <td className="border py-2">{index + 1}</td>
 
                   {columns.map((col) => (
-                    <td key={col.key} className="border py-2 bg-yellow-900/50">
+                    <td key={col.key} className="border py-2">
                       {/* nested data handle */}
                       {col.key === "desc" && item.desc}
                       {col.key === "signature" && item.signature}
@@ -35,7 +34,7 @@ const CostTable = ({ columns, data, actions }) => {
                     </td>
                   ))}
 
-                  <td className="border py-2 bg-yellow-900/50">
+                  <td className="border py-2">
                     {actions.map((action, i) => {
                       const isEditable = dayItem.day === today;
 
@@ -46,7 +45,7 @@ const CostTable = ({ columns, data, actions }) => {
                           className={
                             isEditable
                               ? action.className
-                              : "text-gray-400 cursor-not-allowed"
+                              : "cursor-not-allowed"
                           }
                         >
                           {action.label}
@@ -64,7 +63,7 @@ const CostTable = ({ columns, data, actions }) => {
           )}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

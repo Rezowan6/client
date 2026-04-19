@@ -1,19 +1,19 @@
 import { useNavigate } from "react-router-dom";
 
 // internal import
+import Form from "../../components/form/Form.jsx";
 import loginConfig from "../../configs/loginConfig.js";
 import useAlert from "../../hooks/useAlert.jsx";
 import useForm from "../../hooks/useForm";
 import { loginUser } from "../../services/auth/authService.js";
 import { validateLogin } from "../../utils/validate/validateLogin";
-import Form from "../../components/form/Form.jsx";
 
 const Login = () => {
-  const { alertData, showAlert, closeAlert, confirmAction } = useAlert();
+  const { alertData, showAlert, closeAlert, showConfirm, confirmAction } = useAlert();
 
   const navigate = useNavigate();
 
-  const { values, errors, handleChange, resetForm, showConfirm } = useForm(
+  const { values, errors, handleChange, resetForm, } = useForm(
     { email: "", password: "" },
     validateLogin,
   );
@@ -22,17 +22,25 @@ const Login = () => {
   const submitLogin = async (data) => {
     try {
       const res = await loginUser(data);
+      console.log(res);
+
+      //  token save
+      localStorage.setItem("accessToken", res?.data?.accessToken);
+
+      //  user save
+      localStorage.setItem("user", JSON.stringify(res?.data?.user));
+
       showAlert("Success", res?.message || "User logged in success!");
+
       resetForm();
+
       navigate("/create-users");
     } catch (error) {
-      showAlert(
-        "Error",
-        error.res?.response?.data?.message || "Logged in Failed!",
-      );
+      showAlert("Error", error?.response?.data?.message || "Logged in Failed!");
     }
   };
 
+  // login confirm
   const loginConfirm = () => {
     showConfirm(
       "Login",
@@ -43,21 +51,22 @@ const Login = () => {
 
   return (
     <>
-      <Form
-        config={loginConfig}
-        submitRegister={submitLogin}
-        values={values}
-        errors={errors}
-        handleChange={handleChange}
-        handleSubmit={(e) => {
-          e.preventDefault();
-          loginConfirm();
-        }}
-        resetForm={resetForm}
-        alertData={alertData}
-        closeAlert={closeAlert}
-        confirmAction={confirmAction}
-      />
+      <div className="mt-32 sm:mt-0">
+        <Form
+          config={loginConfig}
+          values={values}
+          errors={errors}
+          handleChange={handleChange}
+          resetForm={resetForm}
+          handleSubmit={(e) => {
+            e.preventDefault();
+            loginConfirm();
+          }}
+          alertData={alertData}
+          closeAlert={closeAlert}
+          confirmAction={confirmAction}
+        />
+      </div>
     </>
   );
 };

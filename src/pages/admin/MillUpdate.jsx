@@ -49,7 +49,7 @@ const MillUpdate = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="text-white p-6">
+    <>
       <ReusableCrudPage
         config={millConfig}
         items={items}
@@ -65,7 +65,7 @@ const MillUpdate = () => {
         closeAlert={closeAlert}
         confirmAction={confirmAction}
       />
-    </div>
+    </>
   );
 };
 

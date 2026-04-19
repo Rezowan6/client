@@ -6,18 +6,22 @@ const AdminDashboard = () => {
   const { totalCost, totalEggCost, totalIncidentalCost, totalMill, totalTk } =
     totals;
 
-  if (isLoading) return <p className="text-white text-center">Loading...</p>;
+  if (isLoading) return <p className="text-center">Loading...</p>;
   return (
-    <div className=" bg-cover bg-center bg-fixed p-4 sm:p-6 lg:p-8 min-h-screen bg-gray-100 dark:bg-[#1E1E2F]/90 rounded-lg shadow-md space-y-6">
-      <h2 className="text-2xl sm:text-3xl font-semibold text-center">
-        Monthly Dashboard Repoart
-      </h2>
-      <p className="text-cyan-600">Per Meal Expense: {users?.totals?.perMill?.toFixed(2)}</p>
+    <div className=" bg-cover bg-center bg-fixed min-h-screen rounded-lg shadow-md space-y-6">
+      <div className="flex flex-col gap-1 sm:flex-row justify-between p-4 sm:p-8 items-center">
+        <h2 className="text-2xl sm:text-3xl text-cyan-500 font-semibold font-lobster text-center">
+          Monthly Dashboard Repoart
+        </h2>
+        <p className="text-cyan-500">
+          Per Meal Expense: {users?.totals?.perMill?.toFixed(2)}
+        </p>
+      </div>
 
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse text-center border rounded-lg">
-          <thead className="bg-gray-200 dark:bg-gray-700/50">
+          <thead>
             <tr>
               <th className="border px-2 sm:px-4 py-2 text-sm sm:text-base">
                 SL
@@ -54,14 +58,14 @@ const AdminDashboard = () => {
               return (
                 <tr
                   key={user._id || index}
-                  className="hover:bg-teal-100 dark:hover:bg-teal-600/30 transition-all text-sm sm:text-base cursor-pointer"
+                  className="transition-all text-sm sm:text-base cursor-pointer"
                 >
                   <td className="border px-2 sm:px-4 py-2">{index + 1}</td>
 
                   <td className="border px-2 sm:px-4 py-2">{user.name}</td>
 
                   <td className="border px-2 sm:px-4 py-2 text-center">
-                    ৳{user?.totalMoney.toFixed(2)}
+                    {user?.totalMoney.toFixed(2)}
                   </td>
                   {/* mill */}
                   <td className="border px-2 sm:px-4 py-2 text-center">
@@ -78,7 +82,7 @@ const AdminDashboard = () => {
 
                   {/* Expense */}
                   <td className="border px-2 sm:px-4 py-2 text-center">
-                    ৳{user.expense.toFixed(2)}
+                    {user.expense.toFixed(2)}
                   </td>
 
                   {/*  Balance with Color */}
@@ -92,7 +96,7 @@ const AdminDashboard = () => {
                           : "text-gray-500"
                     }`}
                   >
-                    ৳{user.balance.toFixed(2)}
+                    {user.balance.toFixed(2)}
                   </td>
 
                   <td
@@ -115,13 +119,13 @@ const AdminDashboard = () => {
               );
             })}
 
-            <tr className="font-semibold bg-teal-50 dark:bg-teal-700/20">
+            <tr className="font-semibold text-cyan-500">
               <td colSpan="2" className="border px-4 py-2 text-center">
                 Total
               </td>
               {/* total balance */}
               <td className="border px-4 py-2 text-center">
-                ৳{totalTk.toFixed(2)}
+                {totalTk.toFixed(2)}
               </td>
               {/* total mill */}
               <td className="border px-4 py-2 text-center">{totalMill}</td>
@@ -133,7 +137,7 @@ const AdminDashboard = () => {
               </td>
               {/* total expenses */}
               <td className="border px-4 py-2 text-center">
-                ৳{totalCost.toFixed(2)}
+                {totalCost.toFixed(2)}
               </td>
             </tr>
           </tbody>

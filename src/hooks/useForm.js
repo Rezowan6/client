@@ -4,9 +4,12 @@ const useForm = (initialState, validate) => {
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
 
+
   // input change handler
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked, dataset, } = e.target;
+
+    const groupName = dataset.group;
 
     const val = type === "checkbox" ? checked : value;
 
@@ -15,6 +18,24 @@ const useForm = (initialState, validate) => {
         ...prev,
         [name]: val,
       };
+
+      if (type === "checkbox" && groupName) {
+
+        // reset only same group
+        Object.keys(updatedValues).forEach((key) => {
+
+          if (typeof updatedValues[key] === "boolean" && key !== groupName ) {
+            updatedValues[key] = false;
+          }
+        });
+
+        if (checked) {
+          updatedValues[name] = true;
+          updatedValues[groupName] = name;
+        } else {
+          updatedValues[groupName] = "";
+        }
+      }
 
       // live validation
       if (validate) {

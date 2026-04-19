@@ -4,7 +4,7 @@ const Button = ({ type = "button", text = "add", onclickHandle }) => {
   return (
     <>
       <button
-        className={Style.btn}
+        className={`${Style.btn} w-full sm:w-32`}
         type={type}
         onClick={onclickHandle}
       >

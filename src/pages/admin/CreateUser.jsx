@@ -20,7 +20,7 @@ const CreateUser = () => {
       password: "",
       confirmPassword: "",
     },
-    validateRegister
+    validateRegister,
   );
 
   // submit API call
@@ -40,25 +40,29 @@ const CreateUser = () => {
     showConfirm(
       "Create User",
       "Are you sure you want to create this user?",
-      () => submitUser(values) // IMPORTANT FIX
+      () => submitUser(values), // IMPORTANT FIX
     );
   };
 
   return (
-    <Form
-      config={userCreateConfig}
-      values={values}
-      errors={errors}
-      handleChange={handleChange}
-      handleSubmit={(e) => {
-        e.preventDefault();
-        createConfirm();
-      }}
-      resetForm={resetForm}
-      alertData={alertData}
-      closeAlert={closeAlert}
-      confirmAction={confirmAction}
-    />
+    <>
+      <div className="mt-32 sm:mt-0">
+        <Form
+          config={userCreateConfig}
+          values={values}
+          errors={errors}
+          handleChange={handleChange}
+          handleSubmit={(e) => {
+            e.preventDefault();
+            createConfirm();
+          }}
+          resetForm={resetForm}
+          alertData={alertData}
+          closeAlert={closeAlert}
+          confirmAction={confirmAction}
+        />
+      </div>
+    </>
   );
 };
 

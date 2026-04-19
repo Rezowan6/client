@@ -6,6 +6,7 @@ import ReusableTable from "../table/ReusableTable";
 
 const ReusableCrudPage = ({
   config,
+  title = "wellcome",
   items,
   values,
   handleChange,
@@ -13,14 +14,14 @@ const ReusableCrudPage = ({
   actions,
   editId,
   totalText,
-  grandTotal,
-  totalEgg=null,
+  grandTotal = true,
+  totalEgg = null,
   errors,
   alertData,
   closeAlert,
   confirmAction,
+  table = true,
 }) => {
-  // console.log(alertData)
   const { data: allUser } = useGetUsersQuery();
 
   const users = allUser?.data?.users || [];
@@ -33,28 +34,55 @@ const ReusableCrudPage = ({
   };
 
   return (
-    <div className="text-white p-6">
+    <section className="w-full">
+      <h1 className="text-3xl text-cyan-500 py-4">{title}</h1>
       {/* FORM */}
       <form onSubmit={handleSubmit}>
-
         {config.form.fields.map((field) => {
+          //  CHECKBOX SUPPORT
+          if (field.type === "checkbox") {
+            return (
+              <div key={field.name} className="py-2">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name={field.name}
+                    data-group={field.dataGroup}
+                    checked={values?.[field.name] || false}
+                    onChange={handleChange}
+                  />
+
+                  <label htmlFor={field.name}>{field.label}</label>
+                </label>
+              </div>
+            );
+          }
+          // SELECT SUPPORT
           if (field.type === "select") {
             return (
-              <select
-                key={field.name}
-                name={field.name}
-                value={values[field.name]}
-                onChange={handleChange}
-                className="text-black"
-              >
-                <option value="">Select</option>
+              <div key={field.name} className="py-4 w-1/4">
+                <label className="block text-white pb-1">{field.label}</label>
 
-                {optionsMap[field.optionsKey]?.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
+                <select
+                  name={field.name}
+                  value={values?.[field.name] || ""}
+                  onChange={handleChange}
+                  required={field.required} // ADD THIS
+                  className="text-black border p-2"
+                >
+                  <option value="">{field.label}</option>
+
+                  {optionsMap[field.optionsKey]?.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+
+                {errors?.[field.name] && (
+                  <p className="text-red-500 text-sm">{errors[field.name]}</p>
+                )}
+              </div>
             );
           }
 
@@ -77,17 +105,23 @@ const ReusableCrudPage = ({
       </form>
 
       {/* TOTAL */}
-      <div className="text-2xl text-cyan-500 text-end pb-4">
-        <h3>{totalText}: {grandTotal || 0}</h3>
-        {totalEgg ? <p>Total Egg: {totalEgg}</p> : ''}
-      </div>
+      {grandTotal && (
+        <div className="text-2xl text-cyan-500 text-end pb-4">
+          <h3>
+            {totalText}: {grandTotal || 0}
+          </h3>
+          {totalEgg ? <p>Total Egg: {totalEgg}</p> : ""}
+        </div>
+      )}
 
       {/* TABLE */}
-      <ReusableTable
-        columns={config.table.columns}
-        data={items}
-        actions={actions}
-      />
+      {table && (
+        <ReusableTable
+          columns={config.table.columns}
+          data={items}
+          actions={actions}
+        />
+      )}
 
       {/* ALERT */}
       <AlertPopup
@@ -95,7 +129,7 @@ const ReusableCrudPage = ({
         onClose={closeAlert}
         onConfirm={confirmAction}
       />
-    </div>
+    </section>
   );
 };
 export default ReusableCrudPage;

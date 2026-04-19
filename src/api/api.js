@@ -60,9 +60,7 @@ API.interceptors.response.use(
         return API(originalRequest);
 
       } catch (err) {
-
-        console.log("Refresh failed", err);
-
+        console.log(err);
         // logout
         localStorage.removeItem("accessToken");
 

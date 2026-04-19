@@ -14,11 +14,11 @@ const Form = ({
   confirmAction,
 }) => {
   return (
-    <div className="bg-[#0F172A] flex justify-center items-center min-h-[100vh]">
+    <div className={`flex justify-center items-center min-h-[60vh] sm:min-h-[100vh]`}>
       <div className="shadow-[0_0_50px_#0ef] p-10 rounded-2xl">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col bg-[#0F172A] justify-center items-center gap-4"
+          className="flex flex-col  justify-center items-center gap-4"
         >
           <h1 className="pb-2 mb-2 text-[#0ef] text-2xl font-bold">
             {config?.title}
@@ -47,7 +47,6 @@ const Form = ({
                 text={button.text}
                 onclickHandle={() => {
                   if (button.action === "reset") resetForm();
-                  if (button.action === "submit") handleSubmit();
                 }}
               />
             ))}

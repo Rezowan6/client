@@ -11,15 +11,25 @@ const useCrudManager = ({
 }) => {
   const [editId, setEditId] = useState(null);
 
-  const { data, isLoading } = useGetQuery();
-  const [addFn] = useAddMutation();
-  const [updateFn] = useUpdateMutation();
+  const queryResult = useGetQuery?.() ?? { data: null, isLoading: false };
 
-  const items = data?.data?.users || [];
+  const data = queryResult?.data ?? null;
+  const isLoading = queryResult?.isLoading ?? false;
+
+  const addHook = useAddMutation?.();
+  const updateHook = useUpdateMutation?.();
+
+  const addFn = addHook?.[0];
+  const updateFn = updateHook?.[0];
+
+  const items = data?.data?.users ?? data?.data ?? [];
 
   //   submit
   const submit = async ({ values, showAlert, resetForm }) => {
     try {
+      if (!addFn && !updateFn) {
+        throw new Error("No API function provided");
+      }
       if (!editId) {
         await addFn(values).unwrap();
         showAlert("Success", "Added successfully!");
@@ -35,6 +45,7 @@ const useCrudManager = ({
       resetForm();
       setEditId(null);
     } catch (err) {
+      console.log(err);
       showAlert("Error", err?.data?.message || "Operation failed");
       resetForm();
       setEditId(null);

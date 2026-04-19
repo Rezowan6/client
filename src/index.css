@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -23,13 +29,6 @@ body {
 
 nav ul li .active {
   color: aqua;
-}
-
-#nav_menu ul li NavLink {
-    @apply text-lg font-bold duration-300
-}
-#nav_menu ul li NavLink:hover {
-    @apply text-yellow-500
 }
 
 .yesBtn {

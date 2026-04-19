@@ -9,7 +9,7 @@ const loginConfig = {
   },
 
   buttons: [
-      { type: "submit", text: "Register", action: "submit" },
+      { type: "submit", text: "Login", action: "submit" },
     ],
 };
 

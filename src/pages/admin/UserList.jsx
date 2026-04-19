@@ -49,8 +49,8 @@ const UserList = () => {
 
   return (
     <>
-      <div className="text-white p-6">
         <h1 className="text-3xl text-cyan-400 py-3">Boarder List</h1>
+        
         <ReusableTable
           columns={columns}
           data={data?.data?.users || []}
@@ -66,7 +66,6 @@ const UserList = () => {
           onClose={closeAlert}
           onConfirm={confirmAction}
         />
-      </div>
     </>
   );
 };

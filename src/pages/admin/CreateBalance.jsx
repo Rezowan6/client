@@ -48,9 +48,10 @@ const CreateBalance = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="text-white p-6">
+    <>
       <ReusableCrudPage
         config={balanceConfig}
+        title="Add user Balance"
         items={items}
         values={values}
         editId={editId}
@@ -64,7 +65,7 @@ const CreateBalance = () => {
         closeAlert={closeAlert}
         confirmAction={confirmAction}
       />
-    </div>
+    </>
   );
 };
 

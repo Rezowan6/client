@@ -1,5 +1,4 @@
 import EditBtn from "../../components/Button/EditBtn";
-import Input from "../../components/Input/Input";
 import incidentalExpensesConfig from "../../configs/incidentalExpensesConfig";
 import {
   useAddIncidentalExpensesMutation,
@@ -13,21 +12,25 @@ import { validateIncedentalExpenses } from "../../utils/validate/validateData";
 import ReusableCrudPage from "./../../components/pages/ReusableCrudPage";
 
 const IncidentalExpenses = () => {
+
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
 
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ userId: "", otherCost: "", egg: "", eggRate: "" }, validateIncedentalExpenses);
+    useForm(
+      { userId: "", otherCost: "", egg: "", eggRate: "" },
+      validateIncedentalExpenses,
+    );
 
   const { items, data, isLoading, editId, submit, editItem } = useCrudManager({
-                                                              useGetQuery: useGetUsersIncidentalExpensesQuery,
-                                                              useAddMutation: useAddIncidentalExpensesMutation,
-                                                              useUpdateMutation: useUpdateIncidentalExpensesMutation,
-                                                              keyField1: "dailyData",
-                                                              keyField2: "otherCost",
-                                                              keyField3: "dailyData",
-                                                              keyField4: "egg",
-                                                            });
+    useGetQuery: useGetUsersIncidentalExpensesQuery,
+    useAddMutation: useAddIncidentalExpensesMutation,
+    useUpdateMutation: useUpdateIncidentalExpensesMutation,
+    keyField1: "dailyData",
+    keyField2: "otherCost",
+    keyField3: "dailyData",
+    keyField4: "egg",
+  });
 
   const incidentalExpensesSubmit = () =>
     submit({ values, showAlert, resetForm });
@@ -48,30 +51,30 @@ const IncidentalExpenses = () => {
     },
   ];
 
-  if (isLoading) return <p className="text-white text-center">Loading...</p>;
+  if (isLoading) return <p className="text-center">Loading...</p>;
 
   return (
-    <div className="text-white p-6">
-      <div className="w-1/2 lg:w-1/4 ">
-        <Input label='Per-Egg-Rate' type="number" placeholder="Enter Per-Egg-Rate" />
+    <>
+      <div className="w-full">
+        <ReusableCrudPage
+          config={incidentalExpensesConfig}
+          title='Incidental Expenses'
+          items={items}
+          values={values}
+          editId={editId}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit(incidentalExpensesAddConfirm)}
+          actions={actions}
+          grandTotal={data?.data?.grandTotalOtherCost || 0}
+          totalEgg={data?.data?.grandTotalEgg || 0}
+          totalText="Total Other Cost"
+          errors={errors}
+          alertData={alertData}
+          closeAlert={closeAlert}
+          confirmAction={confirmAction}
+        />
       </div>
-      <ReusableCrudPage
-        config={incidentalExpensesConfig}
-        items={items}
-        values={values}
-        editId={editId}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit(incidentalExpensesAddConfirm)}
-        actions={actions}
-        grandTotal={data?.data?.grandTotalOtherCost || 0}
-        totalEgg = {data?.data?.grandTotalEgg || 0}
-        totalText="Total Other Cost"
-        errors={errors}
-        alertData={alertData}
-        closeAlert={closeAlert}
-        confirmAction={confirmAction}
-      />
-    </div>
+    </>
   );
 };
 
