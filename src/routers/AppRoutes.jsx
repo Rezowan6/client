@@ -7,7 +7,6 @@ import CreateUser from "../pages/admin/CreateUser";
 import IncidentalExpenses from "../pages/admin/IncidentalExpenses";
 import MillUpdate from "../pages/admin/MillUpdate";
 import UserList from "../pages/admin/UserList";
-import AddPermanentInfo from "../pages/auth/addPermanentInfo";
 import Login from "../pages/auth/Login";
 import VerifyEmail from "../pages/auth/VerifyEmail";
 import AdminDashboard from "../pages/dashboard/AdminDashboard";
@@ -32,7 +31,6 @@ const AppRoutes = () => {
       {/*  Protected Routes (All logged-in users) */}
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<UserDashboard />} />
-        <Route path="/add-permanent-info" element={<AddPermanentInfo />} />
         <Route path="/create-users" element={<CreateUser />} />
         <Route path="/get-users" element={<UserList />} />
         <Route path="/create-balance" element={<CreateBalance />} />

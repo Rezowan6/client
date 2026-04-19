@@ -4,7 +4,7 @@ const AddPermanentInfo = () => {
 
   return (
     <div>
-add permanent data
+    add permanent data
     </div>
   );
 };

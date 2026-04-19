@@ -3,8 +3,6 @@ export const navLinks = [
 
   { name: "Permanent-info", path: "/permanent-info", role: ["admin"] },
 
-  { name: "Add-info", path: "/add-permanent-info", role: ["user",] },
-
   { name: "Create User", path: "/create-users", role: ["admin"] },
 
   { name: "User List", path: "/get-users", role: ["admin", 'user'] },
