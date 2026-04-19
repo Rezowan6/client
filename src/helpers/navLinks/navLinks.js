@@ -1,5 +1,6 @@
 export const navLinks = [
   { name: "Home", path: "/", role: ["all"] },
+  { name: "Login", path: "/login", role: ["all"] },
 
   { name: "Permanent-info", path: "/permanent-info", role: ["admin"] },
 

@@ -30,7 +30,7 @@ const VerifyEmail = () => {
     verify();
 
     return () => clearTimeout(timer); // cleanup
-  }, [token, navigate, showAlert]);
+  }, [token, navigate, showAlert,]);
 
   return (
     <>
