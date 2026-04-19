@@ -48,6 +48,7 @@ const Make_subAdminMess_malik = () => {
     <>
       <ReusableCrudPage
         config={makeSubAdminConfig}
+        title="Add sub-admin and Mess-malik"
         handleChange={handleChange}
         handleSubmit={handleSubmit(roleAddConfirm)}
         errors={errors}

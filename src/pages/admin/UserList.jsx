@@ -6,6 +6,8 @@ import {
   useGetUsersQuery,
 } from "../../features/users/userApi";
 import useAlert from "../../hooks/useAlert";
+import Title from "../../components/title/Title";
+import Loading from "../../components/loading/Loding";
 
 const UserList = () => {
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
@@ -25,7 +27,7 @@ const UserList = () => {
     },
   ];
 
-  if (isLoading) return <p className="text-white text-center">Loading...</p>;
+  if (isLoading) return <Loading />;
   if (error) return <p className="text-white text-center">Error: {error.data?.message}</p>;
 
   // delete user
@@ -49,7 +51,7 @@ const UserList = () => {
 
   return (
     <>
-        <h1 className="text-3xl text-cyan-400 py-3">Boarder List</h1>
+        <Title title="Border List" />
         
         <ReusableTable
           columns={columns}

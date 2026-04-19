@@ -26,7 +26,7 @@ const Navbar = () => {
         <h1 className="font-lobster sm:text-2xl">LOGO</h1>
 
         <div
-          className={`absolute top-0 ${open ? "left-[0]" : "left-[-100%]"} min-h-[90vh] w-full backdrop-blur-sm flex items-center justify-center transition-all duration-300 overflow-hidden lg:static lg:min-h-fit lg:w-auto`}
+          className={`absolute top-0 ${open ? "left-[0]" : "left-[-100%]"} font-semibold min-h-[90vh] w-full backdrop-blur-md flex items-center justify-center transition-all duration-300 overflow-hidden lg:static lg:min-h-fit lg:w-auto`}
         >
           <ul className="flex flex-col items-center gap-8 lg:flex-row">
             {filteredLinks.map((link, index) => (

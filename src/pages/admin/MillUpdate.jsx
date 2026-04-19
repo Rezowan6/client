@@ -12,6 +12,7 @@ import {
 import useAlert from "../../hooks/useAlert";
 import useForm from "../../hooks/useForm";
 import { validateMill } from "../../utils/validate/validateData";
+import Loading from "../../components/loading/Loding";
 
 const MillUpdate = () => {
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
@@ -46,12 +47,13 @@ const MillUpdate = () => {
     },
   ];
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
 
   return (
-    <>
+    <section className="pb-20">
       <ReusableCrudPage
         config={millConfig}
+        title="meal Added"
         items={items}
         values={values}
         editId={editId}
@@ -65,7 +67,7 @@ const MillUpdate = () => {
         closeAlert={closeAlert}
         confirmAction={confirmAction}
       />
-    </>
+    </section>
   );
 };
 

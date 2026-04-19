@@ -3,6 +3,7 @@ import AlertPopup from "../alertPopup/AlertPopup";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import ReusableTable from "../table/ReusableTable";
+import Title from '../title/Title';
 
 const ReusableCrudPage = ({
   config,
@@ -34,9 +35,9 @@ const ReusableCrudPage = ({
   };
   return (
     <>
-    <h1 className="text-cyan-500 text-3xl">{title}</h1>
+      <Title title={title} />
       <section
-        className={`flex justify-center items-center min-h-[60vh] sm:min-h-[70vh]`}
+        className={`flex justify-center items-center min-h-[60vh] sm:min-h-[50vh]`}
       >
         <div className="shadow-[0_0_50px_#0ef] p-10 rounded-2xl">
           {/* FORM */}

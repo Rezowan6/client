@@ -1,5 +1,6 @@
 
 import EditBtn from "../../components/Button/EditBtn";
+import Loading from "../../components/loading/Loding";
 import ReusableCrudPage from "../../components/pages/ReusableCrudPage";
 import balanceConfig from "../../configs/balanceConfig";
 import {
@@ -45,13 +46,13 @@ const CreateBalance = () => {
     },
   ];
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />
 
   return (
-    <>
+    <section className="pb-20">
       <ReusableCrudPage
         config={balanceConfig}
-        title="Add user Balance"
+        title="Add Border Balance"
         items={items}
         values={values}
         editId={editId}
@@ -65,7 +66,7 @@ const CreateBalance = () => {
         closeAlert={closeAlert}
         confirmAction={confirmAction}
       />
-    </>
+    </section>
   );
 };
 
