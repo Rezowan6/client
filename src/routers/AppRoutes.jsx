@@ -5,19 +5,19 @@ import CostAdd from "../pages/admin/CostAdd";
 import CreateBalance from "../pages/admin/CreateBalance";
 import CreateUser from "../pages/admin/CreateUser";
 import IncidentalExpenses from "../pages/admin/IncidentalExpenses";
+import Make_subAdminMess_malik from "../pages/admin/Make_subAdminMess_malik";
 import MillUpdate from "../pages/admin/MillUpdate";
 import UserList from "../pages/admin/UserList";
 import Login from "../pages/auth/Login";
 import VerifyEmail from "../pages/auth/VerifyEmail";
 import AdminDashboard from "../pages/dashboard/AdminDashboard";
 import Errors from "../pages/errors/Errors";
-import PermanentInfo from "../pages/masMalik/PermanentInfo";
 import Home from "../pages/public/Home";
 import Register from "./../pages/auth/Register";
 import UserDashboard from "./../pages/dashboard/UserDashboard";
+
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
-import Make_subAdminMess_malik from "../pages/admin/Make_subAdminMess_malik";
 
 const AppRoutes = () => {
   return (
@@ -36,7 +36,6 @@ const AppRoutes = () => {
         <Route path="/create-balance" element={<CreateBalance />} />
         <Route path="/cost" element={<CostAdd />} />
         <Route path="/incidental-cost" element={<IncidentalExpenses />} />
-        <Route path="/permanent-info" element={<PermanentInfo />} />
 
         {/*  Admin Only Routes */}
         <Route element={<AdminRoute />}>

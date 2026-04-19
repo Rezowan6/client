@@ -1,7 +1,6 @@
 import EditBtn from "../../components/Button/EditBtn";
 import Form from "../../components/form/Form";
 import CostTable from "../../components/table/CostTable";
-import costConfig from "../../configs/costConfig";
 import {
   useAddCostMutation,
   useGetUsersCostQuery,
@@ -11,6 +10,7 @@ import useAlert from "../../hooks/useAlert";
 import useCrudManager from "../../hooks/useCrudManager";
 import { validateCost } from "../../utils/validate/validateData";
 import useForm from "./../../hooks/useForm";
+import costConfigFunc from './../../configs/costConfig';
 
 const CostAdd = () => {
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
@@ -21,7 +21,7 @@ const CostAdd = () => {
     validateCost,
   );
 
-  const { data, isLoading, setEditId, submit } = useCrudManager({
+  const { data, editId, isLoading, setEditId, submit } = useCrudManager({
     useGetQuery: useGetUsersCostQuery,
     useAddMutation: useAddCostMutation,
     useUpdateMutation: useUpdateCostMutation,
@@ -31,6 +31,8 @@ const CostAdd = () => {
 
   const adminName = data?.data?.adminName || "";
   const totalcost = data?.data?.grandTotalCost || 0;
+  
+  const costConfig = costConfigFunc({editId});
 
   // edit cost
   const editCost = (data) => {

@@ -21,6 +21,7 @@ const Make_subAdminMess_malik = () => {
 
       showAlert(res?.message || 'sub-admin added');
     } catch (error) {
+      console.log(error)
       showAlert(error?.response?.data?.message || 'operation failed');
     }
   };

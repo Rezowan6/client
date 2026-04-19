@@ -12,7 +12,7 @@ const incidentalExpensesConfig = {
       {
         name: "otherCost",
         type: "number",
-        label: "OtherCost",
+        label: "Other-Cost",
       },
       {
         name: "egg",
@@ -25,7 +25,7 @@ const incidentalExpensesConfig = {
   table: {
     columns: [
       { key: "name", label: "Name" },
-      { key: "totalOtherCost", label: "OtherCost" },
+      { key: "totalOtherCost", label: "Other-Cost" },
       { key: "totalEgg", label: "Egg" },
     ],
   },

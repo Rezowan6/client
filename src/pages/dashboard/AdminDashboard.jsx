@@ -7,6 +7,7 @@ const AdminDashboard = () => {
     totals;
 
   if (isLoading) return <p className="text-center">Loading...</p>;
+  
   return (
     <div className=" bg-cover bg-center bg-fixed min-h-screen rounded-lg shadow-md space-y-6">
       <div className="flex flex-col gap-1 sm:flex-row justify-between p-4 sm:p-8 items-center">

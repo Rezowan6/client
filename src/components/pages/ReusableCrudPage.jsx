@@ -32,77 +32,101 @@ const ReusableCrudPage = ({
       value: u._id,
     })),
   };
-
   return (
-    <section className="w-full">
-      <h1 className="text-3xl text-cyan-500 py-4">{title}</h1>
-      {/* FORM */}
-      <form onSubmit={handleSubmit}>
-        {config.form.fields.map((field) => {
-          //  CHECKBOX SUPPORT
-          if (field.type === "checkbox") {
-            return (
-              <div key={field.name} className="py-2">
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
+    <>
+    <h1 className="text-cyan-500 text-3xl">{title}</h1>
+      <section
+        className={`flex justify-center items-center min-h-[60vh] sm:min-h-[70vh]`}
+      >
+        <div className="shadow-[0_0_50px_#0ef] p-10 rounded-2xl">
+          {/* FORM */}
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 md:gap-10 justify-center items-center w-full sm:flex-row"
+          >
+            {config.form.fields.map((field) => {
+              //  CHECKBOX SUPPORT
+              if (field.type === "checkbox") {
+                return (
+                  <div key={field.name}>
+                    <label
+                      htmlFor={field.name}
+                      className={`
+                          w-[250px]
+                          flex items-center justify-center font-bold gap-3
+                          cursor-pointer
+                          bg-[#107981]
+                          shadow-lg
+                          py-2
+                          rounded-md ${field.dataGroup == "role" ? "sm:w-[130px]" : "sm:w-20"}`}
+                    >
+                      <input
+                        id={field.name}
+                        type="checkbox"
+                        name={field.name}
+                        data-group={field.dataGroup}
+                        checked={values?.[field.name] || false}
+                        onChange={handleChange}
+                        className="w-5 h-5 accent-[#0ef] cursor-pointer"
+                      />
+
+                      <span>{field.label}</span>
+                    </label>
+                  </div>
+                );
+              }
+              // SELECT SUPPORT
+              if (field.type === "select") {
+                return (
+                  <div key={field.name} className="sm:-mt-6">
+                    <label className="block text-cyan-400 pb-1">
+                      {field.label}
+                    </label>
+
+                    <select
+                      name={field.name}
+                      value={values?.[field.name] || ""}
+                      onChange={handleChange}
+                      required={field.required} // ADD THIS
+                      className="p-3 w-[250px] bg-[#1c356b88] rounded-md outline-none"
+                    >
+                      <option>{field.label}</option>
+
+                      {optionsMap[field.optionsKey]?.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+
+                    {errors?.[field.name] && (
+                      <p className="text-red-500 text-sm">
+                        {errors[field.name]}
+                      </p>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <div key={field.name}>
+                  <Input
+                    key={field.name}
                     name={field.name}
-                    data-group={field.dataGroup}
-                    checked={values?.[field.name] || false}
+                    type={field.type}
+                    value={values[field.name]}
                     onChange={handleChange}
+                    label={field.label}
+                    error={errors[field.name]}
                   />
+                </div>
+              );
+            })}
 
-                  <label htmlFor={field.name}>{field.label}</label>
-                </label>
-              </div>
-            );
-          }
-          // SELECT SUPPORT
-          if (field.type === "select") {
-            return (
-              <div key={field.name} className="py-4 w-1/4">
-                <label className="block text-white pb-1">{field.label}</label>
-
-                <select
-                  name={field.name}
-                  value={values?.[field.name] || ""}
-                  onChange={handleChange}
-                  required={field.required} // ADD THIS
-                  className="text-black border p-2"
-                >
-                  <option value="">{field.label}</option>
-
-                  {optionsMap[field.optionsKey]?.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
-
-                {errors?.[field.name] && (
-                  <p className="text-red-500 text-sm">{errors[field.name]}</p>
-                )}
-              </div>
-            );
-          }
-
-          return (
-            <div key={field.name} className="w-1/2 lg:w-1/4 py-4">
-              <Input
-                key={field.name}
-                name={field.name}
-                type={field.type}
-                value={values[field.name]}
-                onChange={handleChange}
-                label={field.label}
-                error={errors[field.name]}
-              />
-            </div>
-          );
-        })}
-
-        <Button type="submit" text={editId ? "Update" : "Submit"} />
-      </form>
+            <Button type="submit" text={editId ? "Update" : "Submit"} />
+          </form>
+        </div>
+      </section>
 
       {/* TOTAL */}
       {grandTotal && (
@@ -129,7 +153,7 @@ const ReusableCrudPage = ({
         onClose={closeAlert}
         onConfirm={confirmAction}
       />
-    </section>
+    </>
   );
 };
 export default ReusableCrudPage;

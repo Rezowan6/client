@@ -45,7 +45,6 @@ const useCrudManager = ({
       resetForm();
       setEditId(null);
     } catch (err) {
-      console.log(err);
       showAlert("Error", err?.data?.message || "Operation failed");
       resetForm();
       setEditId(null);
