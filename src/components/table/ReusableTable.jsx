@@ -1,4 +1,4 @@
-const ReusableTable = ({ columns, data, actions = [] }) => {
+const ReusableTable = ({ columns, data, actions = [], onAddMillClick }) => {
   return (
     <table className="w-full text-center border-collapse">
       {/* table header */}
@@ -24,7 +24,11 @@ const ReusableTable = ({ columns, data, actions = [] }) => {
 
                 {columns.map((col) => (
                   <td key={col.key} className="border py-2">
-                    {item[col.key]}
+
+                    {col.render
+                      ? col.render(item, onAddMillClick)
+                      : item[col.key]}
+                      
                   </td>
                 ))}
 

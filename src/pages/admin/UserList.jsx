@@ -18,6 +18,8 @@ const UserList = () => {
 
   const columns = [{ key: "name", label: "Name" }];
 
+
+
   // delete action
   const actions = [
     {
@@ -52,6 +54,7 @@ const UserList = () => {
   return (
     <>
         <Title title="Border List" />
+        <Title title={`Total: ${data?.data?.totalUsers}`} />
         
         <ReusableTable
           columns={columns}

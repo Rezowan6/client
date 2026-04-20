@@ -1,9 +1,10 @@
-import { useGetUsersQuery } from "../../features/users/userApi";
+import useOptionsMap from "../../hooks/useOptionsMap";
+import FieldRenderer from "../form/FieldRenderer";
+
 import AlertPopup from "../alertPopup/AlertPopup";
 import Button from "../Button/Button";
-import Input from "../Input/Input";
 import ReusableTable from "../table/ReusableTable";
-import Title from '../title/Title';
+import Title from "../title/Title";
 
 const ReusableCrudPage = ({
   config,
@@ -11,6 +12,7 @@ const ReusableCrudPage = ({
   items,
   values,
   handleChange,
+  onAddMillClick,
   handleSubmit,
   actions,
   editId,
@@ -23,16 +25,8 @@ const ReusableCrudPage = ({
   confirmAction,
   table = true,
 }) => {
-  const { data: allUser } = useGetUsersQuery();
+  const optionsMap = useOptionsMap();
 
-  const users = allUser?.data?.users || [];
-
-  const optionsMap = {
-    users: users.map((u) => ({
-      label: u.name,
-      value: u._id,
-    })),
-  };
   return (
     <>
       <Title title={title} />
@@ -46,81 +40,15 @@ const ReusableCrudPage = ({
             className="flex flex-col gap-4 md:gap-10 justify-center items-center w-full sm:flex-row"
           >
             {config.form.fields.map((field) => {
-              //  CHECKBOX SUPPORT
-              if (field.type === "checkbox") {
-                return (
-                  <div key={field.name}>
-                    <label
-                      htmlFor={field.name}
-                      className={`
-                          w-[250px]
-                          flex items-center justify-center font-bold gap-3
-                          cursor-pointer
-                          bg-[#107981]
-                          shadow-lg
-                          py-2
-                          rounded-md ${field.dataGroup == "role" ? "sm:w-[130px]" : "sm:w-20"}`}
-                    >
-                      <input
-                        id={field.name}
-                        type="checkbox"
-                        name={field.name}
-                        data-group={field.dataGroup}
-                        checked={values?.[field.name] || false}
-                        onChange={handleChange}
-                        className="w-5 h-5 accent-[#0ef] cursor-pointer"
-                      />
-
-                      <span>{field.label}</span>
-                    </label>
-                  </div>
-                );
-              }
-              // SELECT SUPPORT
-              if (field.type === "select") {
-                return (
-                  <div key={field.name} className="sm:-mt-6">
-                    <label className="block text-cyan-400 pb-1">
-                      {field.label}
-                    </label>
-
-                    <select
-                      name={field.name}
-                      value={values?.[field.name] || ""}
-                      onChange={handleChange}
-                      required={field.required} // ADD THIS
-                      className="p-3 w-[250px] bg-[#1c356b88] rounded-md outline-none"
-                    >
-                      <option>{field.label}</option>
-
-                      {optionsMap[field.optionsKey]?.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-
-                    {errors?.[field.name] && (
-                      <p className="text-red-500 text-sm">
-                        {errors[field.name]}
-                      </p>
-                    )}
-                  </div>
-                );
-              }
-
               return (
-                <div key={field.name}>
-                  <Input
-                    key={field.name}
-                    name={field.name}
-                    type={field.type}
-                    value={values[field.name]}
-                    onChange={handleChange}
-                    label={field.label}
-                    error={errors[field.name]}
-                  />
-                </div>
+                <FieldRenderer
+                  key={field.name}
+                  field={field}
+                  values={values}
+                  handleChange={handleChange}
+                  errors={errors}
+                  optionsMap={optionsMap}
+                />
               );
             })}
 
@@ -145,6 +73,7 @@ const ReusableCrudPage = ({
           columns={config.table.columns}
           data={items}
           actions={actions}
+          onAddMillClick={onAddMillClick}
         />
       )}
 

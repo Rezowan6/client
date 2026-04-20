@@ -21,7 +21,7 @@ const Input = ({
         disabled={disabled}
         required
         className={`
-    bg-[#1d2b3a]
+      bg-[#1d2b3a]
     ${error ? "border-red-500 focus:ring-red-500" : "border-gray-300"}
   `}
       />

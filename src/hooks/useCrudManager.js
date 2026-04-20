@@ -4,8 +4,8 @@ const useCrudManager = ({
   useGetQuery,
   useAddMutation,
   useUpdateMutation,
-  keyField1 = "value", // tk / mill / etc
-  keyField2 = "value",
+  keyField1 = null, // tk / mill / etc
+  keyField2 = null,
   keyField3 = null,
   keyField4 = null,
 }) => {

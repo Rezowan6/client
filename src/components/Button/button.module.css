@@ -56,7 +56,7 @@
 
 .btn:hover:after {
   opacity: 100;
-    background:linear-gradient(90deg,rgb(8,8,67),rgb(8,6,40),rgb(8,8,67));
+    background:linear-gradient(90deg,rgb(9, 9, 105),rgb(8,6,40),rgb(8,8,67));
 }
 .btn:hover::before {
   color: #000;
