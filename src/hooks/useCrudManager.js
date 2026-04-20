@@ -15,6 +15,7 @@ const useCrudManager = ({
 
   const data = queryResult?.data ?? null;
   const isLoading = queryResult?.isLoading ?? false;
+  const isErrors = queryResult?.errors ?? false;
 
   const addHook = useAddMutation?.();
   const updateHook = useUpdateMutation?.();
@@ -40,6 +41,7 @@ const useCrudManager = ({
         }).unwrap();
 
         showAlert("Success", "Updated successfully!");
+        resetForm();
       }
 
       resetForm();
@@ -76,6 +78,7 @@ const useCrudManager = ({
     data,
     items,
     isLoading,
+    isErrors,
     editId,
     setEditId,
     submit,

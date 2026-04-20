@@ -1,4 +1,12 @@
-const ReusableTable = ({ columns, data, actions = [], onAddMillClick }) => {
+import { Link } from "react-router-dom";
+
+const ReusableTable = ({
+  link = false,
+  columns,
+  data,
+  actions = [],
+  onAddMillClick,
+}) => {
   return (
     <table className="w-full text-center border-collapse">
       {/* table header */}
@@ -24,23 +32,27 @@ const ReusableTable = ({ columns, data, actions = [], onAddMillClick }) => {
 
                 {columns.map((col) => (
                   <td key={col.key} className="border py-2">
-
                     {col.render
                       ? col.render(item, onAddMillClick)
                       : item[col.key]}
-                      
                   </td>
                 ))}
 
                 <td className="border py-2">
                   {actions.map((action, i) => (
                     <div key={i} className={action.className}>
-                      <span
-                        onClick={() => action.onClick(item)}
-                        className="cursor-pointer inline-flex"
-                      >
-                        {action.label}
-                      </span>
+                      {link ? (
+                        <Link to={`/mill/${item.userId}`} state={item}
+                        className="hover:text-cyan-500"
+                        >View Daily Mill</Link>
+                      ) : (
+                        <span
+                          onClick={() => action.onClick(item)}
+                          className="cursor-pointer inline-flex"
+                        >
+                          {action.label}
+                        </span>
+                      )}
                     </div>
                   ))}
                 </td>

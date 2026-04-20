@@ -24,6 +24,7 @@ const ReusableCrudPage = ({
   closeAlert,
   confirmAction,
   table = true,
+  link,
 }) => {
   const optionsMap = useOptionsMap();
 
@@ -74,6 +75,7 @@ const ReusableCrudPage = ({
           data={items}
           actions={actions}
           onAddMillClick={onAddMillClick}
+          link={link}
         />
       )}
 

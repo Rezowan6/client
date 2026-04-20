@@ -18,6 +18,7 @@ import UserDashboard from "./../pages/dashboard/UserDashboard";
 
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
+import DailyMeals from "../features/mill/pages/DailyMeals";
 
 const AppRoutes = () => {
   return (
@@ -41,6 +42,7 @@ const AppRoutes = () => {
         <Route element={<AdminRoute />}>
           <Route path="/make-sub-admin" element={<Make_subAdminMess_malik />} />
           <Route path="/mills" element={<MillUpdate />} />
+          <Route path="/mill/:id" element={<DailyMeals />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
       </Route>
