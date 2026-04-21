@@ -21,7 +21,7 @@ const useOptionsMap = () => {
       // optional reload UI
       window.location.reload();
     }
-  }, []);
+  }, [users]);
 
   const optionsMap = {
     users: users.map((u) => ({
