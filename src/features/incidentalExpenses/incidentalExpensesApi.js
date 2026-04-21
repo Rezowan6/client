@@ -12,6 +12,15 @@ export const incidentalExpensesApi = apiSlice.injectEndpoints({
 
       invalidatesTags: ["IncidentalExpenses"], // better tag name
     }),
+    distributeOtherCost: builder.mutation({
+      query: (data) => ({
+        url: "/admin/distribute-other-cost",
+        method: "POST",
+        data,
+      }),
+
+      invalidatesTags: ["IncidentalExpenses"], // better tag name
+    }),
 
     // GET IncidentalExpenses USERS
     getUsersIncidentalExpenses: builder.query({
@@ -40,4 +49,4 @@ export const incidentalExpensesApi = apiSlice.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useAddIncidentalExpensesMutation, useGetUsersIncidentalExpensesQuery,useUpdateIncidentalExpensesMutation } = incidentalExpensesApi;
+export const { useAddIncidentalExpensesMutation,useDistributeOtherCostMutation, useGetUsersIncidentalExpensesQuery,useUpdateIncidentalExpensesMutation } = incidentalExpensesApi;

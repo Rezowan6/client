@@ -1,5 +1,4 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
 import Button from "../../../components/Button/Button";
 import EditBtn from "../../../components/Button/EditBtn";
 import ReusableTable from "../../../components/table/ReusableTable";
@@ -10,20 +9,20 @@ const DailyMeals = () => {
   const location = useLocation();
   const { id } = useParams();
 
-  const { name, totalMill, dailyMill } = location.state;
+  const { name, totalTk, dailyTk } = location.state;
 
   const columns = [
     { key: "day", label: "Day" },
-    { key: "mill", label: "Meal" },
+    { key: "tk", label: "Balance" },
   ];
 
   const actions = [
     {
       label: <EditBtn />,
       onClick: (item) => {
-        navigate("/mills", {
+        navigate("/create-balance", {
           state: {
-            editDailyMill: item,
+            editDailyTk: item,
             userId: id,
           },
         });
@@ -35,10 +34,10 @@ const DailyMeals = () => {
     <>
       <div className="pb-4 flex flex-col justify-between items-center sm:flex-row">
         <Title title={`Name: ${name}`} />
-        <Button text="Go Back   " onclickHandle={() => navigate("/mills")} />
+        <Button text="Go Back   " onclickHandle={() => navigate("/create-balance")} />
       </div>
-      <Title title={`Total: ${totalMill}`} />
-      <ReusableTable columns={columns} data={dailyMill} actions={actions} />
+      <Title title={`Total: ${totalTk}`} />
+      <ReusableTable columns={columns} data={dailyTk} actions={actions} />
     </>
   );
 };

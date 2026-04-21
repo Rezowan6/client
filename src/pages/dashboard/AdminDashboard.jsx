@@ -1,12 +1,14 @@
 import { useDashboardData } from "../../hooks/useDashboardData";
 import { generateDashboardPDF } from "./../../utils/pdf/generateDashboardPDF";
 
+import Loading from './../../components/loading/Loding';
+
 const AdminDashboard = () => {
   const { isLoading, users, totals } = useDashboardData();
   const { totalCost, totalEggCost, totalIncidentalCost, totalMill, totalTk } =
     totals;
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
+  if (isLoading) return <Loading />;
   
   return (
     <div className=" bg-cover bg-center bg-fixed min-h-screen rounded-lg shadow-md space-y-6">
@@ -14,9 +16,11 @@ const AdminDashboard = () => {
         <h2 className="text-2xl sm:text-3xl text-cyan-500 font-semibold font-lobster text-center">
           Monthly Dashboard Repoart
         </h2>
-        <p className="text-cyan-500">
-          Per Meal Expense: {users?.totals?.perMill?.toFixed(2)}
-        </p>
+        <div className="text-cyan-500 flex flex-col justify-center items-center lg:flex-row lg:gap-20">
+          <p>Per Meal Expense: {users?.totals?.perMill?.toFixed(2)}</p>
+          <p>Egg Rate: {totals?.eggRate?.toFixed(2)}</p>
+          <p>Sold Products: {totals?.soldProduct?.toFixed(2)}</p>
+        </div>
       </div>
 
       {/* Table */}

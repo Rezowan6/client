@@ -10,6 +10,8 @@ export const navLinks = [
 
   { name: "Cost", path: "/cost", role: ["admin"] },
 
+  { name: "Egg-Rate", path: "/egg-rate", role: ["admin"] },
+
   { name: "Balance", path: "/create-balance", role: ["admin",'sub_admin'] },
 
   { name: "Dashboard", path: "/admin-dashboard", role: ["admin"] },

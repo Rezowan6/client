@@ -1,29 +1,29 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
 import Button from "../../../components/Button/Button";
 import EditBtn from "../../../components/Button/EditBtn";
 import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
 
-const DailyMeals = () => {
+const DailayEggIncidantal = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
 
-  const { name, totalMill, dailyMill } = location.state;
-
+  const { name, totalEgg, dailyData, totalOtherCost } = location.state;
+//   console.log(location);
   const columns = [
     { key: "day", label: "Day" },
-    { key: "mill", label: "Meal" },
+    { key: "egg", label: "Egg" },
+    { key: "otherCost", label: "OtherCost" },
   ];
 
   const actions = [
     {
       label: <EditBtn />,
       onClick: (item) => {
-        navigate("/mills", {
+        navigate("/incidental-cost", {
           state: {
-            editDailyMill: item,
+            editDailyData: item,
             userId: id,
           },
         });
@@ -35,12 +35,13 @@ const DailyMeals = () => {
     <>
       <div className="pb-4 flex flex-col justify-between items-center sm:flex-row">
         <Title title={`Name: ${name}`} />
-        <Button text="Go Back   " onclickHandle={() => navigate("/mills")} />
+        <Button text="Go Back   " onclickHandle={() => navigate("/incidental-cost")} />
       </div>
-      <Title title={`Total: ${totalMill}`} />
-      <ReusableTable columns={columns} data={dailyMill} actions={actions} />
+      <Title title={`Total Egg: ${totalEgg}`} />
+      <Title title={`Total OtherCost: ${totalOtherCost}`} />
+      <ReusableTable columns={columns} data={dailyData} actions={actions} />
     </>
   );
 };
 
-export default DailyMeals;
+export default DailayEggIncidantal;

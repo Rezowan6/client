@@ -16,9 +16,11 @@ import { validateMill } from "../../../utils/validate/validateData";
 import { millAddConfirm } from "../utils/millActions";
 
 import { millTableActions } from "../utils/millTableActions";
+import useOptionsMap from "../../../hooks/useOptionsMap.js";
 
 const DailyMillUpdates = () => {
   const location = useLocation();
+  const { users } = useOptionsMap();
 
   // ALERT
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
@@ -68,6 +70,21 @@ const DailyMillUpdates = () => {
     }
   }, [location.state, setValues, setEditId]);
 
+  const itemsMap = items.reduce((acc, item) => {
+    acc[item.userId] = item;
+    return acc;
+  }, {})
+
+  const finalData = users?.map((user) => {
+    const matchedItem = itemsMap[user?.value];
+    return {
+      userId: user?.value,
+      name: user?.name,
+      dailyMill: matchedItem?.dailyMill,
+      totalMill: matchedItem?.totalMill,
+    }
+  })
+
   if (isLoading) return <Loading />;
   if (isErrors) return <p>Internal server error{isErrors}</p>;
 
@@ -76,11 +93,12 @@ const DailyMillUpdates = () => {
       <ReusableCrudPage
         config={millConfig}
         title="Meal Added"
-        items={items}
+        link="meal"
+        items={finalData}
         values={values}
         editId={editId}
         handleChange={handleChange}
-        onAddMillClick={quickMillAdd}
+        quickAdd={quickMillAdd}
         handleSubmit={handleSubmit(() =>
           millAddConfirm({
             showConfirm,
@@ -97,7 +115,6 @@ const DailyMillUpdates = () => {
         alertData={alertData}
         closeAlert={closeAlert}
         confirmAction={confirmAction}
-        link={true}
       />
     </section>
   );

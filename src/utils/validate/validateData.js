@@ -55,14 +55,17 @@ export const validateCost = (values) => {
 export const validateIncedentalExpenses = (values) => {
   const errors = {};
 
-  const { otherCost, egg, } = values;
+  const { otherCost, egg,totalOtherCost, } = values;
 
   // required email
-  if (!otherCost && !egg) {
+  if (!otherCost && !egg && !totalOtherCost) {
     errors.otherCost = "OtherCost is required";
   }
-  if (!egg && !otherCost) {
+  if (!egg && !otherCost && !totalOtherCost) {
     errors.egg = "Egg is required";
+  }
+  if (!egg && !otherCost && !totalOtherCost) {
+    errors.totalOtherCost = "TotalOtherCost is required";
   }
 
   return errors;
@@ -102,6 +105,22 @@ export const validateRole = (values) => {
   }
   if (!role ) {
     errors.role = "Role is required";
+  }
+
+  return errors;
+};
+// eggRate
+export const eggRateValidator = (values) => {
+  const errors = {};
+
+  const { eggRate, soldProduct } = values;
+
+  // required email
+  if (!eggRate && !soldProduct) {
+    errors.eggRate = "Egg Rate is required";
+  }
+  if (!soldProduct && !eggRate ) {
+    errors.soldProduct = "Sold Product is required";
   }
 
   return errors;

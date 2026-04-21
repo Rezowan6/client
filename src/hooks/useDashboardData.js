@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useGetUsersBalanceQuery } from "../features/balance/balanceApi";
 import { useGetUsersCostQuery } from "../features/cost/costApi";
+import { useGetEggRateQuery } from "../features/eggRate/eggRateApi";
 import { useGetUsersIncidentalExpensesQuery } from "../features/incidentalExpenses/incidentalExpensesApi";
 import { useGetUsersMillQuery } from "../features/mill/millApi";
 import { useGetUsersQuery } from "../features/users/userApi";
@@ -12,8 +13,7 @@ export const useDashboardData = () => {
   const { data: costData } = useGetUsersCostQuery();
   const { data: millData } = useGetUsersMillQuery();
   const { data: incidentalData } = useGetUsersIncidentalExpensesQuery();
-
-  const eggRate = 20;
+  const { data: eggRateData } = useGetEggRateQuery();
 
   const processedUsers = useMemo(() => {
     return calculateUserFinancials({
@@ -23,7 +23,8 @@ export const useDashboardData = () => {
       incidentalUsers: incidentalData?.data?.users,
       grandTotalCost: costData?.data?.grandTotalCost,
       grandTotalMill: millData?.data?.grandTotalMill,
-      eggRate,
+      eggRate: eggRateData?.data?.eggRate || 0,
+      soldProduct: eggRateData?.data?.soldProduct || 0,
     });
   }, [
     usersData?.data?.users,
@@ -32,7 +33,8 @@ export const useDashboardData = () => {
     incidentalData?.data?.users,
     costData?.data?.grandTotalCost,
     millData?.data?.grandTotalMill,
-    eggRate,
+    eggRateData?.data?.eggRate,
+    eggRateData?.data?.soldProduct,
   ]);
 
   return {
@@ -45,6 +47,8 @@ export const useDashboardData = () => {
       totalMill: millData?.data?.grandTotalMill || 0,
       totalEggCost: processedUsers?.totals?.totalEggCost,
       totalIncidentalCost: processedUsers?.totals?.totalIncidentalCost,
+      eggRate: eggRateData?.data?.eggRate || 0,
+      soldProduct: eggRateData?.data?.soldProduct || 0,
     },
   };
 };

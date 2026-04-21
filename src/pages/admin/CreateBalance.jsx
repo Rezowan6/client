@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import EditBtn from "../../components/Button/EditBtn";
 import Loading from "../../components/loading/Loding";
 import ReusableCrudPage from "../../components/pages/ReusableCrudPage";
@@ -12,14 +13,20 @@ import useAlert from "../../hooks/useAlert";
 import useCrudManager from "../../hooks/useCrudManager";
 import useForm from "../../hooks/useForm";
 import { validateBalance } from "../../utils/validate/validateData";
+import { useLocation } from "react-router-dom";
+import useOptionsMap from "../../hooks/useOptionsMap";
 
 const CreateBalance = () => {
+
+  const location = useLocation();
+
+  const { users } = useOptionsMap();
 
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } = useAlert();
 
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } = useForm({ userId: "", tk: "" }, validateBalance);
 
-  const { items, data, isLoading, editId, submit, editItem } = useCrudManager({
+  const { items, data, isLoading, editId, submit, editItem, setEditId } = useCrudManager({
                                                                       useGetQuery: useGetUsersBalanceQuery,
                                                                       useAddMutation: useAddBalanceMutation,
                                                                       useUpdateMutation: useUpdateBalanceMutation,
@@ -46,6 +53,35 @@ const CreateBalance = () => {
     },
   ];
 
+    useEffect(() => {
+      if (location.state?.editDailyTk) {
+        const { day, tk } = location.state.editDailyTk;
+        setEditId(location.state.userId)
+  
+        setValues({
+          userId: location.state.userId,
+          tk: tk,
+          day: day,
+        });
+      }
+    }, [location.state, setValues, setEditId]);
+
+const itemsMap = items?.reduce((acc, item) => {
+  acc[item?.userId] = item;
+  return acc;
+},{})
+
+const finalData = users?.map((user) => {
+  const matchedItem = itemsMap[user?.value];
+
+  return {
+    name: user?.name,
+    userId: user?.value,
+    dailyTk: matchedItem?.dailyTk,
+    totalTk: matchedItem?.totalTk
+  }
+})
+
   if (isLoading) return <Loading />
 
   return (
@@ -53,7 +89,8 @@ const CreateBalance = () => {
       <ReusableCrudPage
         config={balanceConfig}
         title="Add Border Balance"
-        items={items}
+        link="balance"
+        items={finalData}
         values={values}
         editId={editId}
         handleChange={handleChange}

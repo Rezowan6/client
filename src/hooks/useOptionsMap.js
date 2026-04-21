@@ -7,7 +7,7 @@ const useOptionsMap = () => {
 
   const optionsMap = {
     users: users.map((u) => ({
-      label: u.name,
+      name: u.name,
       value: u._id,
     })),
   };

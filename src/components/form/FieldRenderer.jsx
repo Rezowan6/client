@@ -46,7 +46,7 @@ const FieldRenderer = ({ field, values, handleChange, errors, optionsMap }) => {
 
           {optionsMap[field.optionsKey]?.map((opt) => (
             <option key={opt.value} value={opt.value}>
-              {opt.label}
+              {opt.name}
             </option>
           ))}
         </select>

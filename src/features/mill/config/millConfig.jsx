@@ -28,7 +28,7 @@ const millConfig = {
       {
         name: "mill",
         type: "number",
-        label: "Mill",
+        label: "Meal",
       },
     ],
   },
@@ -36,10 +36,10 @@ const millConfig = {
   table: {
     columns: [
       { key: "name", label: "Name" },
-      { key: "totalMill", label: "Mill" },
+      { key: "totalMill", label: "Meal" },
       {
         key: "mill",
-        label: "Add-Mill",
+        label: "Add-Meal",
         render: (row, onAddMillClick) => {
         return (
             <div className="flex gap-2 sm:gap-6 justify-center">

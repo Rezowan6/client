@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
 const ReusableTable = ({
-  link = false,
+  link = null,
   columns,
   data,
   actions = [],
-  onAddMillClick,
+  quickAdd,
+  onSelectUser,
+  selectedUsers = [],
 }) => {
   return (
     <table className="w-full text-center border-collapse">
@@ -27,34 +29,70 @@ const ReusableTable = ({
         {data.length ? (
           data.map((item, index) => {
             return (
-              <tr key={item._id || item.userId}>
+              <tr key={item._id || item.userId || index}>
                 <td className="border py-2"> {index + 1} </td>
 
-                {columns.map((col) => (
-                  <td key={col.key} className="border py-2">
-                    {col.render
-                      ? col.render(item, onAddMillClick)
-                      : item[col.key]}
-                  </td>
-                ))}
+                {columns.map((col) => {
+                  const isSelect = col.key === "select";
+
+                  return (
+                    <td key={col.key} className="border py-2">
+                      {col.render
+                        ? isSelect
+                          ? col.render(item, onSelectUser, selectedUsers)
+                          : col.render(item, quickAdd)
+                        : item[col.key]}
+                    </td>
+                  );
+                })}
 
                 <td className="border py-2">
-                  {actions.map((action, i) => (
-                    <div key={i} className={action.className}>
-                      {link ? (
-                        <Link to={`/mill/${item.userId}`} state={item}
-                        className="hover:text-cyan-500"
-                        >View Daily Mill</Link>
-                      ) : (
+                  {actions.map((action, i) => {
+                    if (link === "meal") {
+                      return (
+                        <div key={i} className={action.className}>
+                          <Link
+                            to={`/mill/${item.userId}`}
+                            state={item}
+                            className="hover:text-cyan-500 text-xs lg:text-sm border-b"
+                          >
+                            #Daily Meal
+                          </Link>
+                        </div>
+                      );
+                    }
+                    if (link === "balance") {
+                      return (
+                        <Link
+                          to={`/balance/${item.userId}`}
+                          state={item}
+                          className="hover:text-cyan-500 text-xs lg:text-sm border-b"
+                        >
+                          #Daily Balance
+                        </Link>
+                      );
+                    }
+                    if (link === "egg") {
+                      return (
+                        <Link
+                          to={`/egg/${item.userId}`}
+                          state={item}
+                          className="hover:text-cyan-500 text-xs lg:text-sm border-b"
+                        >
+                          #Daily View
+                        </Link>
+                      );
+                    } else {
+                      return (
                         <span
                           onClick={() => action.onClick(item)}
                           className="cursor-pointer inline-flex"
                         >
                           {action.label}
                         </span>
-                      )}
-                    </div>
-                  ))}
+                      );
+                    }
+                  })}
                 </td>
               </tr>
             );

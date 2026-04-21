@@ -6,6 +6,7 @@ export const calculateUserFinancials = ({
   grandTotalCost,
   grandTotalMill,
   eggRate,
+  soldProduct,
 }) => {
   const balanceMap = {};
   const millMap = {};
@@ -37,7 +38,7 @@ export const calculateUserFinancials = ({
   });
 
   // total other cost
-  const otherstotaluserCost = totalEggCost + totalIncidentalCost;
+  const otherstotaluserCost = totalEggCost + totalIncidentalCost + soldProduct;
 
   // grand cost without egg + incidental
   const finalTotalGrandCost = grandTotalCost - otherstotaluserCost;

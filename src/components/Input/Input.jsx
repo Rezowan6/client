@@ -17,9 +17,9 @@ const Input = ({
         name={name}
         type={type}
         value={value}
+        placeholder=" "
         onChange={onChange}
         disabled={disabled}
-        required
         className={`
       bg-[#1d2b3a]
     ${error ? "border-red-500 focus:ring-red-500" : "border-gray-300"}

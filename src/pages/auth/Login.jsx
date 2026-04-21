@@ -9,11 +9,12 @@ import { loginUser } from "../../services/auth/authService.js";
 import { validateLogin } from "../../utils/validate/validateLogin";
 
 const Login = () => {
-  const { alertData, showAlert, closeAlert, showConfirm, confirmAction } = useAlert();
+  const { alertData, showAlert, closeAlert, showConfirm, confirmAction } =
+    useAlert();
 
   const navigate = useNavigate();
 
-  const { values, errors, handleChange, resetForm, } = useForm(
+  const { values, errors, handleChange, resetForm, handleSubmit } = useForm(
     { email: "", password: "" },
     validateLogin,
   );
@@ -58,10 +59,7 @@ const Login = () => {
           errors={errors}
           handleChange={handleChange}
           resetForm={resetForm}
-          handleSubmit={(e) => {
-            e.preventDefault();
-            loginConfirm();
-          }}
+          handleSubmit={handleSubmit(loginConfirm)}
           alertData={alertData}
           closeAlert={closeAlert}
           confirmAction={confirmAction}

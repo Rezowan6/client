@@ -13,7 +13,7 @@ const CreateUser = () => {
 
   const [createUser] = useCreateUserMutation();
 
-  const { values, errors, handleChange, resetForm } = useForm(
+  const { values, errors, handleChange, resetForm, handleSubmit } = useForm(
     {
       name: "",
       email: "",
@@ -52,10 +52,7 @@ const CreateUser = () => {
           values={values}
           errors={errors}
           handleChange={handleChange}
-          handleSubmit={(e) => {
-            e.preventDefault();
-            createConfirm();
-          }}
+          handleSubmit={handleSubmit(createConfirm)}
           resetForm={resetForm}
           alertData={alertData}
           closeAlert={closeAlert}

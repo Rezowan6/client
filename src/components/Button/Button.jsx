@@ -2,7 +2,6 @@ import Style from "./button.module.css";
 
 const Button = ({ type = "button", text = "add", onclickHandle }) => {
   const length = text.length;
-  console.log(length)
   return (
     <>
       <button

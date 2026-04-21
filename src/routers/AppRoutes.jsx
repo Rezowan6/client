@@ -19,6 +19,9 @@ import UserDashboard from "./../pages/dashboard/UserDashboard";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import DailyMeals from "../features/mill/pages/DailyMeals";
+import DailyBalance from "../features/balance/pages/DailyBalance";
+import EggRate from "../pages/admin/EggRate";
+import DailayEggIncidantal from "../features/incidentalExpenses/pages/DailayEggIncidantal";
 
 const AppRoutes = () => {
   return (
@@ -34,7 +37,6 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<UserDashboard />} />
         <Route path="/create-users" element={<CreateUser />} />
         <Route path="/get-users" element={<UserList />} />
-        <Route path="/create-balance" element={<CreateBalance />} />
         <Route path="/cost" element={<CostAdd />} />
         <Route path="/incidental-cost" element={<IncidentalExpenses />} />
 
@@ -43,6 +45,10 @@ const AppRoutes = () => {
           <Route path="/make-sub-admin" element={<Make_subAdminMess_malik />} />
           <Route path="/mills" element={<MillUpdate />} />
           <Route path="/mill/:id" element={<DailyMeals />} />
+          <Route path="/create-balance" element={<CreateBalance />} />
+          <Route path="/egg-rate" element={<EggRate />} />
+          <Route path="/balance/:id" element={<DailyBalance />} />
+          <Route path="/egg/:id" element={<DailayEggIncidantal />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
       </Route>

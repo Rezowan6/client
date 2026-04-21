@@ -12,7 +12,7 @@ const Register = () => {
 
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
-  const { values, errors, handleChange, resetForm } = useForm(
+  const { values, errors, handleChange, resetForm, handleSubmit } = useForm(
     {
       name: "",
       email: "",
@@ -60,10 +60,7 @@ const Register = () => {
           values={values}
           errors={errors}
           handleChange={handleChange}
-          handleSubmit={(e) => {
-            e.preventDefault();
-            registerConfirm();
-          }}
+          handleSubmit={handleSubmit(registerConfirm)}
           resetForm={resetForm}
           alertData={alertData}
           closeAlert={closeAlert}

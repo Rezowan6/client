@@ -12,7 +12,6 @@ const ReusableCrudPage = ({
   items,
   values,
   handleChange,
-  onAddMillClick,
   handleSubmit,
   actions,
   editId,
@@ -25,6 +24,9 @@ const ReusableCrudPage = ({
   confirmAction,
   table = true,
   link,
+  onSelectUser,
+  selectedUsers,
+  quickAdd,
 }) => {
   const optionsMap = useOptionsMap();
 
@@ -38,7 +40,7 @@ const ReusableCrudPage = ({
           {/* FORM */}
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-4 md:gap-10 justify-center items-center w-full sm:flex-row"
+            className="flex flex-col gap-4 md:gap-10 justify-center items-center w-full  lg:flex-row"
           >
             {config.form.fields.map((field) => {
               return (
@@ -74,8 +76,10 @@ const ReusableCrudPage = ({
           columns={config.table.columns}
           data={items}
           actions={actions}
-          onAddMillClick={onAddMillClick}
           link={link}
+          onSelectUser={onSelectUser}
+          selectedUsers={selectedUsers}
+          quickAdd={quickAdd}
         />
       )}
 
