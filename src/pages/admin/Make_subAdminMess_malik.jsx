@@ -6,6 +6,7 @@ import makeSubAdminConfig from "./../../configs/makeSub_admin";
 import { makeSubAdmin } from "./../../services/admin/adminService";
 
 const Make_subAdminMess_malik = () => {
+
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
 
@@ -19,10 +20,10 @@ const Make_subAdminMess_malik = () => {
     try {
       const res = await makeSubAdmin({ data: { userId, role } });
 
-      showAlert(res?.message || 'sub-admin added');
+      showAlert(res?.message || "sub-admin added");
     } catch (error) {
-      console.log(error)
-      showAlert(error?.response?.data?.message || 'operation failed');
+      console.log(error);
+      showAlert(error?.response?.data?.message || "operation failed");
     }
   };
 

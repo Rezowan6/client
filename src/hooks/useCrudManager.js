@@ -32,15 +32,14 @@ const useCrudManager = ({
         throw new Error("No API function provided");
       }
       if (!editId) {
-        await addFn(values).unwrap();
-        showAlert("Success", "Added successfully!");
+        const res = await addFn(values).unwrap();
+        showAlert("Success", res?.data?.message || "Added successfully!");
       } else {
-        await updateFn({
+        const res = await updateFn({
           id: editId,
           data: values,
         }).unwrap();
-
-        showAlert("Success", "Updated successfully!");
+        showAlert("Success", res?.data?.message || "Updated successfully!");
         resetForm();
       }
 

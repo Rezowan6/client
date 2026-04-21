@@ -1,9 +1,9 @@
-
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import EditBtn from "../../components/Button/EditBtn";
 import Loading from "../../components/loading/Loding";
 import ReusableCrudPage from "../../components/pages/ReusableCrudPage";
-import balanceConfig from "../../configs/balanceConfig";
+import balanceConfig from "../../configs/balanceConfig.jsx";
 import {
   useAddBalanceMutation,
   useGetUsersBalanceQuery,
@@ -12,30 +12,30 @@ import {
 import useAlert from "../../hooks/useAlert";
 import useCrudManager from "../../hooks/useCrudManager";
 import useForm from "../../hooks/useForm";
-import { validateBalance } from "../../utils/validate/validateData";
-import { useLocation } from "react-router-dom";
 import useOptionsMap from "../../hooks/useOptionsMap";
+import { validateBalance } from "../../utils/validate/validateData";
 
 const CreateBalance = () => {
-
   const location = useLocation();
 
   const { users } = useOptionsMap();
 
-  const { alertData, showAlert, showConfirm, closeAlert, confirmAction } = useAlert();
+  const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
+    useAlert();
 
-  const { values, setValues, errors, handleChange, handleSubmit, resetForm } = useForm({ userId: "", tk: "" }, validateBalance);
+  const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
+    useForm({ userId: "", tk: "" }, validateBalance);
 
-  const { items, data, isLoading, editId, submit, editItem, setEditId } = useCrudManager({
-                                                                      useGetQuery: useGetUsersBalanceQuery,
-                                                                      useAddMutation: useAddBalanceMutation,
-                                                                      useUpdateMutation: useUpdateBalanceMutation,
-                                                                      keyField1: "dailyTk",
-                                                                      keyField2: "tk",
-                                                                    });
+  const { items, data, isLoading, editId, submit, editItem, setEditId } =
+    useCrudManager({
+      useGetQuery: useGetUsersBalanceQuery,
+      useAddMutation: useAddBalanceMutation,
+      useUpdateMutation: useUpdateBalanceMutation,
+      keyField1: "dailyTk",
+      keyField2: "tk",
+    });
 
-
-  const balanceSubmit = () => submit({values,showAlert,resetForm, });
+  const balanceSubmit = () => submit({ values, showAlert, resetForm });
 
   // confirm before balance add
   const balanceAddConfirm = (data) => {
@@ -53,36 +53,54 @@ const CreateBalance = () => {
     },
   ];
 
-    useEffect(() => {
-      if (location.state?.editDailyTk) {
-        const { day, tk } = location.state.editDailyTk;
-        setEditId(location.state.userId)
-  
-        setValues({
-          userId: location.state.userId,
-          tk: tk,
-          day: day,
-        });
-      }
-    }, [location.state, setValues, setEditId]);
+  const quickBalanceAdd = (user, balance) => {
+    const values = {
+      userId: user.userId,
+      tk: balance,
+    };
 
-const itemsMap = items?.reduce((acc, item) => {
-  acc[item?.userId] = item;
-  return acc;
-},{})
+    showConfirm(
+      "Add Balance",
+      `Add ${balance} balance for ${user.name}?`,
 
-const finalData = users?.map((user) => {
-  const matchedItem = itemsMap[user?.value];
+      () =>
+        submit({
+          values,
+          showAlert,
+          resetForm,
+        }),
+    );
+  };
 
-  return {
-    name: user?.name,
-    userId: user?.value,
-    dailyTk: matchedItem?.dailyTk,
-    totalTk: matchedItem?.totalTk
-  }
-})
+  useEffect(() => {
+    if (location.state?.editDailyTk) {
+      const { tk } = location.state.editDailyTk;
+      setEditId(location.state.userId);
 
-  if (isLoading) return <Loading />
+      setValues({
+        userId: location.state.userId,
+        tk: tk,
+      });
+    }
+  }, [location.state, setValues, setEditId]);
+
+  const itemsMap = items?.reduce((acc, item) => {
+    acc[item?.userId] = item;
+    return acc;
+  }, {});
+
+  const finalData = users?.map((user) => {
+    const matchedItem = itemsMap[user?.value];
+
+    return {
+      name: user?.name,
+      userId: user?.value,
+      dailyTk: matchedItem?.dailyTk,
+      totalTk: matchedItem?.totalTk,
+    };
+  });
+
+  if (isLoading) return <Loading />;
 
   return (
     <section className="pb-20">
@@ -102,6 +120,7 @@ const finalData = users?.map((user) => {
         alertData={alertData}
         closeAlert={closeAlert}
         confirmAction={confirmAction}
+        quickAdd={quickBalanceAdd}
       />
     </section>
   );

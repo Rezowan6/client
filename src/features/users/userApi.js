@@ -32,6 +32,7 @@ export const userApi = apiSlice.injectEndpoints({
   }),
 
   overrideExisting: false,
+  refetchOnMountOrArgChange: true,
 });
 
 export const {

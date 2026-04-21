@@ -4,7 +4,7 @@ export const navLinks = [
 
   { name: "Create User", path: "/create-users", role: ["admin"] },
 
-  { name: "User List", path: "/get-users", role: ["admin", 'user'] },
+  { name: "User List", path: "/get-users", role: ["admin", 'sub_admin'] },
 
   { name: "Mills", path: "/mills", role: ["admin"] },
 
