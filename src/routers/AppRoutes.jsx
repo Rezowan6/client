@@ -23,6 +23,7 @@ import DailyBalance from "../features/balance/pages/DailyBalance";
 import EggRate from "../pages/admin/EggRate";
 import DailayEggIncidantal from "../features/incidentalExpenses/pages/DailayEggIncidantal";
 import BasaVara from "../pages/masMalik/BasaVara";
+import MonthlyBasaVara from "../features/basavara/pages/MonthlyBasaVara";
 
 const AppRoutes = () => {
   return (
@@ -51,6 +52,7 @@ const AppRoutes = () => {
           <Route path="/egg-rate" element={<EggRate />} />
           <Route path="/balance/:id" element={<DailyBalance />} />
           <Route path="/egg/:id" element={<DailayEggIncidantal />} />
+          <Route path="/montly-basaVara/:id" element={<MonthlyBasaVara />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
       </Route>

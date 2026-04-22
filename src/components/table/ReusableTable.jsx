@@ -61,6 +61,19 @@ const ReusableTable = ({
                         </div>
                       );
                     }
+                    if (link === "basaVara") {
+                      return (
+                        <div key={i} className={action.className}>
+                          <Link
+                            to={`/montly-basaVara/${item.userId}`}
+                            state={item}
+                            className="hover:text-cyan-500 text-xs lg:text-sm border-b"
+                          >
+                            #View BasaVara
+                          </Link>
+                        </div>
+                      );
+                    }
                     if (link === "balance") {
                       return (
                         <Link
@@ -85,6 +98,7 @@ const ReusableTable = ({
                     } else {
                       return (
                         <span
+                        key={item?.userId}
                           onClick={() => action.onClick(item)}
                           className="cursor-pointer inline-flex"
                         >

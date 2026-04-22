@@ -18,7 +18,7 @@ const CostAdd = () => {
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
 
-  const { values, setValues, errors, handleChange, resetForm } = useForm(
+  const { values, setValues, errors, handleChange, handleSubmit, resetForm } = useForm(
     { cost: "", desc: "", signature: "" },
     validateCost,
   );
@@ -84,10 +84,7 @@ const CostAdd = () => {
           values={values}
           errors={errors}
           handleChange={handleChange}
-          handleSubmit={(e) => {
-            e.preventDefault();
-            costAddConfirm();
-          }}
+          handleSubmit={handleSubmit(costAddConfirm)}
           resetForm={resetForm}
           alertData={alertData}
           closeAlert={closeAlert}

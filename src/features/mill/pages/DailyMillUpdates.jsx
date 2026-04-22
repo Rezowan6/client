@@ -15,7 +15,7 @@ import { validateMill } from "../../../utils/validate/validateData";
 
 import { millAddConfirm } from "../utils/millActions";
 
-import { millTableActions } from "../utils/millTableActions";
+import { useTableActions } from "../../../utils/tableAction/useTableAction.jsx";
 import useOptionsMap from "../../../hooks/useOptionsMap.js";
 
 const DailyMillUpdates = () => {
@@ -35,7 +35,7 @@ const DailyMillUpdates = () => {
     useMillCrud();
 
   // ACTIONS
-  const actions = millTableActions(editItem, setValues);
+  const actions = useTableActions(editItem, setValues);
 
   // quick Mill add
   const quickMillAdd = (user, millValue) => {

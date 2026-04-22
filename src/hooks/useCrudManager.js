@@ -41,7 +41,6 @@ const useCrudManager = ({
         showAlert("Success", res?.data?.message || "Added successfully!");
       } else {
         const res = await updateFn({
-          id: editId,
           data: values,
         }).unwrap();
         showAlert("Success", res?.data?.message || "Updated successfully!");

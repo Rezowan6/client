@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Button from "../../../components/Button/Button.jsx";
 import EditBtn from "../../../components/Button/EditBtn.jsx";
 import Loading from "../../../components/loading/Loding.jsx";
@@ -15,8 +17,10 @@ import {
   useUpdateBasaVaraMutation,
 } from "../basaVaraApi";
 import basaVaraConfig from "../configs/basaVaraConfig.jsx";
+import { useTableActions } from "../../../utils/tableAction/useTableAction.jsx";
 
 const UsersBasaVara = () => {
+  const location = useLocation();
   const { users } = useOptionsMap();
 
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
@@ -25,7 +29,7 @@ const UsersBasaVara = () => {
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
     useForm({ userId: "", basaVara: "" }, basaVaraValidator);
 
-  const { data, isLoading, editId, submit, editItem, deleteItem } =
+  const { data, isLoading, editId, setEditId, submit, editItem, deleteItem } =
     useCrudManager({
       useGetQuery: useGetUsersBasaVaraQuery,
       useAddMutation: useAddBasaVaraMutation,
@@ -35,8 +39,8 @@ const UsersBasaVara = () => {
     });
 
   const {
-    basaVaraList = [],
-    totalBasaVara = 0,
+    users: allUserBasaVara = [],
+    grandTotalBasaVara = 0,
     totalPaidUser = 0,
   } = data?.data || {};
 
@@ -59,12 +63,8 @@ const UsersBasaVara = () => {
     );
   };
 
-  const actions = [
-    {
-      label: <EditBtn action="edit" />,
-      onClick: (item) => editItem(item, setValues),
-    },
-  ];
+  const actions = useTableActions(editItem, setValues);
+  
   const quickBalanceAdd = (user, balance) => {
     const values = {
       userId: user.userId,
@@ -84,8 +84,20 @@ const UsersBasaVara = () => {
     );
   };
 
+  useEffect(() => {
+    if (location.state?.editBasaVara) {
+      const { basaVara } = location.state.editBasaVara;
+      setEditId(location.state.userId);
+
+      setValues({
+        userId: location.state.userId,
+        basaVara: basaVara,
+      });
+    }
+  }, [location.state, setValues, setEditId]);
+
   const itemsMap = new Map(
-    (basaVaraList || []).map((item) => [item.userId, item]),
+    (allUserBasaVara || []).map((item) => [item.userId, item]),
   );
 
   const finalData = (users || []).map((user) => {
@@ -95,17 +107,20 @@ const UsersBasaVara = () => {
       name: user.name,
       userId: user.value,
       basaVara: matchedItem?.basaVara || 0,
+      basaVaraList: matchedItem?.basaVaraList,
       isPaid: matchedItem?.isPaid || "",
     };
   });
 
   if (isLoading) return <Loading />;
+
   return (
     <section className="pb-20">
       <Title title={`Total Paid Border: ${totalPaidUser}`} />
       <ReusableCrudPage
         config={basaVaraConfig}
         title="Add Border BasaVara"
+        link="basaVara"
         items={finalData}
         values={values}
         editId={editId}
@@ -113,7 +128,7 @@ const UsersBasaVara = () => {
         handleSubmit={handleSubmit(balanceAddConfirm)}
         actions={actions}
         totalText="Total"
-        grandTotal={totalBasaVara || 0}
+        grandTotal={grandTotalBasaVara || 0}
         errors={errors}
         alertData={alertData}
         closeAlert={closeAlert}

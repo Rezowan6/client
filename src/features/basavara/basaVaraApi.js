@@ -25,11 +25,15 @@ export const basaVaraApi = apiSlice.injectEndpoints({
 
     // UPDATE BasaVara USERS
     updateBasaVara: builder.mutation({
-      query: (data ) => ({
-        url: `/mas-malik/basa-vara`,
-        method: "PATCH",
-        data,
-      }),
+      query: ({ data }) => {
+        // console.log("Update Data:", data); 
+
+        return {
+          url: `/mas-malik/basa-vara`,
+          method: "PATCH",
+          data,
+        };
+      },
 
       invalidatesTags: ["BasaVara"],
     }),

@@ -23,9 +23,9 @@ export const millApi = apiSlice.injectEndpoints({
       providesTags: ["Mill"],
     }),
 
-        // UPDATE MILL USERS
+    // UPDATE MILL USERS
     updateMill: builder.mutation({
-      query: ({data }) => ({
+      query: ({ data }) => ({
         url: `/admin/mills`,
         method: "PATCH",
         data,
@@ -33,11 +33,13 @@ export const millApi = apiSlice.injectEndpoints({
 
       invalidatesTags: ["Mill"],
     }),
-
-
   }),
 
   overrideExisting: false,
 });
 
-export const { useAddMillMutation, useGetUsersMillQuery,useUpdateMillMutation } = millApi;
+export const {
+  useAddMillMutation,
+  useGetUsersMillQuery,
+  useUpdateMillMutation,
+} = millApi;
