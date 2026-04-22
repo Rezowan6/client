@@ -22,6 +22,7 @@ import DailyMeals from "../features/mill/pages/DailyMeals";
 import DailyBalance from "../features/balance/pages/DailyBalance";
 import EggRate from "../pages/admin/EggRate";
 import DailayEggIncidantal from "../features/incidentalExpenses/pages/DailayEggIncidantal";
+import BasaVara from "../pages/masMalik/BasaVara";
 
 const AppRoutes = () => {
   return (
@@ -39,6 +40,7 @@ const AppRoutes = () => {
         <Route path="/get-users" element={<UserList />} />
         <Route path="/cost" element={<CostAdd />} />
         <Route path="/incidental-cost" element={<IncidentalExpenses />} />
+        <Route path="/basa-vara" element={<BasaVara />} />
 
         {/*  Admin Only Routes */}
         <Route element={<AdminRoute />}>

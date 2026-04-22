@@ -15,6 +15,22 @@ export const validateBalance = (values) => {
   return errors;
 };
 
+export const basaVaraValidator = (values) => {
+  const errors = {};
+
+  const { basaVara, userId  } = values;
+
+  // required email
+  if (!userId) {
+    errors.userId = "User is required";
+  }
+  if (!basaVara) {
+    errors.basaVara = "Balance is required";
+  }
+
+  return errors;
+};
+
 // Mill
 export const validateMill = (values) => {
   const errors = {};

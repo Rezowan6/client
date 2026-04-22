@@ -25,8 +25,8 @@ export const balanceApi = apiSlice.injectEndpoints({
 
     // UPDATE BALANCE USERS
     updateBalance: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/admin/months/user-balances/${id}`,
+      query: ({ data }) => ({
+        url: `/admin/months/user-balances`,
         method: "PATCH",
         data,
       }),

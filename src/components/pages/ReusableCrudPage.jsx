@@ -61,14 +61,12 @@ const ReusableCrudPage = ({
       </section>
 
       {/* TOTAL */}
-      {grandTotal && (
         <div className="text-2xl text-cyan-500 text-end pb-4">
           <h3>
-            {totalText}: {grandTotal || 0}
+           {totalText}:{grandTotal || 0}
           </h3>
           {totalEgg ? <p>Total Egg: {totalEgg}</p> : ""}
         </div>
-      )}
 
       {/* TABLE */}
       {table && (
