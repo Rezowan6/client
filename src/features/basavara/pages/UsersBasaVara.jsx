@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../../../components/Button/Button.jsx";
-import EditBtn from "../../../components/Button/EditBtn.jsx";
 import Loading from "../../../components/loading/Loding.jsx";
 import ReusableCrudPage from "../../../components/pages/ReusableCrudPage.jsx";
 import Title from "../../../components/title/Title.jsx";
@@ -9,15 +8,15 @@ import useAlert from "../../../hooks/useAlert";
 import useCrudManager from "../../../hooks/useCrudManager";
 import useForm from "../../../hooks/useForm";
 import useOptionsMap from "../../../hooks/useOptionsMap";
+import { useTableActions } from "../../../utils/tableAction/useTableAction.jsx";
 import { basaVaraValidator } from "../../../utils/validate/validateData";
 import {
   useAddBasaVaraMutation,
-  useDeletehMonthlyBasaVaraMutation,
   useGetUsersBasaVaraQuery,
+  useRefreshMonthlyBasaVaraMutation,
   useUpdateBasaVaraMutation,
 } from "../basaVaraApi";
 import basaVaraConfig from "../configs/basaVaraConfig.jsx";
-import { useTableActions } from "../../../utils/tableAction/useTableAction.jsx";
 
 const UsersBasaVara = () => {
   const location = useLocation();
@@ -29,14 +28,33 @@ const UsersBasaVara = () => {
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
     useForm({ userId: "", basaVara: "" }, basaVaraValidator);
 
-  const { data, isLoading, editId, setEditId, submit, editItem, deleteItem } =
+  const { data, isLoading, editId, setEditId, submit, editItem, } =
     useCrudManager({
       useGetQuery: useGetUsersBasaVaraQuery,
       useAddMutation: useAddBasaVaraMutation,
       useUpdateMutation: useUpdateBasaVaraMutation,
-      useDeleteMutation: useDeletehMonthlyBasaVaraMutation,
       keyField5: "basaVara",
     });
+
+  const updateHook = useRefreshMonthlyBasaVaraMutation();
+  const updateFn = updateHook?.[0];
+
+  const refreshMonth = async () => {
+    try {
+      const res = await updateFn().unwrap();
+      showAlert("Success", res?.data?.message || "Month refresh succrssfully!");
+    } catch (error) {
+      showAlert(error?.data?.message || "Month refresh failed");
+    }
+  };
+  // month refresh
+  const newMonthStartConfirm = () => {
+    showConfirm(
+      "Month reset",
+      "Are you sure you want to this month refresh?",
+      () => refreshMonth(),
+    );
+  };
 
   const {
     users: allUserBasaVara = [],
@@ -54,17 +72,9 @@ const UsersBasaVara = () => {
       () => balanceSubmit(data),
     );
   };
-  // month reset
-  const newMonthStartConfirm = () => {
-    showConfirm(
-      "Month reset",
-      "Are you sure you want to this month reset?",
-      () => deleteItem(null, showAlert),
-    );
-  };
 
   const actions = useTableActions(editItem, setValues);
-  
+
   const quickBalanceAdd = (user, balance) => {
     const values = {
       userId: user.userId,

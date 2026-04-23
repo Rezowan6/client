@@ -26,7 +26,7 @@ export const basaVaraApi = apiSlice.injectEndpoints({
     // UPDATE BasaVara USERS
     updateBasaVara: builder.mutation({
       query: ({ data }) => {
-        // console.log("Update Data:", data); 
+        // console.log("Update Data:", data);
 
         return {
           url: `/mas-malik/basa-vara`,
@@ -38,10 +38,10 @@ export const basaVaraApi = apiSlice.injectEndpoints({
       invalidatesTags: ["BasaVara"],
     }),
 
-    deletehMonthlyBasaVara: builder.mutation({
+    refreshMonthlyBasaVara: builder.mutation({
       query: () => ({
-        url: `/mas-malik/monthly/basa-vara/reset`,
-        method: "DELETE",
+        url: `/mas-malik/monthly/basa-vara/refresh`,
+        method: "PATCH",
       }),
 
       invalidatesTags: ["BasaVara"],
@@ -55,5 +55,5 @@ export const {
   useAddBasaVaraMutation,
   useGetUsersBasaVaraQuery,
   useUpdateBasaVaraMutation,
-  useDeletehMonthlyBasaVaraMutation,
+  useRefreshMonthlyBasaVaraMutation,
 } = basaVaraApi;
