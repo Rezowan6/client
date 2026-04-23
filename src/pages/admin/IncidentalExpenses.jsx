@@ -16,6 +16,7 @@ import useForm from "../../hooks/useForm";
 import useOptionsMap from "../../hooks/useOptionsMap.js";
 import { validateIncedentalExpenses } from "../../utils/validate/validateData";
 import ReusableCrudPage from "./../../components/pages/ReusableCrudPage";
+import { useTableActions } from "../../utils/tableAction/useTableAction.jsx";
 
 const IncidentalExpenses = () => {
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -40,10 +41,6 @@ const IncidentalExpenses = () => {
       useGetQuery: useGetUsersIncidentalExpensesQuery,
       useAddMutation: useAddIncidentalExpensesMutation,
       useUpdateMutation: useUpdateIncidentalExpensesMutation,
-      keyField1: "dailyData",
-      keyField2: "otherCost",
-      keyField3: "dailyData",
-      keyField4: "egg",
     });
 
   const incidentalExpensesSubmit = async () => {
@@ -116,12 +113,7 @@ const IncidentalExpenses = () => {
     );
   };
 
-  const actions = [
-    {
-      label: <EditBtn action="edit" />,
-      onClick: (item) => editItem(item, setValues),
-    },
-  ];
+  const actions = useTableActions(editItem, setValues)
 
   // add
   const quickEggAdd = (user, eggValue) => {
@@ -146,13 +138,12 @@ const IncidentalExpenses = () => {
   // edit
   useEffect(() => {
     if (location.state?.editDailyData) {
-      const { day, egg, otherCost } = location.state.editDailyData;
+      const { egg, otherCost } = location.state.editDailyData;
       setEditId(location.state.userId);
       setValues({
         userId: location.state.userId,
         egg: egg,
         otherCost: otherCost,
-        day: day,
       });
     }
   }, [location.state, setValues, setEditId]);

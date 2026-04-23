@@ -33,7 +33,6 @@ const UsersBasaVara = () => {
       useGetQuery: useGetUsersBasaVaraQuery,
       useAddMutation: useAddBasaVaraMutation,
       useUpdateMutation: useUpdateBasaVaraMutation,
-      keyField5: "basaVara",
     });
 
   const updateHook = useRefreshMonthlyBasaVaraMutation();

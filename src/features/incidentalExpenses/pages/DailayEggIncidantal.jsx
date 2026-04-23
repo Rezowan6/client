@@ -10,7 +10,7 @@ const DailayEggIncidantal = () => {
   const { id } = useParams();
 
   const { name, totalEgg, dailyData, totalOtherCost } = location.state;
-//   console.log(location);
+
   const columns = [
     { key: "day", label: "Day" },
     { key: "egg", label: "Egg" },
