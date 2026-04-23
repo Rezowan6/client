@@ -15,7 +15,7 @@ import { validateMill } from "../../../utils/validate/validateData";
 
 import { millAddConfirm } from "../utils/millActions";
 
-import { useTableActions } from "../../../utils/tableAction/useTableAction.jsx";
+import { useTableActions } from "../../../hooks/useTableAction";
 import useOptionsMap from "../../../hooks/useOptionsMap.js";
 
 const DailyMillUpdates = () => {

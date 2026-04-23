@@ -1,5 +1,4 @@
-import EditBtn from "../../components/Button/EditBtn";
-
+import EditBtn from './../components/Button/EditBtn';
 
 export const useTableActions = (editItem, setValues) => [
   {

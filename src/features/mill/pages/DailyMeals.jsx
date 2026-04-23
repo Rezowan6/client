@@ -14,12 +14,12 @@ const DailyMeals = () => {
 
   const { data, isLoading } = useGetUsersMillQuery();
 
-  const users = data?.data?.users;
-  const userDailyMill = users?.filter((user) => user?.userId === id);
+  const users = data?.data?.users || [];
+  const userDailyMill = users?.find((user) => String(user?.userId) === String(id)) || {};
 
-  const { name: userName, totalMill: userTotalMill, dailyMill: userDailyMills } = location.state;
+  const { name: userName="", totalMill: userTotalMill=0, dailyMill: userDailyMills=[] } = location.state;
 
-  const { name="", totalMill=0, dailyMill=[] } = userDailyMill[0] || [];
+  const { name="", totalMill=0, dailyMill=[] } = userDailyMill || {};
 
   const columns = [
     { key: "day", label: "Day" },

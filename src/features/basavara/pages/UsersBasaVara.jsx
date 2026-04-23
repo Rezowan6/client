@@ -8,7 +8,7 @@ import useAlert from "../../../hooks/useAlert";
 import useCrudManager from "../../../hooks/useCrudManager";
 import useForm from "../../../hooks/useForm";
 import useOptionsMap from "../../../hooks/useOptionsMap";
-import { useTableActions } from "../../../utils/tableAction/useTableAction.jsx";
+import { useTableActions } from "../../../hooks/useTableAction.jsx";
 import { basaVaraValidator } from "../../../utils/validate/validateData";
 import {
   useAddBasaVaraMutation,
@@ -28,7 +28,7 @@ const UsersBasaVara = () => {
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
     useForm({ userId: "", basaVara: "" }, basaVaraValidator);
 
-  const { data, isLoading, editId, setEditId, submit, editItem, } =
+  const { data, isLoading, editId, setEditId, submit, editItem } =
     useCrudManager({
       useGetQuery: useGetUsersBasaVaraQuery,
       useAddMutation: useAddBasaVaraMutation,

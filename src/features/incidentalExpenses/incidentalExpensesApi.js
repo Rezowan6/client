@@ -34,11 +34,13 @@ export const incidentalExpensesApi = apiSlice.injectEndpoints({
 
     // UPDATE IncidentalExpenses USERS
     updateIncidentalExpenses: builder.mutation({
-      query: ({ data }) => ({
-        url: `/admin/incidental`,
-        method: "PATCH",
-        data,
-      }),
+      query: ({ data }) => {
+        return {
+          url: `/admin/incidental`,
+          method: "PATCH",
+          data,
+        };
+      },
 
       invalidatesTags: ["IncidentalExpenses"],
     }),
