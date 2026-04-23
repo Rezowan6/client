@@ -24,6 +24,7 @@ const IncidentalExpenses = () => {
     closeAlert,
     confirmAction,
   } = useIncidentalExpenses();
+  
   if (isLoading) return <Loading />;
 
   return (

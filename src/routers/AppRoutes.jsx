@@ -16,14 +16,16 @@ import Home from "../pages/public/Home";
 import Register from "./../pages/auth/Register";
 import UserDashboard from "./../pages/dashboard/UserDashboard";
 
+import DailyBalance from "../features/balance/pages/DailyBalance";
+import MonthlyBasaVara from "../features/basavara/pages/MonthlyBasaVara";
+import DailayEggIncidantal from "../features/incidentalExpenses/pages/DailayEggIncidantal";
+import DailyMeals from "../features/mill/pages/DailyMeals";
+import CurrentBillCreate from "../pages/admin/CurrentBillCreate";
+import EggRate from "../pages/admin/EggRate";
+import BasaVara from "../pages/masMalik/BasaVara";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
-import DailyMeals from "../features/mill/pages/DailyMeals";
-import DailyBalance from "../features/balance/pages/DailyBalance";
-import EggRate from "../pages/admin/EggRate";
-import DailayEggIncidantal from "../features/incidentalExpenses/pages/DailayEggIncidantal";
-import BasaVara from "../pages/masMalik/BasaVara";
-import MonthlyBasaVara from "../features/basavara/pages/MonthlyBasaVara";
+import MonthlyCurrentBill from "../features/bills/pages/MonthlyCurrentBill";
 
 const AppRoutes = () => {
   return (
@@ -36,7 +38,7 @@ const AppRoutes = () => {
 
       {/*  Protected Routes (All logged-in users) */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<UserDashboard />} />
+        <Route path="/profile" element={<UserDashboard />} />
         <Route path="/create-users" element={<CreateUser />} />
         <Route path="/get-users" element={<UserList />} />
         <Route path="/cost" element={<CostAdd />} />
@@ -47,17 +49,19 @@ const AppRoutes = () => {
         <Route element={<AdminRoute />}>
           <Route path="/make-sub-admin" element={<Make_subAdminMess_malik />} />
           <Route path="/mills" element={<MillUpdate />} />
+          <Route path="/current-bill" element={<CurrentBillCreate />} />
           <Route path="/mill/:id" element={<DailyMeals />} />
           <Route path="/create-balance" element={<CreateBalance />} />
           <Route path="/egg-rate" element={<EggRate />} />
           <Route path="/balance/:id" element={<DailyBalance />} />
+          <Route path="/currentBill/:id" element={<MonthlyCurrentBill />} />
           <Route path="/egg/:id" element={<DailayEggIncidantal />} />
           <Route path="/montly-basaVara/:id" element={<MonthlyBasaVara />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
       </Route>
 
-      {/* ❌ Error Route */}
+      {/*  Error Route */}
       <Route path="*" element={<Errors />} />
     </Routes>
   );

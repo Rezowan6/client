@@ -14,7 +14,7 @@ export const validateBalance = (values) => {
 
   return errors;
 };
-
+// basaVara
 export const basaVaraValidator = (values) => {
   const errors = {};
 
@@ -26,6 +26,22 @@ export const basaVaraValidator = (values) => {
   }
   if (!basaVara) {
     errors.basaVara = "Balance is required";
+  }
+
+  return errors;
+};
+// current bill
+export const currentBillValidator = (values) => {
+  const errors = {};
+
+  const { currentBill, userId  } = values;
+
+  // required email
+  if (!userId) {
+    errors.userId = "User is required";
+  }
+  if (!currentBill) {
+    errors.currentBill = "Balance is required";
   }
 
   return errors;

@@ -75,6 +75,17 @@ const ReusableTable = ({
                           </div>
                         );
                       }
+                      if (link === "currentBill") {
+                        return (
+                          <Link
+                            to={`/currentBill/${item.userId}`}
+                            state={item}
+                            className="hover:text-cyan-500 text-xs lg:text-sm border-b"
+                          >
+                            #view
+                          </Link>
+                        );
+                      }
                       if (link === "balance") {
                         return (
                           <Link
