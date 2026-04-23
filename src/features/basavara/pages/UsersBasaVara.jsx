@@ -43,7 +43,7 @@ const UsersBasaVara = () => {
       const res = await updateFn().unwrap();
       showAlert("Success", res?.data?.message || "Month refresh succrssfully!");
     } catch (error) {
-      showAlert(error?.data?.message || "Month refresh failed");
+      showAlert("Error", error?.data?.message || "Month refresh failed");
     }
   };
   // month refresh

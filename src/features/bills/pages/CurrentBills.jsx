@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import Button from "../../../components/Button/Button";
 import ReusableCrudPage from "../../../components/pages/ReusableCrudPage";
 import Title from "../../../components/title/Title";
@@ -9,7 +10,7 @@ import useOptionsMap from "../../../hooks/useOptionsMap";
 import useAlert from "../../../hooks/useAlert";
 import useForm from "../../../hooks/useForm";
 import useCrudManager from "../../../hooks/useCrudManager";
-import { useAddCurrentBillMutation, useGetCurrentBillQuery, useUpdateCurrentBillMutation } from "../currentBillsApi";
+import { useAddCurrentBillMutation, useGetCurrentBillQuery, useMonthlyRefreshCurrentBillMutation, useUpdateCurrentBillMutation } from "../currentBillsApi";
 import { currentBillValidator } from "../../../utils/validate/validateData";
 import Loading from "../../../components/loading/Loding";
 
@@ -30,25 +31,25 @@ const CurrentBills = () => {
       useUpdateMutation: useUpdateCurrentBillMutation,
     });
 
-  // const updateHook = useRefreshMonthlyBasaVaraMutation();
-  // const updateFn = updateHook?.[0];
+  const updateHook = useMonthlyRefreshCurrentBillMutation();
+  const updateFn = updateHook?.[0];
 
-  // const refreshMonth = async () => {
-  //   try {
-  //     const res = await updateFn().unwrap();
-  //     showAlert("Success", res?.data?.message || "Month refresh succrssfully!");
-  //   } catch (error) {
-  //     showAlert(error?.data?.message || "Month refresh failed");
-  //   }
-  // };
-  // // month refresh
-  // const newMonthStartConfirm = () => {
-  //   showConfirm(
-  //     "Month reset",
-  //     "Are you sure you want to this month refresh?",
-  //     () => refreshMonth(),
-  //   );
-  // };
+  const refreshMonth = async () => {
+    try {
+      const res = await updateFn().unwrap();
+      showAlert("Success", res?.data?.message || "Month refresh succrssfully!");
+    } catch (error) {
+      showAlert("Error",error?.data?.message || "Month refresh failed");
+    }
+  };
+  // month refresh
+  const newMonthStartConfirm = () => {
+    showConfirm(
+      "Month reset",
+      "Are you sure you want to this month refresh?",
+      () => refreshMonth(),
+    );
+  };
 
   const {
     users: allUserCurrentBill = [],
@@ -139,11 +140,11 @@ const CurrentBills = () => {
         quickAdd={quickBalanceAdd}
       />
 
-      {/* <Button
+       <Button
         type="button"
         text="New month start"
         onclickHandle={newMonthStartConfirm}
-      /> */}
+      /> 
     </section>
   );
 };

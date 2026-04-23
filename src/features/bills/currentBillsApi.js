@@ -31,8 +31,18 @@ export const currentbillApi = apiSlice.injectEndpoints({
       },
       providesTags: ["CurrentBill"],
     }),
+    // refresh
+    monthlyRefreshCurrentBill: builder.mutation({
+      query: () => {
+        return {
+        url: "admin/months/current-bill/refresh",
+        method: "PATCH",
+      }
+      },
+      providesTags: ["CurrentBill"],
+    }),
   }),
 });
 
-export const {useAddCurrentBillMutation, useGetCurrentBillQuery, useUpdateCurrentBillMutation} = currentbillApi;
+export const {useAddCurrentBillMutation, useGetCurrentBillQuery, useUpdateCurrentBillMutation, useMonthlyRefreshCurrentBillMutation } = currentbillApi;
 
