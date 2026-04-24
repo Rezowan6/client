@@ -28,7 +28,7 @@ const DailyMillUpdates = () => {
 
   // FORM
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ userId: "", mill: "" }, validateMill);
+    useForm({ userId: "", mill: "", day: "" }, validateMill);
 
   // CRUD
   const { items, data, isLoading, isErrors, editId, setEditId, submit, editItem } =
@@ -45,8 +45,8 @@ const DailyMillUpdates = () => {
     };
 
     showConfirm(
-      "Add Mill",
-      `Add ${millValue} mill for ${user.name}?`,
+      "Add Meal",
+      `Are you sure you want to add ${millValue} meal for ${user.name}?`,
 
       () =>
         submit({

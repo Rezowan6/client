@@ -41,16 +41,16 @@ const UsersBasaVara = () => {
   const refreshMonth = async () => {
     try {
       const res = await updateFn().unwrap();
-      showAlert("Success", res?.data?.message || "Month refresh succrssfully!");
+      showAlert("Success", res?.data?.message || "Month reset successful!");
     } catch (error) {
-      showAlert("Error", error?.data?.message || "Month refresh failed");
+      showAlert("Error", error?.data?.message || "Month reset failed!");
     }
   };
   // month refresh
   const newMonthStartConfirm = () => {
     showConfirm(
-      "Month reset",
-      "Are you sure you want to this month refresh?",
+      "Month Reset",
+      "Are you sure you want to refresh this month?",
       () => refreshMonth(),
     );
   };
@@ -66,8 +66,8 @@ const UsersBasaVara = () => {
   // confirm before balance add
   const balanceAddConfirm = (data) => {
     showConfirm(
-      "Balance added",
-      "Are you sure you want to balance added this user?",
+      "Add Balance",
+      "Are you sure you want to add balance for this user?",
       () => balanceSubmit(data),
     );
   };

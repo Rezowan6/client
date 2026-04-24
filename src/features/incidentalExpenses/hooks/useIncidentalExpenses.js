@@ -31,7 +31,7 @@ const useIncidentalExpenses = () => {
 
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
     useForm(
-      { userId: "", otherCost: "", egg: "", totalOtherCost: "" },
+      { userId: "", otherCost: "", egg: "", totalOtherCost: "", day: "" },
       validateIncedentalExpenses,
     );
 
@@ -97,7 +97,7 @@ const useIncidentalExpenses = () => {
   // edit
   useEffect(() => {
     if (location.state?.editDailyData) {
-      const { egg, otherCost } = location.state.editDailyData;
+      const { egg, otherCost, day } = location.state.editDailyData;
 
       setEditId(location.state.userId);
 
@@ -107,6 +107,7 @@ const useIncidentalExpenses = () => {
           userId: location.state.userId,
           egg: egg,
           otherCost: otherCost,
+          day,
         };
       });
     }

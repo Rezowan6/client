@@ -24,15 +24,13 @@ const CreateBalance = () => {
     useAlert();
 
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ userId: "", tk: "" }, validateBalance);
+    useForm({ userId: "", tk: "", day: "" }, validateBalance);
 
   const { items, data, isLoading, editId, submit, editItem, setEditId } =
     useCrudManager({
       useGetQuery: useGetUsersBalanceQuery,
       useAddMutation: useAddBalanceMutation,
       useUpdateMutation: useUpdateBalanceMutation,
-      keyField1: "dailyTk",
-      keyField2: "tk",
     });
 
   const balanceSubmit = () => submit({ values, showAlert, resetForm });
@@ -74,12 +72,13 @@ const CreateBalance = () => {
 
   useEffect(() => {
     if (location.state?.editDailyTk) {
-      const { tk } = location.state.editDailyTk;
+      const {day, tk } = location.state.editDailyTk;
       setEditId(location.state.userId);
 
       setValues({
         userId: location.state.userId,
-        tk: tk,
+        tk,
+        day
       });
     }
   }, [location.state, setValues, setEditId]);

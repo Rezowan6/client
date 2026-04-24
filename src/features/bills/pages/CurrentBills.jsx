@@ -1,18 +1,23 @@
 import { useEffect } from "react";
 
+import { useLocation } from "react-router-dom";
 import Button from "../../../components/Button/Button";
+import Loading from "../../../components/loading/Loding";
 import ReusableCrudPage from "../../../components/pages/ReusableCrudPage";
 import Title from "../../../components/title/Title";
-import billConfig from "../config/CurrentBillConfig";
-import { useTableActions } from "../../incidentalExpenses";
-import { useLocation } from "react-router-dom";
-import useOptionsMap from "../../../hooks/useOptionsMap";
 import useAlert from "../../../hooks/useAlert";
-import useForm from "../../../hooks/useForm";
 import useCrudManager from "../../../hooks/useCrudManager";
-import { useAddCurrentBillMutation, useGetCurrentBillQuery, useMonthlyRefreshCurrentBillMutation, useUpdateCurrentBillMutation } from "../currentBillsApi";
+import useForm from "../../../hooks/useForm";
+import useOptionsMap from "../../../hooks/useOptionsMap";
 import { currentBillValidator } from "../../../utils/validate/validateData";
-import Loading from "../../../components/loading/Loding";
+import { useTableActions } from "../../incidentalExpenses";
+import billConfig from "../config/CurrentBillConfig";
+import {
+  useAddCurrentBillMutation,
+  useGetCurrentBillQuery,
+  useMonthlyRefreshCurrentBillMutation,
+  useUpdateCurrentBillMutation,
+} from "../currentBillsApi";
 
 const CurrentBills = () => {
   const location = useLocation();
@@ -22,7 +27,7 @@ const CurrentBills = () => {
     useAlert();
 
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ userId: "", currentBill: "" }, currentBillValidator);
+    useForm({ userId: "", currentBill: "", month: "" }, currentBillValidator);
 
   const { data, isLoading, editId, setEditId, submit, editItem } =
     useCrudManager({
@@ -39,14 +44,14 @@ const CurrentBills = () => {
       const res = await updateFn().unwrap();
       showAlert("Success", res?.data?.message || "Month refresh succrssfully!");
     } catch (error) {
-      showAlert("Error",error?.data?.message || "Month refresh failed");
+      showAlert("Error", error?.data?.message || "Month refresh failed");
     }
   };
   // month refresh
   const newMonthStartConfirm = () => {
     showConfirm(
-      "Month reset",
-      "Are you sure you want to this month refresh?",
+      "Month Refresh",
+      "Are you sure you want to refresh this month?",
       () => refreshMonth(),
     );
   };
@@ -91,12 +96,13 @@ const CurrentBills = () => {
 
   useEffect(() => {
     if (location.state?.editCurrentBill) {
-      const { currentBill } = location.state.editCurrentBill;
+      const { currentBill, month } = location.state.editCurrentBill;
       setEditId(location.state.userId);
 
       setValues({
         userId: location.state.userId,
-        currentBill: currentBill,
+        currentBill,
+        month,
       });
     }
   }, [location.state, setValues, setEditId]);
@@ -117,13 +123,13 @@ const CurrentBills = () => {
     };
   });
 
-  if(isLoading) return <Loading />
+  if (isLoading) return <Loading />;
   return (
     <section className="pb-20">
-      <Title title={`Total Paid Border: ${totalPaidUser}`} />
+      <Title title={`Total Paid: ${totalPaidUser}`} />
       <ReusableCrudPage
         config={billConfig}
-        title="Add Border Current Bill"
+        title="Add Monthly Current Bill"
         link="currentBill"
         items={finalData}
         values={values}
@@ -140,11 +146,11 @@ const CurrentBills = () => {
         quickAdd={quickBalanceAdd}
       />
 
-       <Button
+      <Button
         type="button"
         text="New month start"
         onclickHandle={newMonthStartConfirm}
-      /> 
+      />
     </section>
   );
 };

@@ -11,8 +11,6 @@ const useMillCrud = () => {
     useGetQuery: useGetUsersMillQuery,
     useAddMutation: useAddMillMutation,
     useUpdateMutation: useUpdateMillMutation,
-    keyField1: "dailyMill",
-    keyField2: "mill",
   });
 
   return crud;
