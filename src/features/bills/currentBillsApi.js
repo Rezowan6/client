@@ -29,7 +29,7 @@ export const currentbillApi = apiSlice.injectEndpoints({
         data,
       }
       },
-      providesTags: ["CurrentBill"],
+      invalidatesTags: ["CurrentBill"],
     }),
     // refresh
     monthlyRefreshCurrentBill: builder.mutation({
@@ -39,7 +39,7 @@ export const currentbillApi = apiSlice.injectEndpoints({
         method: "PATCH",
       }
       },
-      providesTags: ["CurrentBill"],
+      invalidatesTags: ["CurrentBill"],
     }),
   }),
 });

@@ -46,6 +46,22 @@ export const currentBillValidator = (values) => {
 
   return errors;
 };
+// khala bill
+export const khalaBillValidator = (values) => {
+  const errors = {};
+
+  const { khalaBill, userId  } = values;
+
+  // required email
+  if (!userId) {
+    errors.userId = "User is required";
+  }
+  if (!khalaBill) {
+    errors.khalaBill = "Balance is required";
+  }
+
+  return errors;
+};
 
 // Mill
 export const validateMill = (values) => {

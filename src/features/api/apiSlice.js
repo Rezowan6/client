@@ -7,7 +7,7 @@ export const apiSlice = createApi({
 
   baseQuery: axiosBaseQuery(),
 
-  tagTypes: ["Users"],
+  tagTypes: ["Users","Mill","CurrentBill", "KhalaBill","Balance","Cost","IncidentalExpenses","EggRate","PermanentInfo"],
 
   endpoints: () => ({}),
 });

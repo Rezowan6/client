@@ -26,6 +26,8 @@ import BasaVara from "../pages/masMalik/BasaVara";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import MonthlyCurrentBill from "../features/bills/pages/MonthlyCurrentBill";
+import KhalaBillCreate from "../pages/admin/KhalaBillCreate";
+import MonthlyKhalaBill from "../features/khalaBill/pages/MonthlyKhalaBill";
 
 const AppRoutes = () => {
   return (
@@ -50,11 +52,13 @@ const AppRoutes = () => {
           <Route path="/make-sub-admin" element={<Make_subAdminMess_malik />} />
           <Route path="/mills" element={<MillUpdate />} />
           <Route path="/current-bill" element={<CurrentBillCreate />} />
+          <Route path="/khala-bill" element={<KhalaBillCreate />} />
           <Route path="/mill/:id" element={<DailyMeals />} />
           <Route path="/create-balance" element={<CreateBalance />} />
           <Route path="/egg-rate" element={<EggRate />} />
           <Route path="/balance/:id" element={<DailyBalance />} />
           <Route path="/currentBill/:id" element={<MonthlyCurrentBill />} />
+          <Route path="/khalaBill/:id" element={<MonthlyKhalaBill />} />
           <Route path="/egg/:id" element={<DailayEggIncidantal />} />
           <Route path="/montly-basaVara/:id" element={<MonthlyBasaVara />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />

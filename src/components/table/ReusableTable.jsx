@@ -86,6 +86,17 @@ const ReusableTable = ({
                           </Link>
                         );
                       }
+                      if (link === "khalaBill") {
+                        return (
+                          <Link
+                            to={`/khalaBill/${item.userId}`}
+                            state={item}
+                            className="hover:text-cyan-500 text-xs lg:text-sm border-b"
+                          >
+                            #view
+                          </Link>
+                        );
+                      }
                       if (link === "balance") {
                         return (
                           <Link

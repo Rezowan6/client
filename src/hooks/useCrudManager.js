@@ -15,7 +15,7 @@ const useCrudManager = ({
 
   const queryResult = useGetQuery?.() ?? { data: null, isLoading: false };
 
-  // console.log(queryResult)
+
   const data = queryResult?.data ?? null;
   const isLoading = queryResult?.isLoading ?? false;
   const isErrors = queryResult?.errors ?? false;
@@ -37,13 +37,13 @@ const useCrudManager = ({
 
       if (!editId) {
         const res = await addFn(payload).unwrap();
-        showAlert("Success", res?.data?.message || "Added successfully!");
+        showAlert("Success", res?.message || "Added successfully!");
       } else {
         const res = await updateFn({
           data: payload,
         }).unwrap();
 
-        showAlert("Success", res?.data?.message || "Updated successfully!");
+        showAlert("Success", res?.message || "Updated successfully!");
       }
 
       resetForm();
