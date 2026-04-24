@@ -4,7 +4,9 @@ import { generateDashboardPDF } from "./../../utils/pdf/generateDashboardPDF";
 import Loading from './../../components/loading/Loding';
 
 const AdminDashboard = () => {
+  
   const { isLoading, users, totals } = useDashboardData();
+
   const { totalCost, totalEggCost, totalIncidentalCost, totalMill, totalTk } =
     totals;
 

@@ -18,16 +18,16 @@ import UserDashboard from "./../pages/dashboard/UserDashboard";
 
 import DailyBalance from "../features/balance/pages/DailyBalance";
 import MonthlyBasaVara from "../features/basavara/pages/MonthlyBasaVara";
+import MonthlyCurrentBill from "../features/bills/pages/MonthlyCurrentBill";
 import DailayEggIncidantal from "../features/incidentalExpenses/pages/DailayEggIncidantal";
+import MonthlyKhalaBill from "../features/khalaBill/pages/MonthlyKhalaBill";
 import DailyMeals from "../features/mill/pages/DailyMeals";
 import CurrentBillCreate from "../pages/admin/CurrentBillCreate";
 import EggRate from "../pages/admin/EggRate";
+import KhalaBillCreate from "../pages/admin/KhalaBillCreate";
 import BasaVara from "../pages/masMalik/BasaVara";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
-import MonthlyCurrentBill from "../features/bills/pages/MonthlyCurrentBill";
-import KhalaBillCreate from "../pages/admin/KhalaBillCreate";
-import MonthlyKhalaBill from "../features/khalaBill/pages/MonthlyKhalaBill";
 
 const AppRoutes = () => {
   return (

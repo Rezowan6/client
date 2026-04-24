@@ -4,9 +4,9 @@ const costConfigFunc = ({ editId }) => {
 
     form: {
       fields: [
-        { name: "cost", type: "cost", label: "cost" },
-        { name: "desc", type: "desc", label: "desc" },
-        { name: "signature", type: "signature", label: "signature" },
+        { name: "cost", type: "number", label: "cost" },
+        { name: "desc", type: "text", label: "desc" },
+        { name: "signature", type: "text", label: "signature" },
       ],
     },
 

@@ -18,11 +18,11 @@ export const navLinks = [
 
   // { name: "Egg-Rate", path: "/egg-rate", role: ["admin"] },
 
-  { name: "Balance", path: "/create-balance", role: ["admin",'sub_admin'] },
+  // { name: "Balance", path: "/create-balance", role: ["admin",'sub_admin'] },
 
   { name: "Dashboard", path: "/admin-dashboard", role: ["admin"] },
 
-  // { name: "Profile", path: "/profile", role: ["admin","user"] },
+  { name: "Profile", path: "/profile", role: ["admin","user","sub_admin"] },
 
   { name: "Incidental", path: "/incidental-cost", role: ["admin"] },
 
