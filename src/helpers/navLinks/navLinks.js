@@ -16,7 +16,7 @@ export const navLinks = [
 
   // { name: "KhalaBill", path: "/khala-bill", role: ["admin"] },
 
-  // { name: "Egg-Rate", path: "/egg-rate", role: ["admin"] },
+  { name: "Egg-Rate", path: "/egg-rate", role: ["admin"] },
 
   { name: "Balance", path: "/create-balance", role: ["admin",'sub_admin'] },
 
