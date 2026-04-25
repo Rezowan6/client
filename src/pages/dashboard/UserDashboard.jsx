@@ -9,9 +9,9 @@ const UserDashboard = () => {
   const { name, email, role, _id } = user;
   
   const { isLoading, users, } = useDashboardData();
-  const {data: usersBasaVara} =useGetUsersBasaVaraQuery()
-  const {data: userKhalaBill} =useGetKhalaBillQuery()
-  const {data: userCurrentill} =useGetCurrentBillQuery()
+  const {data: usersBasaVara} = useGetUsersBasaVaraQuery()
+  const {data: userKhalaBill} = useGetKhalaBillQuery()
+  const {data: userCurrentill} = useGetCurrentBillQuery()
 
   const userData = users?.usersData?.find((user) => user?.id === _id) || {};
   const userBasaVara = usersBasaVara?.data?.users?.find((user) => user?.userId === _id) || {};
@@ -30,7 +30,7 @@ const UserDashboard = () => {
       {/* Header */}
       <div className="bg-gray-700 shadow rounded-2xl p-6 flex items-center gap-6">
         <img
-          src={user?.avatar || "MY"}
+          src={user?.avatar}
           alt="profile"
           className="w-20 h-20 rounded-full object-cover border"
         />
@@ -40,10 +40,6 @@ const UserDashboard = () => {
           <p>{email}</p>
           <p className="text-sm">{role}</p>
         </div>
-
-        <button className="ml-auto px-4 py-2 bg-blue-600 text-white rounded-lg">
-          Edit Profile
-        </button>
       </div>
 
       {/* Stats */}
@@ -78,9 +74,8 @@ const UserDashboard = () => {
           <h3 className="text-lg font-bold">{balance.toFixed(2)}</h3>
         </div>
 
-        <div className={`bg-gray-700 ${basaVaraBill ? "text-green-500"  : "text-red-500"} p-4 rounded-xl shadow`}>
+        <div className={`bg-gray-700 ${basaVaraBill==="paid" ? "text-green-500"  : "text-rose-500"} p-4 rounded-xl shadow`}>
           <p>Basa Vara</p>
-          {/* <span className="text-xs">{basaVara}</span> */}
           <h3 className="text-lg font-bold">{basaVaraBill}</h3>
         </div>
 
