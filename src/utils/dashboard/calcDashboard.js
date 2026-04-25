@@ -18,12 +18,12 @@ export const calculateUserFinancials = ({
 
   // balance map
   balanceUsers?.forEach((u) => {
-    balanceMap[u.userId] = u.totalTk;
+    balanceMap[String(u.userId)] = u.totalTk;
   });
 
   // mill map
   millUsers?.forEach((u) => {
-    millMap[u.userId] = u.totalMill;
+    millMap[String(u.userId)] = u.totalMill;
   });
 
   // incidental + egg cost calculate FIRST
@@ -61,7 +61,7 @@ export const calculateUserFinancials = ({
     const remainingBalance = userTk - expense;
 
     return {
-      id: user._id,
+      id: String(user._id),
       name: user.name,
       totalMoney: userTk,
       totalMill: userMill,

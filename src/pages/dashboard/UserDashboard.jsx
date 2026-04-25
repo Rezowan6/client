@@ -13,17 +13,17 @@ const UserDashboard = () => {
   const {data: userKhalaBill} = useGetKhalaBillQuery()
   const {data: userCurrentill} = useGetCurrentBillQuery()
 
-  const userData = users?.usersData?.find((user) => user?.id === _id) || {};
+  const userData = users?.usersData?.find((user) => String(user?.id) === String(_id)) || {};
   const userBasaVara = usersBasaVara?.data?.users?.find((user) => user?.userId === _id) || {};
   const khalaBill = userKhalaBill?.data?.users?.find((user) => user?.userId === _id) || {};
   const currentBill = userCurrentill?.data?.users?.find((user) => user?.userId === _id) || {};
-console.log(userData)
+
   const { balance=0, eggCost=0, incidentalCost=0, expense=0, totalMill=0, totalMoney=0 } = userData;
   const {isPaid: basaVaraBill="unpaid"} = userBasaVara;
   const {isPaid: khalaBillPaid="unpaid"} = khalaBill;
   const {isPaid: currentBillPaid="unpaid"} = currentBill;
 
-  if(isLoading) return <Loading />
+  if(isLoading || !users?.usersData?.length ) return <Loading />
 
   return (
     <div className="max-w-full lg:max-w-4xl mx-auto pt-6">

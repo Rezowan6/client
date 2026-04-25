@@ -26,12 +26,12 @@ export const useDashboardData = () => {
 
   const processedUsers = useMemo(() => {
     return calculateUserFinancials({
-      users: usersData?.data?.users,
-      balanceUsers: balanceData?.data?.users,
-      millUsers: millData?.data?.users,
-      incidentalUsers: incidentalData?.data?.users,
-      grandTotalCost: costData?.data?.grandTotalCost,
-      grandTotalMill: millData?.data?.grandTotalMill,
+      users: usersData?.data?.users || [],
+      balanceUsers: balanceData?.data?.users || [],
+      millUsers: millData?.data?.users || [],
+      incidentalUsers: incidentalData?.data?.users || [],
+      grandTotalCost: costData?.data?.grandTotalCost || 0,
+      grandTotalMill: millData?.data?.grandTotalMill || 0,
       eggRate: eggRateData?.data?.eggRate || 0,
       soldProduct: eggRateData?.data?.soldProduct || 0,
     });
