@@ -12,9 +12,9 @@ export const navLinks = [
 
   { name: "Cost", path: "/cost", role: ["admin"] },
 
-  // { name: "CurrentBill", path: "/current-bill", role: ["admin"] },
+  { name: "CurrentBill", path: "/current-bill", role: ["admin"] },
 
-  // { name: "KhalaBill", path: "/khala-bill", role: ["admin"] },
+  { name: "KhalaBill", path: "/khala-bill", role: ["admin"] },
 
   { name: "Egg-Rate", path: "/egg-rate", role: ["admin"] },
 
@@ -26,5 +26,5 @@ export const navLinks = [
 
   { name: "Incidental", path: "/incidental-cost", role: ["admin"] },
 
-  // { name: "Make-Sub-Admin", path: "/make-sub-admin", role: ["admin"] },
+  { name: "Make-Sub-Admin", path: "/make-sub-admin", role: ["admin"] },
 ];

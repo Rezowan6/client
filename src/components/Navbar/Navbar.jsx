@@ -1,40 +1,40 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-// internal import
-import { navLinks } from "../../helpers/navLinks/navLinks";
+import { useNavigation } from "../../hooks/useNavigation";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const userRole = user?.role || "all";
+  const userRole = user?.role || "user";
 
-  const filteredLinks = navLinks.filter((link) => {
-  if (!link.role) return true;
-
-  return (
-    link.role.includes("all") ||
-    link.role.includes(userRole)
-  );
-});
+  const nagigation = useNavigation(userRole);
 
   return (
     <header id="nvbar" className="fixed w-full top-0 left-0 z-50">
       <nav className="container bg-gradient-to-r from-[#1c356b88] via-[#069b8e] to-[#1c356b88] flex justify-between items-center h-16 sm:h-20">
-        <h1 className="font-lobster sm:text-2xl">LOGO</h1>
+        {nagigation?.filter((item) => item.name === "Profile").map((profile, idx) => (
+          <NavLink key={idx} to={profile.path}>
+            {profile.icon}
+          </NavLink>
+        ))}
 
         <div
           className={`absolute top-0 ${open ? "left-[0]" : "left-[-100%]"} font-semibold min-h-[90vh] w-full backdrop-blur-md flex items-center justify-center transition-all duration-300 overflow-hidden lg:static lg:min-h-fit lg:w-auto`}
         >
           <ul className="flex flex-col items-center gap-8 lg:flex-row">
-            {filteredLinks.map((link, index) => (
-              <li key={index}>
-                <NavLink to={link.path} onClick={() => setOpen(false)}>
-                  {link.name}
-                </NavLink>
-              </li>
+            {nagigation?.map((group, groupIndex) => (
+              <React.Fragment key={groupIndex}>
+                {group?.links?.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <NavLink to={link.path} onClick={() => setOpen(false)}>
+                      {link.name}
+                    </NavLink>
+                  </li>
+                ))}
+              </React.Fragment>
             ))}
           </ul>
         </div>

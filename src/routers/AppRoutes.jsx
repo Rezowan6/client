@@ -22,6 +22,7 @@ import MonthlyCurrentBill from "../features/bills/pages/MonthlyCurrentBill";
 import DailayEggIncidantal from "../features/incidentalExpenses/pages/DailayEggIncidantal";
 import MonthlyKhalaBill from "../features/khalaBill/pages/MonthlyKhalaBill";
 import DailyMeals from "../features/mill/pages/DailyMeals";
+import MainLayout from "../layouts/MainLayout";
 import CurrentBillCreate from "../pages/admin/CurrentBillCreate";
 import EggRate from "../pages/admin/EggRate";
 import KhalaBillCreate from "../pages/admin/KhalaBillCreate";
@@ -40,6 +41,7 @@ const AppRoutes = () => {
 
       {/*  Protected Routes (All logged-in users) */}
       <Route element={<ProtectedRoute />}>
+      <Route element={<MainLayout />}>
         <Route path="/profile" element={<UserDashboard />} />
         <Route path="/create-users" element={<CreateUser />} />
         <Route path="/get-users" element={<UserList />} />
@@ -63,6 +65,8 @@ const AppRoutes = () => {
           <Route path="/montly-basaVara/:id" element={<MonthlyBasaVara />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
+      </Route>
+
       </Route>
 
       {/*  Error Route */}
