@@ -17,7 +17,7 @@ const UserDashboard = () => {
   const userBasaVara = usersBasaVara?.data?.users?.find((user) => user?.userId === _id) || {};
   const khalaBill = userKhalaBill?.data?.users?.find((user) => user?.userId === _id) || {};
   const currentBill = userCurrentill?.data?.users?.find((user) => user?.userId === _id) || {};
-
+console.log(userData)
   const { balance=0, eggCost=0, incidentalCost=0, expense=0, totalMill=0, totalMoney=0 } = userData;
   const {isPaid: basaVaraBill="unpaid"} = userBasaVara;
   const {isPaid: khalaBillPaid="unpaid"} = khalaBill;
