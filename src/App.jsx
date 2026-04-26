@@ -11,6 +11,7 @@ function App() {
     <>
       <Provider store={store}>
         <BrowserRouter>
+         <Navbar />
           <div className="pt-16 sm:pt-20 container">
             <AppRoutes />
           </div>
