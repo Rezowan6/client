@@ -24,8 +24,8 @@ const UserDashboard = () => {
   const {isPaid: basaVaraBill="unpaid"} = userBasaVara;
   const {isPaid: khalaBillPaid="unpaid"} = khalaBill;
   const {isPaid: currentBillPaid="unpaid"} = currentBill;
-// || !users?.usersData?.length 
-  if(isLoading ) return <Loading />
+
+  if(isLoading || !users?.usersData?.length ) return <Loading />
 
   return (
     <div className="max-w-full lg:max-w-4xl mx-auto pt-6">

@@ -16,6 +16,14 @@ export const adminNav = [
       },
     ],
   },
+  {
+    group: "Daily Management",
+    links: [
+      { name: "Meal", path: "/mills" },
+      { name: "Cost", path: "/cost" },
+      { name: "Incidental", path: "/incidental-cost" },
+    ],
+  },
 
   {
     group: "Billing",
