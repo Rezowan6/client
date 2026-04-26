@@ -1,33 +1,131 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { useNavigation } from "../../hooks/useNavigation";
 
 const Sidebar = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const [openGroup, setOpenGroup] = useState(null);
+
+  const location = useLocation();
+
   const user = JSON.parse(localStorage.getItem("user"));
-  const navigation = useNavigation(user?.role);
+  const userRole = user?.role || "user";
+
+  const navigation = useNavigation(userRole);
+
+  const groupNavigation = navigation?.filter((item) => item.group);
+
+  //  Auto open active group
+  useEffect(() => {
+    groupNavigation?.forEach((group, index) => {
+      const hasActive = group.links.some(
+        (link) => location.pathname === link.path,
+      );
+
+      if (hasActive) {
+        setOpenGroup(index);
+      }
+    });
+  }, [location.pathname]);
+
+  const toggleGroup = (index) => {
+    setOpenGroup(openGroup === index ? null : index);
+  };
 
   return (
-    <aside className="w-64 h-screen bg-gray-800 text-white p-5 fixed left-0 top-0">
-      <h2 className="text-2xl font-bold mb-8">Admin Panel</h2>
+    <>
+      {/* Mobile Toggle Button */}
+      <button
+        className="lg:hidden fixed top-4 left-4 z-50  p-2 rounded"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        ☰
+      </button>
 
-      <div className="space-y-6">
-        {navigation?.map((section, index) => (
-          <div key={index}>
+      {/* Overlay (Mobile) */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
-            <h3 className="text-gray-400 uppercase text-xs font-semibold mb-3">
-              {section.group}
-            </h3>
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed lg:static
+          top-0 left-0
+          h-screen
+          z-50
+          bg-[#0f172a]
+          text-white
+          transition-all duration-300
+          
+          ${collapsed ? "w-[80px]" : "w-[260px]"}
+          
+          ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          }
+        `}
+      >
+        {/* Header */}
+        <div className="flex justify-between items-center p-4 border-b border-gray-700">
+          {!collapsed && <h2 className="text-lg font-bold">Admin Panel</h2>}
 
-            <ul className="space-y-2">
-              {section?.links?.map((link) => (
-                <li key={link.path}>
-                  <NavLink to={link.path}>{link.name}</NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </aside>
+          {/* Collapse Button */}
+          <button
+            className="hidden lg:block"
+            onClick={() => setCollapsed(!collapsed)}
+          >
+            {collapsed ? "➡" : "⬅"}
+          </button>
+        </div>
+
+        {/* Menu */}
+        <ul className="p-3 space-y-2">
+          {groupNavigation?.map((group, groupIndex) => (
+            <li key={groupIndex}>
+              {/* Group Button */}
+              <button
+                onClick={() => toggleGroup(groupIndex)}
+                className="w-full flex justify-between items-center px-3 py-2 rounded hover:bg-[#1e293b]"
+              >
+                <span>{!collapsed && group.group}</span>
+
+                {!collapsed && (
+                  <span>{openGroup === groupIndex ? "▼" : "▶"}</span>
+                )}
+              </button>
+
+              {/* Links */}
+              <ul
+                className={`overflow-hidden transition-all duration-300 ${
+                  openGroup === groupIndex ? "max-h-96" : "max-h-0"
+                }`}
+              >
+                {group.links.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <NavLink
+                      to={link.path}
+                      onClick={() => setSidebarOpen(false)}
+                      className={({ isActive }) =>
+                        `block px-6 py-2 rounded mt-1 hover:bg-[#334155] ${
+                          isActive ? "bg-[#069b8e]" : ""
+                        }`
+                      }
+                    >
+                      {link.name}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </>
   );
 };
+
 export default Sidebar;

@@ -10,18 +10,18 @@ const ReusableTable = ({
   selectedUsers = [],
 }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full text-center border-collapse">
+    <div className="w-full overflow-x-auto">
+      <table className="min-w-[700px] w-full text-center border-collapse">
         {/* table header */}
-        <thead>
+        <thead className="sticky top-0 bg-gray-900 z-10">
           <tr>
-            <th className="border py-2">SL</th>
+            <th className="border px-2 py-2 text-xs sm:text-sm md:text-base">SL</th>
             {columns.map((col) => (
-              <th key={col.key} className="border py-2">
+              <th key={col.key} className="border px-2 py-2 text-xs sm:text-sm md:text-base">
                 {col.label}
               </th>
             ))}
-            <th className="border py-2">Action</th>
+            <th className="border px-2 py-2 text-xs sm:text-sm md:text-base">Action</th>
           </tr>
         </thead>
 
@@ -30,14 +30,14 @@ const ReusableTable = ({
           {data.length ? (
             data.map((item, index) => {
               return (
-                <tr key={item._id || item.userId || index} className="hover:bg-cyan-800/50">
-                  <td className="border py-2"> {index + 1} </td>
+                <tr key={item._id || item.userId || index} className="hover:bg-cyan-800/50 active:bg-cyan-800/50">
+                  <td className="border px-2 py-2 text-xs sm:text-sm"> {index + 1} </td>
 
                   {columns.map((col) => {
                     const isSelect = col.key === "select";
 
                     return (
-                      <td key={col.key} className="border py-2">
+                      <td key={col.key} className="border px-2 py-2 text-xs sm:text-sm">
                         {col.render
                           ? isSelect
                             ? col.render(item, onSelectUser, selectedUsers)

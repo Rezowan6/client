@@ -10,7 +10,7 @@ const FieldRenderer = ({ field, values, handleChange, errors, optionsMap }) => {
           htmlFor={field.name}
           className={`
             w-[250px] flex items-center justify-center font-bold gap-3 cursor-pointer bg-[#107981] shadow-lg py-2 rounded-md
-            ${field.dataGroup == "role" ? "sm:w-[130px]" : "sm:w-20"}
+            ${field.dataGroup == "role" ? "sm:w-[130px]" : "sm:w-[130px"}
           `}
         >
           <input

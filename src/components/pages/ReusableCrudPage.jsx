@@ -34,13 +34,13 @@ const ReusableCrudPage = ({
     <>
       <Title title={title} />
       <section
-        className={`flex justify-center items-center min-h-[60vh] sm:min-h-[50vh]`}
+        className={`flex justify-center items-center min-h-[60vh]`}
       >
         <div className="shadow-[0_0_50px_#0ef] p-10 rounded-2xl">
           {/* FORM */}
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-4 md:gap-10 justify-center items-center w-full  lg:flex-row"
+            className="flex flex-col gap-4 justify-center items-center w-full"
           >
             {config.form.fields.map((field) => {
               return (
