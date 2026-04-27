@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useNavigation } from "../../hooks/useNavigation";
 
-const Sidebar = () => {
+const Sidebar = ({collapsed, setCollapsed}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
   const [openGroup, setOpenGroup] = useState(null);
 
   const location = useLocation();
@@ -54,7 +53,7 @@ const Sidebar = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:static
+          fixed lg:fixed
           top-0 left-0
           h-screen
           z-50
@@ -62,7 +61,7 @@ const Sidebar = () => {
           text-white
           transition-all duration-300
           
-          ${collapsed ? "w-[80px]" : "w-[260px]"}
+          ${collapsed ? "lg:w-[80px] w-[260px]" : "w-[260px]"}
           
           ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"

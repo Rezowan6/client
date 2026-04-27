@@ -1,5 +1,6 @@
 import { useDashboardData } from "../../hooks/useDashboardData";
 import { generateDashboardPDF } from "./../../utils/pdf/generateDashboardPDF";
+import Title from '../../components/title/Title'
 
 import Loading from './../../components/loading/Loding';
 
@@ -13,17 +14,15 @@ const AdminDashboard = () => {
   if (isLoading) return <Loading />;
   
   return (
-    <div className=" bg-cover bg-center bg-fixed min-h-screen rounded-lg shadow-md space-y-6">
-      <div className="flex flex-col gap-1 sm:flex-row justify-between p-4 sm:p-8 items-center">
-        <h2 className="text-2xl sm:text-3xl text-cyan-500 font-semibold font-lobster text-center">
-          Monthly Dashboard Repoart
-        </h2>
-        <div className="text-cyan-500 flex flex-col justify-center items-center lg:flex-row lg:gap-20">
+    <div className=" bg-cover bg-center bg-fixed min-h-screen rounded-lg shadow-md">
+      <div className="text-center pb-8 lg:pb-20">
+        <Title title='Monthly Dashboard Repoart' />
+      </div>
+        <div className="text-cyan-500 flex flex-col mb-4 justify-evenly items-center lg:flex-row">
           <p>Per Meal Expense: {users?.totals?.perMill?.toFixed(2)}</p>
           <p>Egg Rate: {totals?.eggRate?.toFixed(2)}</p>
           <p>Sold Products: {totals?.soldProduct?.toFixed(2)}</p>
         </div>
-      </div>
 
       {/* Table */}
       <div className="overflow-x-auto">

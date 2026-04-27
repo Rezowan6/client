@@ -32,7 +32,7 @@ const ReusableCrudPage = ({
 
   return (
     <>
-      <Title title={title} />
+    <Title title={title} />
       <section
         className={`flex justify-center items-center min-h-[60vh]`}
       >
