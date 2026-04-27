@@ -27,46 +27,52 @@ import CurrentBillCreate from "../pages/admin/CurrentBillCreate";
 import EggRate from "../pages/admin/EggRate";
 import KhalaBillCreate from "../pages/admin/KhalaBillCreate";
 import BasaVara from "../pages/masMalik/BasaVara";
+// route
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from './PublicRoute';
 
 const AppRoutes = () => {
   return (
     <Routes>
       {/*  Public Routes */}
-      <Route path="/" element={<Home />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
       <Route path="/verify-email/:token" element={<VerifyEmail />} />
+      <Route element={<PublicRoute />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Route>
 
       {/*  Protected Routes (All logged-in users) */}
       <Route element={<ProtectedRoute />}>
-      <Route element={<MainLayout />}>
-        <Route path="/profile" element={<UserDashboard />} />
-        <Route path="/create-users" element={<CreateUser />} />
-        <Route path="/get-users" element={<UserList />} />
-        <Route path="/cost" element={<CostAdd />} />
-        <Route path="/incidental-cost" element={<IncidentalExpenses />} />
-        <Route path="/basa-vara" element={<BasaVara />} />
+        <Route element={<MainLayout />}>
+          <Route path="/profile" element={<UserDashboard />} />
+          <Route path="/create-users" element={<CreateUser />} />
+          <Route path="/get-users" element={<UserList />} />
+          <Route path="/cost" element={<CostAdd />} />
+          <Route path="/incidental-cost" element={<IncidentalExpenses />} />
+          <Route path="/basa-vara" element={<BasaVara />} />
 
-        {/*  Admin Only Routes */}
-        <Route element={<AdminRoute />}>
-          <Route path="/make-sub-admin" element={<Make_subAdminMess_malik />} />
-          <Route path="/mills" element={<MillUpdate />} />
-          <Route path="/current-bill" element={<CurrentBillCreate />} />
-          <Route path="/khala-bill" element={<KhalaBillCreate />} />
-          <Route path="/mill/:id" element={<DailyMeals />} />
-          <Route path="/create-balance" element={<CreateBalance />} />
-          <Route path="/egg-rate" element={<EggRate />} />
-          <Route path="/balance/:id" element={<DailyBalance />} />
-          <Route path="/currentBill/:id" element={<MonthlyCurrentBill />} />
-          <Route path="/khalaBill/:id" element={<MonthlyKhalaBill />} />
-          <Route path="/egg/:id" element={<DailayEggIncidantal />} />
-          <Route path="/montly-basaVara/:id" element={<MonthlyBasaVara />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          {/*  Admin Only Routes */}
+          <Route element={<AdminRoute />}>
+            <Route
+              path="/make-sub-admin"
+              element={<Make_subAdminMess_malik />}
+            />
+            <Route path="/mills" element={<MillUpdate />} />
+            <Route path="/current-bill" element={<CurrentBillCreate />} />
+            <Route path="/khala-bill" element={<KhalaBillCreate />} />
+            <Route path="/mill/:id" element={<DailyMeals />} />
+            <Route path="/create-balance" element={<CreateBalance />} />
+            <Route path="/egg-rate" element={<EggRate />} />
+            <Route path="/balance/:id" element={<DailyBalance />} />
+            <Route path="/currentBill/:id" element={<MonthlyCurrentBill />} />
+            <Route path="/khalaBill/:id" element={<MonthlyKhalaBill />} />
+            <Route path="/egg/:id" element={<DailayEggIncidantal />} />
+            <Route path="/montly-basaVara/:id" element={<MonthlyBasaVara />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          </Route>
         </Route>
-      </Route>
-
       </Route>
 
       {/*  Error Route */}

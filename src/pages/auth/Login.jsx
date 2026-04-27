@@ -34,7 +34,7 @@ const Login = () => {
 
       resetForm();
 
-      navigate("/create-users");
+      navigate("/profile");
     } catch (error) {
       showAlert("Error", error?.response?.data?.message || "Logged in Failed!");
     }
