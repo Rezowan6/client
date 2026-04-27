@@ -24,6 +24,7 @@ export const useDashboardData = () => {
     incidentalLoading ||
     eggRateLoading;
 
+
   const processedUsers = useMemo(() => {
     return calculateUserFinancials({
       users: usersData?.data?.users || [],

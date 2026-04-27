@@ -23,6 +23,7 @@ const Login = () => {
   const submitLogin = async (data) => {
     try {
       const res = await loginUser(data);
+      console.log({res});
 
       //  token save
       localStorage.setItem("accessToken", res?.data?.accessToken);
