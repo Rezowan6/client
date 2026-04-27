@@ -12,6 +12,6 @@ export const commonNav = [
   {
     name: "Profile",
     path: "/profile",
-    icon: <CgProfile size={"30"} />
+    icon: <CgProfile size={"20"} />
   },
 ];

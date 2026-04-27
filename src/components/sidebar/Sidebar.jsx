@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useNavigation } from "../../hooks/useNavigation";
 
-const Sidebar = ({collapsed, setCollapsed}) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+const Sidebar = ({collapsed, setCollapsed, sidebarOpen, setSidebarOpen}) => {
   const [openGroup, setOpenGroup] = useState(null);
 
   const location = useLocation();
@@ -35,12 +34,6 @@ const Sidebar = ({collapsed, setCollapsed}) => {
   return (
     <>
       {/* Mobile Toggle Button */}
-      <button
-        className="lg:hidden fixed top-4 left-4 z-50  p-2 rounded"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      >
-        ☰
-      </button>
 
       {/* Overlay (Mobile) */}
       {sidebarOpen && (
