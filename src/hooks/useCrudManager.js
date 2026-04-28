@@ -79,7 +79,6 @@ const useCrudManager = ({
   };
 
   const deleteItem = async (id, showAlert) => {
-    console.log(id)
     try {
       if (!deleteFn) return;
 

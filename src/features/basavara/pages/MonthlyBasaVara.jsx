@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 
 import Button from "../../../components/Button/Button";
-import EditBtn from "../../../components/Button/EditBtn";
 import Loading from "../../../components/loading/Loding";
 import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
+import { useTableActions } from "../../../hooks/useTableAction";
 import { useGetUsersBasaVaraQuery } from "../basaVaraApi";
 
 const MonthlyBasaVara = () => {
@@ -25,19 +25,16 @@ const MonthlyBasaVara = () => {
     { key: "isPaid", label: "Status" },
   ];
 
-  const actions = [
-    {
-      label: <EditBtn />,
-      onClick: (item) => {
-        navigate("/basa-vara", {
-          state: {
-            editBasaVara: item,
-            userId: id,
-          },
-        });
-      },
+  const actions = useTableActions({
+    edit: (item) => {
+      navigate("/basa-vara", {
+        state: {
+          editBasaVara: item,
+          userId: id,
+        },
+      });
     },
-  ];
+  });
 
   if (isLoading) return <Loading />;
 

@@ -1,7 +1,7 @@
-import EditBtn from "../../components/Button/EditBtn";
+import { useMemo } from "react";
 import Form from "../../components/form/Form";
 import Loading from "../../components/loading/Loding";
-import CostTable from "../../components/table/CostTable";
+import ReusableTable from "../../components/table/ReusableTable";
 import Title from "../../components/title/Title";
 import {
   useAddCostMutation,
@@ -10,20 +10,21 @@ import {
 } from "../../features/cost/costApi";
 import useAlert from "../../hooks/useAlert";
 import useCrudManager from "../../hooks/useCrudManager";
+import { useTableActions } from "../../hooks/useTableAction";
 import { validateCost } from "../../utils/validate/validateData";
 import costConfigFunc from "./../../configs/costConfig";
 import useForm from "./../../hooks/useForm";
 
 const CostAdd = () => {
+  const today = new Date().getDate();
+
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
 
-  const { values, setValues, errors, handleChange, handleSubmit, resetForm } = useForm(
-    { cost: "", desc: "", signature: "" },
-    validateCost,
-  );
+  const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
+    useForm({ cost: "", desc: "", signature: "" }, validateCost);
 
-  const { data, editId, isLoading, setEditId, submit } = useCrudManager({
+  const { items, data, editId, isLoading, setEditId, submit } = useCrudManager({
     useGetQuery: useGetUsersCostQuery,
     useAddMutation: useAddCostMutation,
     useUpdateMutation: useUpdateCostMutation,
@@ -38,15 +39,14 @@ const CostAdd = () => {
 
   // edit cost
   const editCost = (data) => {
+    if (today !== data?.day) {
+      return showAlert(
+        "Error",
+        "Update failed: Updates are allowed only on the same day",
+      );
+    }
     setEditId(data.day);
-
-    data?.items?.forEach((item) => {
-      setValues({
-        cost: item.cost,
-        desc: item.desc,
-        signature: item.signature,
-      });
-    });
+    setValues({ ...data });
   };
   // confirm before cost add
   const costAddConfirm = (data) => {
@@ -57,18 +57,28 @@ const CostAdd = () => {
     );
   };
 
-  const actions = [
-    {
-      label: <EditBtn action="edit" />,
-      onClick: (item) => editCost(item, setValues),
-    },
-  ];
+  const actions = useTableActions({
+    edit: (item) => editCost(item),
+  });
+
   const columns = [
     { key: "day", label: "Day" },
     { key: "totalCost", label: "Cost" },
     { key: "desc", label: "Desc" },
     { key: "signature", label: "Signature" },
   ];
+
+  const finalData = useMemo(() => {
+    return (
+      items?.dailyCosts?.flatMap((dayItem) =>
+        dayItem.items.map((item) => ({
+          ...item,
+          day: dayItem.day,
+          totalCost: dayItem.totalCost,
+        })),
+      ) || []
+    );
+  }, [items]);
 
   if (isLoading) return <Loading />;
 
@@ -92,7 +102,7 @@ const CostAdd = () => {
         />
       </div>
       <Title title="Monthly Cost Report" />
-      <CostTable columns={columns} data={data?.data} actions={actions} />
+      <ReusableTable columns={columns} data={finalData} actions={actions} />
     </section>
   );
 };

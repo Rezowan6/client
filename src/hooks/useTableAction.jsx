@@ -1,26 +1,24 @@
 import EditBtn from "./../components/Button/EditBtn";
 
-export const useTableActions = (
-  editItem,
-  deleteItem,
-  setValues,
-  options = {}
-) => {
-  const { showEdit = true, showDelete = true } = options;
-
+export const useTableActions = ({
+  edit = null,
+  delete: deleteAction = null,
+}) => {
   const actions = [];
 
-  if (showEdit) {
+  // Edit
+  if (edit) {
     actions.push({
       label: <EditBtn action="edit" />,
-      onClick: (item) => editItem(item, setValues),
+      onClick: (item) => edit(item),
     });
   }
 
-  if (showDelete) {
+  // Delete
+  if (deleteAction) {
     actions.push({
       label: <EditBtn action="delete" />,
-      onClick: (item) => deleteItem(item),
+      onClick: (item) => deleteAction(item || item?._id),
     });
   }
 

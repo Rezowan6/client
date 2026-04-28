@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import EditBtn from "../../components/Button/EditBtn";
 import Loading from "../../components/loading/Loding";
 import ReusableCrudPage from "../../components/pages/ReusableCrudPage";
 import balanceConfig from "../../configs/balanceConfig.jsx";
@@ -26,12 +25,11 @@ const CreateBalance = () => {
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
     useForm({ userId: "", tk: "", day: "" }, validateBalance);
 
-  const { items, data, isLoading, editId, submit, editItem, setEditId } =
-    useCrudManager({
-      useGetQuery: useGetUsersBalanceQuery,
-      useAddMutation: useAddBalanceMutation,
-      useUpdateMutation: useUpdateBalanceMutation,
-    });
+  const { items, data, isLoading, editId, submit, setEditId } = useCrudManager({
+    useGetQuery: useGetUsersBalanceQuery,
+    useAddMutation: useAddBalanceMutation,
+    useUpdateMutation: useUpdateBalanceMutation,
+  });
 
   const balanceSubmit = () => submit({ values, showAlert, resetForm });
 
@@ -43,13 +41,6 @@ const CreateBalance = () => {
       () => balanceSubmit(data),
     );
   };
-
-  const actions = [
-    {
-      label: <EditBtn action="edit" />,
-      onClick: (item) => editItem(item, setValues),
-    },
-  ];
 
   const quickBalanceAdd = (user, balance) => {
     const values = {
@@ -72,13 +63,13 @@ const CreateBalance = () => {
 
   useEffect(() => {
     if (location.state?.editDailyTk) {
-      const {day, tk } = location.state.editDailyTk;
+      const { day, tk } = location.state.editDailyTk;
       setEditId(location.state.userId);
 
       setValues({
         userId: location.state.userId,
         tk,
-        day
+        day,
       });
     }
   }, [location.state, setValues, setEditId]);
@@ -112,7 +103,6 @@ const CreateBalance = () => {
         editId={editId}
         handleChange={handleChange}
         handleSubmit={handleSubmit(balanceAddConfirm)}
-        actions={actions}
         totalText="Total"
         grandTotal={data?.data?.grandTotalTk || 0}
         errors={errors}

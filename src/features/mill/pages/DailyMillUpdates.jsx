@@ -15,7 +15,6 @@ import { validateMill } from "../../../utils/validate/validateData";
 
 import { millAddConfirm } from "../utils/millActions";
 
-import { useTableActions } from "../../../hooks/useTableAction";
 import useOptionsMap from "../../../hooks/useOptionsMap.js";
 
 const DailyMillUpdates = () => {
@@ -31,11 +30,8 @@ const DailyMillUpdates = () => {
     useForm({ userId: "", mill: "", day: "" }, validateMill);
 
   // CRUD
-  const { items, data, isLoading, isErrors, editId, setEditId, submit, editItem } =
+  const { items, data, isLoading, isErrors, editId, setEditId, submit, } =
     useMillCrud();
-
-  // ACTIONS
-  const actions = useTableActions(editItem, setValues);
 
   // quick Mill add
   const quickMillAdd = (user, millValue) => {
@@ -108,7 +104,6 @@ const DailyMillUpdates = () => {
             resetForm,
           }),
         )}
-        actions={actions}
         grandTotal={data?.data?.grandTotalMill || 0}
         totalText="Total"
         errors={errors}

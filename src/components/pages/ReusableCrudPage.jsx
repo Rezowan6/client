@@ -1,3 +1,5 @@
+import { linkRoutes } from "../../configs/links/linkRoutes";
+
 import useOptionsMap from "../../hooks/useOptionsMap";
 import FieldRenderer from "../form/FieldRenderer";
 
@@ -72,6 +74,7 @@ const ReusableCrudPage = ({
       {table && (
         <ReusableTable
           columns={config.table.columns}
+          linkRoutes={linkRoutes}
           data={items}
           actions={actions}
           link={link}

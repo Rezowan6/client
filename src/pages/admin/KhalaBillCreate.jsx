@@ -15,7 +15,6 @@ import useAlert from "../../hooks/useAlert";
 import useCrudManager from "../../hooks/useCrudManager";
 import useForm from "../../hooks/useForm";
 import useOptionsMap from "../../hooks/useOptionsMap";
-import { useTableActions } from "../../hooks/useTableAction";
 import { khalaBillValidator } from "../../utils/validate/validateData";
 import khalaBillConfig from "./../../features/khalaBill/config/khalaBillConfig";
 
@@ -29,16 +28,14 @@ const KhalaBillCreate = () => {
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
     useForm({ userId: "", khalaBill: "", month: "" }, khalaBillValidator);
 
-  const { data, isLoading, editId, setEditId, submit, editItem } =
-    useCrudManager({
-      useGetQuery: useGetKhalaBillQuery,
-      useAddMutation: useAddKhalaBillMutation,
-      useUpdateMutation: useUpdateKhalaBillMutation,
-    });
+  const { data, isLoading, editId, setEditId, submit } = useCrudManager({
+    useGetQuery: useGetKhalaBillQuery,
+    useAddMutation: useAddKhalaBillMutation,
+    useUpdateMutation: useUpdateKhalaBillMutation,
+  });
 
   const updateHook = useMonthlyRefreshKhalaBillMutation();
   const updateFn = updateHook?.[0];
-
 
   const refreshMonth = async () => {
     try {
@@ -73,8 +70,6 @@ const KhalaBillCreate = () => {
       () => balanceSubmit(data),
     );
   };
-
-  const actions = useTableActions(editItem, setValues);
 
   const quickBalanceAdd = (user, balance) => {
     const values = {
@@ -137,7 +132,6 @@ const KhalaBillCreate = () => {
           editId={editId}
           handleChange={handleChange}
           handleSubmit={handleSubmit(balanceAddConfirm)}
-          actions={actions}
           totalText="Total"
           grandTotal={grandTotalKhalaBill || 0}
           errors={errors}

@@ -10,7 +10,6 @@ import useCrudManager from "../../../hooks/useCrudManager";
 import useForm from "../../../hooks/useForm";
 import useOptionsMap from "../../../hooks/useOptionsMap";
 import { currentBillValidator } from "../../../utils/validate/validateData";
-import { useTableActions } from "../../incidentalExpenses";
 import billConfig from "../config/CurrentBillConfig";
 import {
   useAddCurrentBillMutation,
@@ -29,12 +28,11 @@ const CurrentBills = () => {
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
     useForm({ userId: "", currentBill: "", month: "" }, currentBillValidator);
 
-  const { data, isLoading, editId, setEditId, submit, editItem } =
-    useCrudManager({
-      useGetQuery: useGetCurrentBillQuery,
-      useAddMutation: useAddCurrentBillMutation,
-      useUpdateMutation: useUpdateCurrentBillMutation,
-    });
+  const { data, isLoading, editId, setEditId, submit } = useCrudManager({
+    useGetQuery: useGetCurrentBillQuery,
+    useAddMutation: useAddCurrentBillMutation,
+    useUpdateMutation: useUpdateCurrentBillMutation,
+  });
 
   const updateHook = useMonthlyRefreshCurrentBillMutation();
   const updateFn = updateHook?.[0];
@@ -72,8 +70,6 @@ const CurrentBills = () => {
       () => balanceSubmit(data),
     );
   };
-
-  const actions = useTableActions(editItem, setValues);
 
   const quickBalanceAdd = (user, balance) => {
     const values = {
@@ -136,7 +132,6 @@ const CurrentBills = () => {
         editId={editId}
         handleChange={handleChange}
         handleSubmit={handleSubmit(balanceAddConfirm)}
-        actions={actions}
         totalText="Total"
         grandTotal={grandTotalCurrentBill || 0}
         errors={errors}

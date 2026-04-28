@@ -3,6 +3,7 @@ import Button from "../../../components/Button/Button";
 import EditBtn from "../../../components/Button/EditBtn";
 import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
+import { useTableActions } from "../../../hooks/useTableAction";
 
 const DailyMeals = () => {
   const navigate = useNavigate();
@@ -16,10 +17,9 @@ const DailyMeals = () => {
     { key: "tk", label: "Balance" },
   ];
 
-  const actions = [
+  const actions = useTableActions(
     {
-      label: <EditBtn />,
-      onClick: (item) => {
+      edit: (item) => {
         navigate("/create-balance", {
           state: {
             editDailyTk: item,
@@ -27,8 +27,7 @@ const DailyMeals = () => {
           },
         });
       },
-    },
-  ];
+    })
 
   return (
     <>

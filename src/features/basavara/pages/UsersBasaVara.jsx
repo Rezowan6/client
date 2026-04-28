@@ -8,7 +8,6 @@ import useAlert from "../../../hooks/useAlert";
 import useCrudManager from "../../../hooks/useCrudManager";
 import useForm from "../../../hooks/useForm";
 import useOptionsMap from "../../../hooks/useOptionsMap";
-import { useTableActions } from "../../../hooks/useTableAction.jsx";
 import { basaVaraValidator } from "../../../utils/validate/validateData";
 import {
   useAddBasaVaraMutation,
@@ -28,12 +27,11 @@ const UsersBasaVara = () => {
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
     useForm({ userId: "", basaVara: "" }, basaVaraValidator);
 
-  const { data, isLoading, editId, setEditId, submit, editItem } =
-    useCrudManager({
-      useGetQuery: useGetUsersBasaVaraQuery,
-      useAddMutation: useAddBasaVaraMutation,
-      useUpdateMutation: useUpdateBasaVaraMutation,
-    });
+  const { data, isLoading, editId, setEditId, submit } = useCrudManager({
+    useGetQuery: useGetUsersBasaVaraQuery,
+    useAddMutation: useAddBasaVaraMutation,
+    useUpdateMutation: useUpdateBasaVaraMutation,
+  });
 
   const updateHook = useRefreshMonthlyBasaVaraMutation();
   const updateFn = updateHook?.[0];
@@ -71,8 +69,6 @@ const UsersBasaVara = () => {
       () => balanceSubmit(data),
     );
   };
-
-  const actions = useTableActions(editItem, setValues);
 
   const quickBalanceAdd = (user, balance) => {
     const values = {
@@ -135,7 +131,6 @@ const UsersBasaVara = () => {
         editId={editId}
         handleChange={handleChange}
         handleSubmit={handleSubmit(balanceAddConfirm)}
-        actions={actions}
         totalText="Total"
         grandTotal={grandTotalBasaVara || 0}
         errors={errors}

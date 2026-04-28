@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 
 import Button from "../../../components/Button/Button";
-import EditBtn from "../../../components/Button/EditBtn";
 import Loading from "../../../components/loading/Loding";
 import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
 import { useGetCurrentBillQuery } from "../currentBillsApi";
+import { useTableActions } from "./../../../hooks/useTableAction";
 
 const MonthlyCurrentBill = () => {
   const navigate = useNavigate();
@@ -15,9 +15,11 @@ const MonthlyCurrentBill = () => {
 
   const users = data?.data?.users || [];
   const userMonthlyData = users?.find((user) => user?.userId === id) || {};
-  const { name: userName = "", totalCurrentBill=0, currentBillList: usercurrentBillList = [] } =
-    userMonthlyData || {};
-
+  const {
+    name: userName = "",
+    totalCurrentBill = 0,
+    currentBillList: usercurrentBillList = [],
+  } = userMonthlyData || {};
 
   const columns = [
     { key: "date", label: "Date" },
@@ -25,19 +27,16 @@ const MonthlyCurrentBill = () => {
     { key: "isPaid", label: "Status" },
   ];
 
-  const actions = [
-    {
-      label: <EditBtn />,
-      onClick: (item) => {
-        navigate("/current-bill", {
-          state: {
-            editCurrentBill: item,
-            userId: id || userMonthlyData?._id,
-          },
-        });
-      },
+  const actions = useTableActions({
+    edit: (item) => {
+      navigate("/current-bill", {
+        state: {
+          editCurrentBill: item,
+          userId: id || userMonthlyData?._id,
+        },
+      });
     },
-  ];
+  });
 
   if (isLoading) return <Loading />;
 
