@@ -10,8 +10,8 @@ const ReusableTable = ({
   selectedUsers = [],
 }) => {
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="min-w-[700px] w-full text-center border-collapse">
+    <div className="w-full overflow-x-auto pb-10">
+      <table className="w-full text-center border-collapse">
         {/* table header */}
         <thead className="sticky top-0 bg-gray-900 z-10">
           <tr>
@@ -121,7 +121,7 @@ const ReusableTable = ({
                       } else {
                         return (
                           <span
-                            key={item?.userId}
+                            key={item?.userId || item?._id}
                             onClick={() => action.onClick(item)}
                             className="cursor-pointer inline-flex"
                           >

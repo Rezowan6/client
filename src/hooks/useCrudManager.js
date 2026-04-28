@@ -49,6 +49,7 @@ const useCrudManager = ({
       resetForm();
       setEditId(null);
     } catch (err) {
+      console.log(err)
       showAlert("Error", err?.data?.message || "Operation failed");
       resetForm();
       setEditId(null);
@@ -57,14 +58,14 @@ const useCrudManager = ({
 
   //   edit
   const editItem = (item, setValues) => {
-    setEditId(item.userId);
+    setEditId(item.userId || item._id);
 
     const baseData = item[keyField1] || [];
 
     const extraData = keyField3 ? item[keyField3] || [] : [];
 
     setValues({
-      userId: item.userId,
+      userId: item.userId || item._id,
       [keyField5]: item[keyField5],
 
       [keyField2]: baseData.map((day) => day[keyField2]),
@@ -78,6 +79,7 @@ const useCrudManager = ({
   };
 
   const deleteItem = async (id, showAlert) => {
+    console.log(id)
     try {
       if (!deleteFn) return;
 

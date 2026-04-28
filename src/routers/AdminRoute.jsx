@@ -1,7 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 
+import { getLocalUser } from "../utils/localStorage/localStorage";
+
 const AdminRoute = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getLocalUser();
 
   if (user?.role !== "admin") {
     return <Navigate to="/" replace />;

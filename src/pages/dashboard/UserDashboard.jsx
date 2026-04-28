@@ -5,16 +5,11 @@ import { useGetKhalaBillQuery } from "../../features/khalaBill/khalaBillApi";
 import { useDashboardData } from "../../hooks/useDashboardData";
 
 import profilImg from "../../assets/images/app.png";
+import { getLocalUser } from "../../utils/localStorage/localStorage";
 
 const UserDashboard = () => {
-  const storedUser = localStorage.getItem("user");
-  let user = null;
-  try {
-    user = storedUser ? JSON.parse(storedUser) : null;
-  } catch (error) {
-    console.log(error);
-    localStorage.removeItem("user");
-  }
+  const user = getLocalUser();
+
   const safeUser = user || {};
   const { name="", email="", role="", _id="" } = safeUser;
 

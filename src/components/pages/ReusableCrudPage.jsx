@@ -34,7 +34,7 @@ const ReusableCrudPage = ({
     <>
     <Title title={title} />
       <section
-        className={`flex justify-center items-center min-h-[60vh]`}
+        className={`flex justify-center items-center mt-6 min-h-[60vh]`}
       >
         <div className="shadow-[0_0_50px_#0ef] p-10 rounded-2xl">
           {/* FORM */}

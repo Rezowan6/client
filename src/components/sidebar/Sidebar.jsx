@@ -4,6 +4,7 @@ import useAlert from "../../hooks/useAlert";
 import { useNavigation } from "../../hooks/useNavigation";
 import { logoutUser } from "../../services/auth/authService";
 import AlertPopup from "../alertPopup/AlertPopup";
+import { getLocalUser } from "../../utils/localStorage/localStorage";
 
 const Sidebar = ({ collapsed, setCollapsed, sidebarOpen, setSidebarOpen }) => {
   const [openGroup, setOpenGroup] = useState(null);
@@ -12,15 +13,7 @@ const Sidebar = ({ collapsed, setCollapsed, sidebarOpen, setSidebarOpen }) => {
 
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
-  const storedUser = localStorage.getItem("user");
-  let user = null;
-
-  try {
-    user = storedUser ? JSON.parse(storedUser) : null;
-  } catch (error) {
-    console.log(error);
-    localStorage.removeItem("user");
-  }
+  const user = getLocalUser();
   const userRole = user?.role || "user";
 
   const navigation = useNavigation(userRole);

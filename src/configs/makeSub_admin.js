@@ -27,6 +27,12 @@ const makeSubAdminConfig = {
       },
     ],
   },
+    table: {
+    columns: [
+      { key: "name", label: "Name" },
+      { key: "role", label: "Role" },
+    ],
+  }
 };
 
 export default makeSubAdminConfig;
