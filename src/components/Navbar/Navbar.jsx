@@ -12,7 +12,7 @@ const Navbar = ({ collapsed, setSidebarOpen, sidebarOpen }) => {
 
   return (
     <header
-      className={`fixed w-full bg-[#0f172a] top-0 left-0 py-5 container flex justify-between items-center gap-10 ${collapsed ? "lg:ml-[80px]" : "lg:ml-[260px] "} transition-all duration-300 border-b border-gray-700`}
+      className={`fixed z-50 w-full bg-[#0f172a] top-0 left-0 py-5 container flex justify-between items-center gap-10 ${collapsed ? "lg:ml-[80px]" : "lg:ml-[260px] "} transition-all duration-300 border-b md:border-none border-gray-700`}
     >
       <button
         className="lg:hidden"

@@ -40,6 +40,10 @@ export const adminNav = [
         name: "Balance",
         path: "/create-balance",
       },
+      {
+        name: "BasaVara",
+        path: "/basa-vara",
+      },
     ],
   },
 

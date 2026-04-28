@@ -45,7 +45,7 @@ const CostAdd = () => {
         "Update failed: Updates are allowed only on the same day",
       );
     }
-    setEditId(data.day);
+    setEditId(data?.day);
     setValues({ ...data });
   };
   // confirm before cost add

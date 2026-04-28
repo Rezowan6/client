@@ -16,7 +16,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #333;
+  background:linear-gradient(90deg,rgb(9, 9, 105),rgb(8,6,40),rgb(8,8,67));
   left: 0;
   top: 0;
   border-radius: 10px;
@@ -56,13 +56,13 @@
 
 .btn:hover:after {
   opacity: 100;
-    background:linear-gradient(90deg,rgb(9, 9, 105),rgb(8,6,40),rgb(8,8,67));
+  background:linear-gradient(90deg,rgb(9, 9, 105),rgb(8,6,40),rgb(8,8,67));
 }
 .btn:hover::before {
   color: #000;
 }
 
 .btn:active {
-  color: #000;
+  color: #fff;
   font-weight: bold;
 }

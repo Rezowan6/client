@@ -1,6 +1,5 @@
 const basaVaraConfig = {
   title: "BasaVara",
-
   form: {
     fields: [
       {
@@ -27,7 +26,7 @@ const basaVaraConfig = {
         render: (row, onAddBalance) => {
           return (
             <div className="flex gap-2 sm:gap-6 justify-center">
-              {[500, 1000, 1500].map((val) => {
+              {[1000, 1200].map((val) => {
                 return (
                   <button
                     key={val}
