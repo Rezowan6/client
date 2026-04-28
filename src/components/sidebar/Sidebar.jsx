@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useNavigation } from "../../hooks/useNavigation";
+import { logoutUser } from "../../services/auth/authService";
+import useAlert from "../../hooks/useAlert";
+import AlertPopup from "../alertPopup/AlertPopup";
 
-const Sidebar = ({collapsed, setCollapsed, sidebarOpen, setSidebarOpen}) => {
+const Sidebar = ({ collapsed, setCollapsed, sidebarOpen, setSidebarOpen }) => {
   const [openGroup, setOpenGroup] = useState(null);
 
   const location = useLocation();
+
+    const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
+      useAlert();
 
   const user = JSON.parse(localStorage.getItem("user"));
   const userRole = user?.role || "user";
@@ -30,6 +36,29 @@ const Sidebar = ({collapsed, setCollapsed, sidebarOpen, setSidebarOpen}) => {
   const toggleGroup = (index) => {
     setOpenGroup(openGroup === index ? null : index);
   };
+
+  const handleLogout = async () => {
+    try {
+      const res = await logoutUser();
+
+      localStorage.removeItem("user");
+      localStorage.removeItem("accessToken");
+
+      showAlert("Success", res?.message || "Logout successfully")
+
+      window.location.href = "/login";
+    } catch (error) {
+      showAlert("Error", error.message || "Operation failed");
+    }
+  };
+
+  const confirmLogout = () => {
+        showConfirm(
+      "Logout",
+      "Are you sure you want to logout this device?",
+      () => handleLogout(), 
+    );
+  }
 
   return (
     <>
@@ -115,7 +144,23 @@ const Sidebar = ({collapsed, setCollapsed, sidebarOpen, setSidebarOpen}) => {
             </li>
           ))}
         </ul>
+
+        {/* Logout Section */}
+        <div className="absolute bottom-0 w-full p-3 border-t border-gray-700">
+          <button
+            onClick={confirmLogout}
+            className="w-full flex items-center gap-2 px-3 py-2 rounded hover:bg-red-600"
+          >
+            {!collapsed && "Logout"}
+          </button>
+        </div>
       </aside>
+
+            <AlertPopup
+              {...alertData}
+              onClose={closeAlert}
+              onConfirm={confirmAction}
+            />
     </>
   );
 };
