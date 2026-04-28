@@ -35,4 +35,12 @@ export const logoutUser = async () => {
   return res?.data;
 }
 
+// authService.js
+export const getCurrentUser = async () => {
+  const res = await API.get("/auth/me");
+
+  console.log(res);
+  return res?.data?.data;
+};
+
 

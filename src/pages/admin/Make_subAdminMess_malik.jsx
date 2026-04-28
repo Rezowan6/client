@@ -20,10 +20,9 @@ const Make_subAdminMess_malik = () => {
     try {
       const res = await makeSubAdmin({ data: { userId, role } });
 
-      showAlert(res?.message || "sub-admin added");
+      showAlert("Success", res?.message || "sub-admin added");
     } catch (error) {
-      console.log(error);
-      showAlert(error?.response?.data?.message || "operation failed");
+      showAlert("Error", error?.response?.data?.message || "operation failed");
     }
   };
 

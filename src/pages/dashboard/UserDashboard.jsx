@@ -1,31 +1,50 @@
 import Loading from "../../components/loading/Loding";
 import { useGetUsersBasaVaraQuery } from "../../features/basavara/basaVaraApi";
-import { useGetCurrentBillQuery } from '../../features/bills/currentBillsApi';
+import { useGetCurrentBillQuery } from "../../features/bills/currentBillsApi";
 import { useGetKhalaBillQuery } from "../../features/khalaBill/khalaBillApi";
 import { useDashboardData } from "../../hooks/useDashboardData";
 
-import profilImg from '../../assets/images/app.png';
+import profilImg from "../../assets/images/app.png";
 
 const UserDashboard = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const { name, email, role, _id } = user;
-  
-  const { isLoading, users, } = useDashboardData();
-  const {data: usersBasaVara} = useGetUsersBasaVaraQuery()
-  const {data: userKhalaBill} = useGetKhalaBillQuery()
-  const {data: userCurrentill} = useGetCurrentBillQuery()
+  const storedUser = localStorage.getItem("user");
+  let user = null;
+  try {
+    user = storedUser ? JSON.parse(storedUser) : null;
+  } catch (error) {
+    console.log(error);
+    localStorage.removeItem("user");
+  }
+  const safeUser = user || {};
+  const { name="", email="", role="", _id="" } = safeUser;
 
-  const userData = users?.usersData?.find((user) => String(user?.id) === String(_id)) || {};
-  const userBasaVara = usersBasaVara?.data?.users?.find((user) => user?.userId === _id) || {};
-  const khalaBill = userKhalaBill?.data?.users?.find((user) => user?.userId === _id) || {};
-  const currentBill = userCurrentill?.data?.users?.find((user) => user?.userId === _id) || {};
+  const { isLoading, users } = useDashboardData();
+  const { data: usersBasaVara } = useGetUsersBasaVaraQuery();
+  const { data: userKhalaBill } = useGetKhalaBillQuery();
+  const { data: userCurrentill } = useGetCurrentBillQuery();
 
-  const { balance=0, eggCost=0, incidentalCost=0, expense=0, totalMill=0, totalMoney=0 } = userData;
-  const {isPaid: basaVaraBill="unpaid"} = userBasaVara;
-  const {isPaid: khalaBillPaid="unpaid"} = khalaBill;
-  const {isPaid: currentBillPaid="unpaid"} = currentBill;
+  const userData =
+    users?.usersData?.find((user) => String(user?.id) === String(_id)) || {};
+  const userBasaVara =
+    usersBasaVara?.data?.users?.find((user) => user?.userId === _id) || {};
+  const khalaBill =
+    userKhalaBill?.data?.users?.find((user) => user?.userId === _id) || {};
+  const currentBill =
+    userCurrentill?.data?.users?.find((user) => user?.userId === _id) || {};
 
-  if(isLoading || !users?.usersData?.length ) return <Loading />
+  const {
+    balance = 0,
+    eggCost = 0,
+    incidentalCost = 0,
+    expense = 0,
+    totalMill = 0,
+    totalMoney = 0,
+  } = userData;
+  const { isPaid: basaVaraBill = "unpaid" } = userBasaVara;
+  const { isPaid: khalaBillPaid = "unpaid" } = khalaBill;
+  const { isPaid: currentBillPaid = "unpaid" } = currentBill;
+
+  if (isLoading || !users?.usersData?.length) return <Loading />;
 
   return (
     <div className="max-w-full lg:max-w-4xl mx-auto pt-6">
@@ -71,22 +90,30 @@ const UserDashboard = () => {
           <h3 className="text-lg font-bold">{expense.toFixed(2)}</h3>
         </div>
 
-        <div className={`bg-gray-700 ${balance > 0 ? "text-green-500"  : "text-rose-500"} p-4 rounded-xl shadow`}>
+        <div
+          className={`bg-gray-700 ${balance > 0 ? "text-green-500" : "text-rose-500"} p-4 rounded-xl shadow`}
+        >
           <p>Remaining Balance</p>
           <h3 className="text-lg font-bold">{balance.toFixed(2)}</h3>
         </div>
 
-        <div className={`bg-gray-700 ${basaVaraBill==="paid" ? "text-green-500"  : "text-rose-500"} p-4 rounded-xl shadow`}>
+        <div
+          className={`bg-gray-700 ${basaVaraBill === "paid" ? "text-green-500" : "text-rose-500"} p-4 rounded-xl shadow`}
+        >
           <p>Basa Vara</p>
           <h3 className="text-lg font-bold">{basaVaraBill}</h3>
         </div>
 
-        <div className={`bg-gray-700 ${khalaBillPaid==="paid" ? "text-green-500"  : "text-rose-500"} p-4 rounded-xl shadow`}>
+        <div
+          className={`bg-gray-700 ${khalaBillPaid === "paid" ? "text-green-500" : "text-rose-500"} p-4 rounded-xl shadow`}
+        >
           <p>Khala Bill</p>
           <h3 className="text-lg font-bold">{khalaBillPaid}</h3>
         </div>
 
-        <div className={`bg-gray-700 ${currentBillPaid==="paid" ? "text-green-500"  : "text-rose-500"} p-4 rounded-xl shadow`}>
+        <div
+          className={`bg-gray-700 ${currentBillPaid === "paid" ? "text-green-500" : "text-rose-500"} p-4 rounded-xl shadow`}
+        >
           <p>Current Bill</p>
           <h3 className="text-lg font-bold">{currentBillPaid}</h3>
         </div>

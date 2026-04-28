@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import useAlert from "../../hooks/useAlert";
 import { useNavigation } from "../../hooks/useNavigation";
 import { logoutUser } from "../../services/auth/authService";
-import useAlert from "../../hooks/useAlert";
 import AlertPopup from "../alertPopup/AlertPopup";
 
 const Sidebar = ({ collapsed, setCollapsed, sidebarOpen, setSidebarOpen }) => {
@@ -10,10 +10,17 @@ const Sidebar = ({ collapsed, setCollapsed, sidebarOpen, setSidebarOpen }) => {
 
   const location = useLocation();
 
-    const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
-      useAlert();
+  const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
+    useAlert();
+  const storedUser = localStorage.getItem("user");
+  let user = null;
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  try {
+    user = storedUser ? JSON.parse(storedUser) : null;
+  } catch (error) {
+    console.log(error);
+    localStorage.removeItem("user");
+  }
   const userRole = user?.role || "user";
 
   const navigation = useNavigation(userRole);
@@ -44,7 +51,7 @@ const Sidebar = ({ collapsed, setCollapsed, sidebarOpen, setSidebarOpen }) => {
       localStorage.removeItem("user");
       localStorage.removeItem("accessToken");
 
-      showAlert("Success", res?.message || "Logout successfully")
+      showAlert("Success", res?.message || "Logout successfully");
 
       window.location.href = "/login";
     } catch (error) {
@@ -53,12 +60,10 @@ const Sidebar = ({ collapsed, setCollapsed, sidebarOpen, setSidebarOpen }) => {
   };
 
   const confirmLogout = () => {
-        showConfirm(
-      "Logout",
-      "Are you sure you want to logout this device?",
-      () => handleLogout(), 
+    showConfirm("Logout", "Are you sure you want to logout this device?", () =>
+      handleLogout(),
     );
-  }
+  };
 
   return (
     <>
@@ -156,11 +161,11 @@ const Sidebar = ({ collapsed, setCollapsed, sidebarOpen, setSidebarOpen }) => {
         </div>
       </aside>
 
-            <AlertPopup
-              {...alertData}
-              onClose={closeAlert}
-              onConfirm={confirmAction}
-            />
+      <AlertPopup
+        {...alertData}
+        onClose={closeAlert}
+        onConfirm={confirmAction}
+      />
     </>
   );
 };
