@@ -20,7 +20,7 @@ const BasaVaraRate = () => {
     basaVaraRateValidator,
   );
 
-  const { data, isLoading, submit } = useCrudManager({
+  const { isLoading, submit } = useCrudManager({
     useAddMutation: useAddBasaVaraRateMutation,
     useGetQuery: useGetUsersBasaVaraRateQuery,
     useUpdateMutation: useUpdateBasaVaraRateMutation,

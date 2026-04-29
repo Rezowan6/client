@@ -25,10 +25,10 @@ const CreateUser = () => {
     try {
       const res = await createUser(data).unwrap();
 
-      showAlert("Success", res?.message || "User created success!");
+      showAlert("Success", res?.message || "Invite link send success!");
       resetForm();
     } catch (error) {
-      showAlert("Error", error?.data?.message || "User create failed");
+      showAlert("Error", error?.data?.message || "Invite link send failed");
     }
   };
 
