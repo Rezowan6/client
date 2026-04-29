@@ -28,6 +28,19 @@ export const loginUser = async (data) => {
 
   return res.data;
 };
+// set-password
+export const setpassword = async ({data, token}) => {
+
+  const res = await API.post(`/auth/set-password/${token}`, data);
+
+  console.log(res)
+
+  const { accessToken } = res.data.data;
+
+  localStorage.setItem("accessToken", accessToken);
+
+  return res.data;
+};
 
 // logout
 export const logoutUser = async () => {

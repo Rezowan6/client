@@ -36,7 +36,11 @@ export const validateRegister = (values) => {
   }
   return errors;
 };
-
+// invite
 export const inviteValidator = (values) => {
   return validateFields(values, ["email",]);
+};
+
+export const setpasswordValidator = (values) => {
+  return validateFields(values, ["name","email","password",]);
 };

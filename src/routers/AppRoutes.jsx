@@ -17,6 +17,7 @@ import Register from "./../pages/auth/Register";
 import UserDashboard from "./../pages/dashboard/UserDashboard";
 
 import DailyBalance from "../features/balance/pages/DailyBalance";
+import BasaVaraRate from "../features/basavara/pages/BasaVaraRate";
 import MonthlyBasaVara from "../features/basavara/pages/MonthlyBasaVara";
 import MonthlyCurrentBill from "../features/bills/pages/MonthlyCurrentBill";
 import DailayEggIncidantal from "../features/incidentalExpenses/pages/DailayEggIncidantal";
@@ -27,8 +28,8 @@ import CurrentBillCreate from "../pages/admin/CurrentBillCreate";
 import EggRate from "../pages/admin/EggRate";
 import KhalaBillCreate from "../pages/admin/KhalaBillCreate";
 import BasaVara from "../pages/masMalik/BasaVara";
-import BasaVaraRate from "../features/basavara/pages/BasaVaraRate";
 // route
+import SetPassword from "../pages/auth/SetPassword";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
@@ -38,6 +39,7 @@ const AppRoutes = () => {
     <Routes>
       {/*  Public Routes */}
       <Route path="/verify-email/:token" element={<VerifyEmail />} />
+      <Route path="/set-password/:token" element={<SetPassword />} />
       <Route element={<PublicRoute />}>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
@@ -66,7 +68,7 @@ const AppRoutes = () => {
 
           <Route path="/khala-bill" element={<KhalaBillCreate />} />
           <Route path="/khalaBill/:id" element={<MonthlyKhalaBill />} />
-          
+
           <Route path="/mills" element={<MillUpdate />} />
           <Route path="/mill/:id" element={<DailyMeals />} />
 
