@@ -1,6 +1,5 @@
 import Form from "../../../components/form/Form";
 import Loading from "../../../components/loading/Loding";
-import Title from "../../../components/title/Title";
 import useAlert from "../../../hooks/useAlert";
 import useForm from "../../../hooks/useForm";
 import { basaVaraRateValidator } from "../../../utils/validate/validateData";
@@ -36,13 +35,10 @@ const BasaVaraRate = () => {
     );
   };
 
-  const {month, year} = data.data;
-
   if (isLoading) return <Loading />;
   return (
     <div>
       <div className="mt-32 md:mt-0">
-        <Title title={`${month}-${year}`} />
         <Form
           config={basaVaraRateConfig}
           values={values}
