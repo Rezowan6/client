@@ -38,7 +38,6 @@ const SetPassword = () => {
 
       navigate("/");
     } catch (error) {
-        console.log(error.response.data)
       showAlert("Error", error?.response?.data?.message || "Logged in Failed!");
     }
   };
