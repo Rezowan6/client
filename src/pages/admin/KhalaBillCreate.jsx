@@ -26,7 +26,7 @@ const KhalaBillCreate = () => {
     useAlert();
 
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ userId: "", khalaBill: "", month: "" }, khalaBillValidator);
+    useForm({ userId: "", balance: "", month: "" }, khalaBillValidator);
 
   const { data, isLoading, editId, setEditId, submit } = useCrudManager({
     useGetQuery: useGetKhalaBillQuery,

@@ -5,16 +5,10 @@ const useCrudManager = ({
   useAddMutation,
   useUpdateMutation,
   useDeleteMutation,
-  keyField1 = null, // tk / mill / etc
-  keyField2 = null,
-  keyField3 = null,
-  keyField4 = null,
-  keyField5 = null,
 }) => {
   const [editId, setEditId] = useState(null);
 
   const queryResult = useGetQuery?.() ?? { data: null, isLoading: false };
-
 
   const data = queryResult?.data ?? null;
   const isLoading = queryResult?.isLoading ?? false;
@@ -49,33 +43,11 @@ const useCrudManager = ({
       resetForm();
       setEditId(null);
     } catch (err) {
-      console.log(err)
+      console.log(err);
       showAlert("Error", err?.data?.message || "Operation failed");
       resetForm();
       setEditId(null);
     }
-  };
-
-  //   edit
-  const editItem = (item, setValues) => {
-    setEditId(item.userId || item._id);
-
-    const baseData = item[keyField1] || [];
-
-    const extraData = keyField3 ? item[keyField3] || [] : [];
-
-    setValues({
-      userId: item.userId || item._id,
-      [keyField5]: item[keyField5],
-
-      [keyField2]: baseData.map((day) => day[keyField2]),
-
-      ...(keyField4
-        ? {
-            [keyField4]: extraData.map((day) => day[keyField4]),
-          }
-        : {}),
-    });
   };
 
   const deleteItem = async (id, showAlert) => {
@@ -105,7 +77,6 @@ const useCrudManager = ({
     editId,
     setEditId,
     submit,
-    editItem,
     deleteItem,
   };
 };

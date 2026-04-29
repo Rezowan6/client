@@ -19,7 +19,6 @@ const IncidentalExpenses = () => {
     handleChange,
     handleSelectUser,
     onSubmit,
-    actions,
     quickEggAdd,
     closeAlert,
     confirmAction,
@@ -39,7 +38,6 @@ const IncidentalExpenses = () => {
           editId={editId}
           handleChange={handleChange}
           handleSubmit={onSubmit}
-          actions={actions}
           grandTotal={data?.data?.grandTotalOtherCost || 0}
           totalEgg={data?.data?.grandTotalEgg || 0}
           totalText="Total Other Cost"

@@ -10,7 +10,7 @@ const balanceConfig = {
         label: "Select User",
       },
       {
-        name: "tk",
+        name: "balance",
         type: "number",
         label: "Balance",
       },

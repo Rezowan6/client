@@ -1,175 +1,61 @@
+import {
+  validateAtLeastOne,
+  validateFields,
+} from "../../helpers/validatorFields/validatorFields";
+
 // Balance
 export const validateBalance = (values) => {
-  const errors = {};
-
-  const { tk, userId  } = values;
-
-  // required email
-  if (!userId) {
-    errors.userId = "User is required";
-  }
-  if (!tk) {
-    errors.tk = "Balance is required";
-  }
-
-  return errors;
+  return validateFields(values, ["userId", "balance"]);
 };
 // basaVara
 export const basaVaraValidator = (values) => {
-  const errors = {};
-
-  const { basaVara, userId  } = values;
-
-  // required email
-  if (!userId) {
-    errors.userId = "User is required";
-  }
-  if (!basaVara) {
-    errors.basaVara = "Balance is required";
-  }
-
-  return errors;
+  return validateFields(values, ["userId", "basaVara"]);
+};
+// basaVara Rate
+export const basaVaraRateValidator = (values) => {
+  return validateFields(values, ["balance"]);
 };
 // current bill
 export const currentBillValidator = (values) => {
-  const errors = {};
-
-  const { currentBill, userId  } = values;
-
-  // required email
-  if (!userId) {
-    errors.userId = "User is required";
-  }
-  if (!currentBill) {
-    errors.currentBill = "Balance is required";
-  }
-
-  return errors;
+  return validateFields(values, ["userId", "balance"]);
 };
 // khala bill
 export const khalaBillValidator = (values) => {
-  const errors = {};
-
-  const { khalaBill, userId  } = values;
-
-  // required email
-  if (!userId) {
-    errors.userId = "User is required";
-  }
-  if (!khalaBill) {
-    errors.khalaBill = "Balance is required";
-  }
-
-  return errors;
+  return validateFields(values, ["userId", "balance"]);
 };
 
 // Mill
 export const validateMill = (values) => {
-  const errors = {};
-
-  const { mill, userId  } = values;
-
-  // required email
-  if (!userId) {
-    errors.userId = "User is required";
-  }
-  if (!mill) {
-    errors.mill = "Mill is required";
-  }
-
-  return errors;
+  return validateFields(values, ["userId", "mill"]);
 };
 
 // Cost
 export const validateCost = (values) => {
-  const errors = {};
-
-  const { cost, desc, signature } = values;
-
-  // required email
-  if (!cost) {
-    errors.cost = "Cost is required";
-  }
-  if (!desc) {
-    errors.desc = "Desc is required";
-  }
-  if (!signature) {
-    errors.signature = "signature is required";
-  }
-
-  return errors;
+  return validateFields(values, ["cost", "desc", "signature"]);
 };
-// other Cost
-export const validateIncedentalExpenses = (values) => {
-  const errors = {};
 
-  const { otherCost, egg,totalOtherCost, } = values;
-
-  // required email
-  if (!otherCost && !egg && !totalOtherCost) {
-    errors.otherCost = "OtherCost is required";
-  }
-  if (!egg && !otherCost && !totalOtherCost) {
-    errors.egg = "Egg is required";
-  }
-  if (!egg && !otherCost && !totalOtherCost) {
-    errors.totalOtherCost = "TotalOtherCost is required";
-  }
-
-  return errors;
-};
 // permanent info
 export const validatePermanentInfo = (values) => {
-  const errors = {};
-
-  const { location,  mobileNumber, department, semester  } = values;
-
-  // required email
-  if (!location ) {
-    errors.location = "Location is required";
-  }
-  if (!mobileNumber ) {
-    errors.mobileNumber = "MobileNumber is required";
-  }
-  if (!department ) {
-    errors.department = "department is required";
-  }
-  if (!semester ) {
-    errors.semester = "semester is required";
-  }
-
-  return errors;
+  return validateFields(values, ["userId", "parmanent"]);
 };
 
 // role
 export const validateRole = (values) => {
-  const errors = {};
+  return validateFields(values, ["userId", "role"]);
+};
 
-  const {userId, role } = values;
+// ------------------- validateAtLeastOne ----------------------
 
-  // required email
-  if (!userId ) {
-    errors.userId = "User id is required";
-  }
-  if (!role ) {
-    errors.role = "Role is required";
-  }
-
-  return errors;
+// other Cost
+export const validateIncedentalExpenses = (values) => {
+  return validateAtLeastOne(values, [
+    "userId",
+    "otherCost",
+    "egg",
+    "totalOtherCost",
+  ]);
 };
 // eggRate
 export const eggRateValidator = (values) => {
-  const errors = {};
-
-  const { eggRate, soldProduct } = values;
-
-  // required email
-  if (!eggRate && !soldProduct) {
-    errors.eggRate = "Egg Rate is required";
-  }
-  if (!soldProduct && !eggRate ) {
-    errors.soldProduct = "Sold Product is required";
-  }
-
-  return errors;
+  return validateAtLeastOne(values, ["eggRate", "soldProduct"]);
 };

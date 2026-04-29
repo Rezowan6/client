@@ -22,6 +22,7 @@ export const adminNav = [
       { name: "Meal", path: "/mills" },
       { name: "Cost", path: "/cost" },
       { name: "Incidental", path: "/incidental-cost" },
+      { name: "Egg-Rate", path: "/egg-rate" },
     ],
   },
 
@@ -43,6 +44,10 @@ export const adminNav = [
       {
         name: "BasaVara",
         path: "/basa-vara",
+      },
+      {
+        name: "Rate",
+        path: "/basa-vara-rate",
       },
     ],
   },

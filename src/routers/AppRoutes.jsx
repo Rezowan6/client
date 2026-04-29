@@ -27,6 +27,7 @@ import CurrentBillCreate from "../pages/admin/CurrentBillCreate";
 import EggRate from "../pages/admin/EggRate";
 import KhalaBillCreate from "../pages/admin/KhalaBillCreate";
 import BasaVara from "../pages/masMalik/BasaVara";
+import BasaVaraRate from "../features/basavara/pages/BasaVaraRate";
 // route
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
@@ -51,6 +52,7 @@ const AppRoutes = () => {
           <Route path="/get-users" element={<UserList />} />
 
           <Route path="/basa-vara" element={<BasaVara />} />
+          <Route path="/basa-vara-rate" element={<BasaVaraRate />} />
           <Route path="/montly-basaVara/:id" element={<MonthlyBasaVara />} />
 
           <Route path="/cost" element={<CostAdd />} />

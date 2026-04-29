@@ -10,7 +10,7 @@ const khalaBillConfig = {
         label: "Select User",
       },
       {
-        name: "khalaBill",
+        name: "balance",
         type: "number",
         label: "Balance",
       },

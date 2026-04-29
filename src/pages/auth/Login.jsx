@@ -45,7 +45,7 @@ const Login = () => {
     showConfirm(
       "Login",
       "Are you sure you want to login?",
-      () => submitLogin(values), // IMPORTANT FIX
+      () => submitLogin(values),
     );
   };
 

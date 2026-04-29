@@ -2,18 +2,17 @@ import { apiSlice } from "../api/apiSlice";
 
 export const basaVaraApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // ADD BasaVara
+    // ADD
     addBasaVara: builder.mutation({
       query: (data) => ({
         url: "/mas-malik/basa-vara",
         method: "POST",
         data,
       }),
-
-      invalidatesTags: ["BasaVara"], // better tag name
+      invalidatesTags: ["BasaVara"],
     }),
 
-    // GET BasaVara USERS
+    // GET
     getUsersBasaVara: builder.query({
       query: () => ({
         url: "/mas-malik/basa-vara",
@@ -23,11 +22,9 @@ export const basaVaraApi = apiSlice.injectEndpoints({
       providesTags: ["BasaVara"],
     }),
 
-    // UPDATE BasaVara USERS
+    // UPDATE
     updateBasaVara: builder.mutation({
       query: ({ data }) => {
-        // console.log("Update Data:", data);
-
         return {
           url: `/mas-malik/basa-vara`,
           method: "PATCH",

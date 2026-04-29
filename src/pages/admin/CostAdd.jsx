@@ -13,11 +13,10 @@ import useCrudManager from "../../hooks/useCrudManager";
 import { useTableActions } from "../../hooks/useTableAction";
 import { validateCost } from "../../utils/validate/validateData";
 import costConfigFunc from "./../../configs/costConfig";
+import { getCurrentDateParts } from "./../../helpers/date/getCurrentDate";
 import useForm from "./../../hooks/useForm";
 
 const CostAdd = () => {
-  const today = new Date().getDate();
-
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
 
@@ -39,10 +38,11 @@ const CostAdd = () => {
 
   // edit cost
   const editCost = (data) => {
+    const { day: today } = getCurrentDateParts();
     if (today !== data?.day) {
       return showAlert(
-        "Error",
-        "Update failed: Updates are allowed only on the same day",
+        "Update failed",
+        "Updates are allowed only on the same day",
       );
     }
     setEditId(data?.day);

@@ -10,7 +10,7 @@ const currentBillConfig = {
         label: "Select User",
       },
       {
-        name: "currentBill",
+        name: "balance",
         type: "number",
         label: "Balance",
       },

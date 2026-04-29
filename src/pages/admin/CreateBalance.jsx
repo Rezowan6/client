@@ -23,7 +23,7 @@ const CreateBalance = () => {
     useAlert();
 
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ userId: "", tk: "", day: "" }, validateBalance);
+    useForm({ userId: "", balance: "", day: "" }, validateBalance);
 
   const { items, data, isLoading, editId, submit, setEditId } = useCrudManager({
     useGetQuery: useGetUsersBalanceQuery,

@@ -13,7 +13,6 @@ import {
   toggleSelection,
   useDistributeOtherCostMutation,
   useIncidantalCrud,
-  useTableActions,
   validateIncedentalExpenses,
 } from "../index";
 
@@ -35,7 +34,7 @@ const useIncidentalExpenses = () => {
       validateIncedentalExpenses,
     );
 
-  const { items, data, isLoading, editId, submit, editItem, setEditId } =
+  const { items, data, isLoading, editId, submit, setEditId } =
     useIncidantalCrud();
 
   const incidentalExpensesSubmit = async () => {
@@ -71,7 +70,6 @@ const useIncidentalExpenses = () => {
     );
   };
 
-  const actions = useTableActions(editItem, setValues);
   const onSubmit = handleSubmit(handleConfirm);
 
   // add
@@ -96,8 +94,8 @@ const useIncidentalExpenses = () => {
 
   // edit
   useEffect(() => {
-    if (location.state?.editDailyData) {
-      const { egg, otherCost, day } = location.state.editDailyData;
+    if (location?.state?.editDailyData) {
+      const data = location.state.editDailyData;
 
       setEditId(location.state.userId);
 
@@ -105,9 +103,7 @@ const useIncidentalExpenses = () => {
         return {
           ...prev,
           userId: location.state.userId,
-          egg: egg,
-          otherCost: otherCost,
-          day,
+          ...data,
         };
       });
     }
@@ -139,9 +135,7 @@ const useIncidentalExpenses = () => {
     handleChange,
     handleSelectUser,
     onSubmit,
-    actions,
     quickEggAdd,
-    editItem,
     setValues,
     setEditId,
     closeAlert,

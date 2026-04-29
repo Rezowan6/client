@@ -26,7 +26,7 @@ const CurrentBills = () => {
     useAlert();
 
   const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ userId: "", currentBill: "", month: "" }, currentBillValidator);
+    useForm({ userId: "", balance: "", month: "" }, currentBillValidator);
 
   const { data, isLoading, editId, setEditId, submit } = useCrudManager({
     useGetQuery: useGetCurrentBillQuery,
