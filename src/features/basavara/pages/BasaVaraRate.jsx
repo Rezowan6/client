@@ -1,37 +1,48 @@
 import Form from "../../../components/form/Form";
-import Loading from "../../../components/loading/Loding"
+import Loading from "../../../components/loading/Loding";
+import Title from "../../../components/title/Title";
 import useAlert from "../../../hooks/useAlert";
 import useForm from "../../../hooks/useForm";
 import { basaVaraRateValidator } from "../../../utils/validate/validateData";
+import {
+  useAddBasaVaraRateMutation,
+  useGetUsersBasaVaraRateQuery,
+  useUpdateBasaVaraRateMutation,
+} from "../basaVaraRateApi";
+import useCrudManager from "./../../../hooks/useCrudManager";
 import basaVaraRateConfig from "./../configs/basaVaraRateConfig";
-import useCrudManager from './../../../hooks/useCrudManager';
-import { useAddBasaVaraRateMutation, useGetUsersBasaVaraRateQuery, useUpdateBasaVaraRateMutation } from "../basaVaraRateApi";
 
 const BasaVaraRate = () => {
   const { alertData, showAlert, closeAlert, showConfirm, confirmAction } =
     useAlert();
 
-  const { values, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ balance: "" }, basaVaraRateValidator);
+  const { values, errors, handleChange, handleSubmit, resetForm } = useForm(
+    { balance1: "", balance2: "" },
+    basaVaraRateValidator,
+  );
 
-    const { data, isLoading, submit,} = useCrudManager({
-      useAddMutation: useAddBasaVaraRateMutation,
-      useGetQuery: useGetUsersBasaVaraRateQuery,
-      useUpdateMutation: useUpdateBasaVaraRateMutation
-    })
-
-    console.log(data)
+  const { data, isLoading, submit } = useCrudManager({
+    useAddMutation: useAddBasaVaraRateMutation,
+    useGetQuery: useGetUsersBasaVaraRateQuery,
+    useUpdateMutation: useUpdateBasaVaraRateMutation,
+  });
 
   const handleConfirm = () => {
+    const payload = {
+      basaVaraRate: [Number(values.balance1), Number(values.balance2)],
+    };
     showConfirm("BasaVara-Rate", "Are you sure you want to added rate?", () =>
-      submit(values, showAlert, resetForm),
+      submit({ values: payload, showAlert, resetForm }),
     );
   };
 
-  if(isLoading) return <Loading />
+  const {month, year} = data.data;
+
+  if (isLoading) return <Loading />;
   return (
     <div>
-      <div className="mt-32 sm:mt-0">
+      <div className="mt-32 md:mt-0">
+        <Title title={`${month}-${year}`} />
         <Form
           config={basaVaraRateConfig}
           values={values}

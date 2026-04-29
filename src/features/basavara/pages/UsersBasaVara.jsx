@@ -15,7 +15,8 @@ import {
   useRefreshMonthlyBasaVaraMutation,
   useUpdateBasaVaraMutation,
 } from "../basaVaraApi";
-import basaVaraConfig from "../configs/basaVaraConfig.jsx";
+import { useGetUsersBasaVaraRateQuery } from "../basaVaraRateApi.js";
+import basaVara from "./../configs/basaVaraConfig";
 
 const UsersBasaVara = () => {
   const location = useLocation();
@@ -31,6 +32,12 @@ const UsersBasaVara = () => {
     useGetQuery: useGetUsersBasaVaraQuery,
     useAddMutation: useAddBasaVaraMutation,
     useUpdateMutation: useUpdateBasaVaraMutation,
+  });
+
+  const { data: basaVaraRates } = useGetUsersBasaVaraRateQuery();
+  
+  const basaVaraConfig = basaVara({
+    basaVaraRate: basaVaraRates?.data?.basaVaraRate,
   });
 
   const updateHook = useRefreshMonthlyBasaVaraMutation();

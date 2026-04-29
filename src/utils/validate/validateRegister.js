@@ -1,12 +1,9 @@
+import { validateFields } from "../../helpers/validatorFields/validatorFields";
+
 export const validateRegister = (values) => {
-  const {name, email, password, confirmPassword } = values;
+  const { email, password, confirmPassword } = values;
 
   const errors = {};
-
-  // reqruired name
-  if(!name) {
-    errors.name = "Name is required"
-  }
 
   // required email
   if (!email) {
@@ -38,4 +35,8 @@ export const validateRegister = (values) => {
     errors.confirmPassword = "Passwords do not match";
   }
   return errors;
+};
+
+export const inviteValidator = (values) => {
+  return validateFields(values, ["email",]);
 };

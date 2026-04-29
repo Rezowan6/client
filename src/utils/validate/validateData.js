@@ -11,10 +11,6 @@ export const validateBalance = (values) => {
 export const basaVaraValidator = (values) => {
   return validateFields(values, ["userId", "basaVara"]);
 };
-// basaVara Rate
-export const basaVaraRateValidator = (values) => {
-  return validateFields(values, ["balance"]);
-};
 // current bill
 export const currentBillValidator = (values) => {
   return validateFields(values, ["userId", "balance"]);
@@ -45,7 +41,10 @@ export const validateRole = (values) => {
 };
 
 // ------------------- validateAtLeastOne ----------------------
-
+// basaVara Rate
+export const basaVaraRateValidator = (values) => {
+  return validateAtLeastOne(values, ["balance1", "balance2"]);
+};
 // other Cost
 export const validateIncedentalExpenses = (values) => {
   return validateAtLeastOne(values, [

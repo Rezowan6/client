@@ -2,10 +2,10 @@ import useAlert from "../../hooks/useAlert";
 import useForm from "../../hooks/useForm";
 
 import userCreateConfig from "../../configs/userCreateConfig";
-import { validateRegister } from "../../utils/validate/validateRegister";
 
 import Form from "../../components/form/Form";
 import { useCreateUserMutation } from "../../features/users/userApi";
+import { inviteValidator } from "../../utils/validate/validateRegister";
 
 const CreateUser = () => {
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
@@ -15,12 +15,9 @@ const CreateUser = () => {
 
   const { values, errors, handleChange, resetForm, handleSubmit } = useForm(
     {
-      name: "",
       email: "",
-      password: "",
-      confirmPassword: "",
     },
-    validateRegister,
+    inviteValidator,
   );
 
   // submit API call
@@ -43,7 +40,6 @@ const CreateUser = () => {
       () => submitUser(values), // IMPORTANT FIX
     );
   };
-
   return (
     <>
       <div className="mt-32 sm:mt-0">

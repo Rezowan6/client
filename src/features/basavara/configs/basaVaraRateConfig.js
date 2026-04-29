@@ -3,7 +3,12 @@ const basaVaraRateConfig = {
   form: {
     fields: [
       {
-        name: "balance",
+        name: "balance1",
+        type: "number",
+        label: "Balance",
+      },
+      {
+        name: "balance2",
         type: "number",
         label: "Balance",
       },

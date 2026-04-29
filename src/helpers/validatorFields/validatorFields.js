@@ -1,6 +1,5 @@
 export const validateFields = (values, requiredFields) => {
   const errors = {};
-  console.log(values);
 
   requiredFields.forEach((field) => {
     if (!values[field]) {
@@ -13,8 +12,6 @@ export const validateFields = (values, requiredFields) => {
 
 export const validateAtLeastOne = (values, fields) => {
   const errors = {};
-
-  console.log(values)
 
   const hasValue = fields.some((field) => values[field]);
 
