@@ -33,6 +33,7 @@ import SetPassword from "../pages/auth/SetPassword";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
+import AdminTransfer from "../pages/admin/AdminTransfer";
 
 const AppRoutes = () => {
   return (
@@ -81,6 +82,7 @@ const AppRoutes = () => {
             <Route path="/egg-rate" element={<EggRate />} />
             <Route path="/egg/:id" element={<DailayEggIncidantal />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/transfer-main-admin" element={<AdminTransfer />} />
           </Route>
         </Route>
       </Route>

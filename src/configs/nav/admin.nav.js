@@ -59,6 +59,10 @@ export const adminNav = [
         name: "Dashboard",
         path: "/admin-dashboard",
       },
+      {
+        name: "Transfer-admin",
+        path: "/transfer-main-admin",
+      },
     ],
   },
 ];

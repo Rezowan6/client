@@ -16,13 +16,12 @@ const Make_subAdminMess_malik = () => {
     useAlert();
 
   const { values, errors, handleChange, handleSubmit, resetForm } =
-    useForm({ userId: "", role: "" }, validateRole);
+    useForm({ userId: "", role: "", remove: false }, validateRole);
 
-  const { items, isLoading, editId, setEditId, submit, } =
-    useCrudManager({
-      useGetQuery: useGetSubAdminQuery,
-      useUpdateMutation: useUpdateSubAdminMutation,
-    });
+  const { items, isLoading, editId, submit } = useCrudManager({
+    useGetQuery: useGetSubAdminQuery,
+    useUpdateMutation: useUpdateSubAdminMutation,
+  });
 
   // actual submit
   const roleSubmit = () => {
@@ -30,6 +29,7 @@ const Make_subAdminMess_malik = () => {
       values,
       showAlert,
       resetForm,
+      roleEdit: values.userId
     });
   };
   // confirm before submit
@@ -41,21 +41,27 @@ const Make_subAdminMess_malik = () => {
     );
   };
   // remove role
-  const removeRole = (id) => {
-    setEditId(id);
-    return submit({ values: id, showAlert, resetForm });
+  const removeRole = (item) => {
+    const payload = {
+      ...item,
+      remove: true,
+    }
+    return submit({ values: payload, showAlert, resetForm, roleEdit: item._id });
   };
 
-  const roleRemoveConfirm = (id) => {
+  const roleRemoveConfirm = (item) => {
     showConfirm(
       "Role Remove",
       "Are you sure you want to remove this user's role?",
-      () => removeRole(id),
+      () => removeRole(item),
     );
   };
 
   const actions = useTableActions({
-    onDelete: roleRemoveConfirm,
+    delete: (item) => {
+      console.log(item)
+      roleRemoveConfirm(item);
+    },
   });
 
   if (isLoading) return <Loading />;

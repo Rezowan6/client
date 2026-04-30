@@ -25,11 +25,12 @@ const useCrudManager = ({
   const items = data?.data?.users ?? data?.data ?? [];
 
   //   submit
-  const submit = async ({ values, showAlert, resetForm }) => {
+  const submit = async ({ values, showAlert, resetForm, roleEdit=null, }) => {
+    console.log({values, editId})
     try {
       const payload = { ...values };
 
-      if (!editId) {
+      if (!editId && !roleEdit) {
         const res = await addFn(payload).unwrap();
         showAlert("Success", res?.message || "Added successfully!");
       } else {
