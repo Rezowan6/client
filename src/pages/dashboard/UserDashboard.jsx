@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import Loading from "../../components/loading/Loding";
 import { useGetUsersBasaVaraQuery } from "../../features/basavara/basaVaraApi";
 import { useGetCurrentBillQuery } from "../../features/bills/currentBillsApi";
@@ -8,10 +10,12 @@ import profilImg from "../../assets/images/app.png";
 import { getLocalUser } from "../../utils/localStorage/localStorage";
 
 const UserDashboard = () => {
-  const user = getLocalUser();
+  const navigate = useNavigate();
 
+  const user = getLocalUser();
+  // localStorage read user info
   const safeUser = user || {};
-  const { name="", email="", role="", _id="" } = safeUser;
+  const { name = "", email = "", role = "", _id = "" } = safeUser;
 
   const { isLoading, users } = useDashboardData();
   const { data: usersBasaVara } = useGetUsersBasaVaraQuery();
@@ -60,9 +64,16 @@ const UserDashboard = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-        <div className="bg-gray-700 p-4 rounded-xl shadow">
-          <p>Balance</p>
-          <h3 className="text-lg font-bold">{totalMoney.toFixed(2)}</h3>
+        <div className="bg-gray-700 flex items-center gap-10 p-4 rounded-xl shadow">
+          <div>
+            <p>Balance</p>
+            <h3 className="text-lg font-bold">{totalMoney.toFixed(2)}</h3>
+          </div>
+          <div>
+            <span
+            onClick={()=> navigate("/user/balance")}
+             className="text-xs border-b hover:text-yellow-400 cursor-pointer">#view</span>
+          </div>
         </div>
 
         <div className="bg-gray-700 p-4 rounded-xl shadow">
@@ -119,9 +130,9 @@ const UserDashboard = () => {
         <h3 className="text-lg font-semibold mb-4">Profile Details</h3>
 
         <div className="space-y-2">
-          <p>{/* 📍 Address: {user?.address} */}</p>
-          <p>{/* 📅 Joined: {user?.createdAt} */}</p>
-          <p>{/* 📞 Phone: {user?.phone} */}</p>
+          <p>{/*  Address: {user?.address} */}</p>
+          <p>{/*  Joined: {user?.createdAt} */}</p>
+          <p>{/*  Phone: {user?.phone} */}</p>
         </div>
       </div>
     </div>

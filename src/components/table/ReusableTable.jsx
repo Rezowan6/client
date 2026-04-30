@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const ReusableTable = ({
+  tableAction = true,
   link = null,
   linkRoutes,
   columns,
@@ -27,9 +28,11 @@ const ReusableTable = ({
                 {col.label}
               </th>
             ))}
-            <th className="border px-2 py-2 text-xs sm:text-sm md:text-base">
-              Action
-            </th>
+            {tableAction && (
+              <th className="border px-2 py-2 text-xs sm:text-sm md:text-base">
+                Action
+              </th>
+            )}
           </tr>
         </thead>
 
@@ -64,31 +67,33 @@ const ReusableTable = ({
                     );
                   })}
 
-                  <td className="border py-2">
-                    <div className="flex gap-2 justify-center items-center">
-                      {/* 👁️ View Link (only once) */}
-                      {link && linkRoutes[link] && (
-                        <Link
-                          to={linkRoutes[link](item)}
-                          state={item}
-                          className="hover:text-cyan-500 text-xs lg:text-sm border-b"
-                        >
-                          #view
-                        </Link>
-                      )}
+                  {tableAction && (
+                    <td className="border py-2">
+                      <div className="flex gap-2 justify-center items-center">
+                        {/*  View Link (only once) */}
+                        {link && linkRoutes[link] && (
+                          <Link
+                            to={linkRoutes[link](item)}
+                            state={item}
+                            className="hover:text-cyan-500 text-xs lg:text-sm border-b"
+                          >
+                            #view
+                          </Link>
+                        )}
 
-                      {/* ✏️ 🗑️ Other Actions */}
-                      {actions.map((action, i) => (
-                        <span
-                          key={i}
-                          onClick={() => action.onClick(item)}
-                          className="cursor-pointer inline-flex"
-                        >
-                          {action.label}
-                        </span>
-                      ))}
-                    </div>
-                  </td>
+                        {/*  Other Actions */}
+                        {actions.map((action, i) => (
+                          <span
+                            key={i}
+                            onClick={() => action.onClick(item)}
+                            className="cursor-pointer inline-flex"
+                          >
+                            {action.label}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                  )}
                 </tr>
               );
             })

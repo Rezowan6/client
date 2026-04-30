@@ -35,7 +35,7 @@ const UsersBasaVara = () => {
   });
 
   const { data: basaVaraRates } = useGetUsersBasaVaraRateQuery();
-  
+
   const basaVaraConfig = basaVara({
     basaVaraRate: basaVaraRates?.data?.basaVaraRate,
   });

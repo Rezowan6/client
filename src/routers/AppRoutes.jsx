@@ -34,6 +34,7 @@ import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import AdminTransfer from "../pages/admin/AdminTransfer";
+import UserBalance from "../pages/user/UserBalance";
 
 const AppRoutes = () => {
   return (
@@ -63,6 +64,7 @@ const AppRoutes = () => {
 
           <Route path="/create-balance" element={<CreateBalance />} />
           <Route path="/balance/:id" element={<DailyBalance />} />
+          <Route path="/user/balance" element={<UserBalance />} />
 
           <Route path="/current-bill" element={<CurrentBillCreate />} />
           <Route path="/currentBill/:id" element={<MonthlyCurrentBill />} />
