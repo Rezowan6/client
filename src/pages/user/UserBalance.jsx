@@ -26,6 +26,7 @@ const UserBalance = () => {
     { key: "day", label: "Day" },
     { key: "balance", label: "Balance" },
   ];
+
   if (isLoading) return <Loading />;
   return (
     <>
