@@ -20,7 +20,7 @@ const currentBillConfig = {
   table: {
     columns: [
       { key: "name", label: "Name" },
-      { key: "currentBill", label: "Balance" },
+      { key: "balance", label: "Balance" },
       {
         key: "balance",
         label: "AddBill",

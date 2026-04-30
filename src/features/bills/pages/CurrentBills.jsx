@@ -74,7 +74,7 @@ const CurrentBills = () => {
   const quickBalanceAdd = (user, balance) => {
     const values = {
       userId: user.userId,
-      currentBill: balance,
+      balance,
     };
 
     showConfirm(
@@ -91,14 +91,13 @@ const CurrentBills = () => {
   };
 
   useEffect(() => {
-    if (location.state?.editCurrentBill) {
-      const { currentBill, month } = location.state.editCurrentBill;
+    if (location.state?.editBill) {
+      const data = location.state.editBill;
       setEditId(location.state.userId);
 
       setValues({
         userId: location.state.userId,
-        currentBill,
-        month,
+        ...data,
       });
     }
   }, [location.state, setValues, setEditId]);
@@ -113,11 +112,13 @@ const CurrentBills = () => {
     return {
       name: user.name,
       userId: user.value,
-      currentBill: matchedItem?.currentBill || 0,
-      basaVaraList: matchedItem?.CurrentBillList,
+      balance: matchedItem?.balance || 0,
+      currentBillList: matchedItem?.currentBillList,
       isPaid: matchedItem?.isPaid || "",
     };
   });
+
+  console.log({itemsMap,users, allUserCurrentBill})
 
   if (isLoading) return <Loading />;
   return (

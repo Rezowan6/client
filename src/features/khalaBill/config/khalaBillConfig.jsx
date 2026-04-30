@@ -20,7 +20,7 @@ const khalaBillConfig = {
   table: {
     columns: [
       { key: "name", label: "Name" },
-      { key: "khalaBill", label: "Balance" },
+      { key: "balance", label: "Balance" },
       {
         key: "balance",
         label: "AddBill",

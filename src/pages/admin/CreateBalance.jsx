@@ -45,7 +45,7 @@ const CreateBalance = () => {
   const quickBalanceAdd = (user, balance) => {
     const values = {
       userId: user.userId,
-      tk: balance,
+      balance,
     };
 
     showConfirm(
@@ -63,12 +63,12 @@ const CreateBalance = () => {
 
   useEffect(() => {
     if (location.state?.editDailyTk) {
-      const { day, tk } = location.state.editDailyTk;
+      const { day, balance } = location.state.editDailyTk;
       setEditId(location.state.userId);
 
       setValues({
         userId: location.state.userId,
-        tk,
+        balance,
         day,
       });
     }

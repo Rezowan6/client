@@ -74,7 +74,7 @@ const KhalaBillCreate = () => {
   const quickBalanceAdd = (user, balance) => {
     const values = {
       userId: user.userId,
-      khalaBill: balance,
+      balance,
     };
 
     showConfirm(
@@ -91,13 +91,12 @@ const KhalaBillCreate = () => {
   };
 
   useEffect(() => {
-    if (location.state?.editKhalaBill) {
-      const { khalaBill, month } = location.state.editKhalaBill;
+    if (location.state?.editBill) {
+      const data = location.state.editBill;
       setEditId(location.state.userId);
       setValues({
         userId: location.state.userId,
-        khalaBill,
-        month,
+        ...data
       });
     }
   }, [location.state, setValues, setEditId]);
@@ -112,7 +111,7 @@ const KhalaBillCreate = () => {
     return {
       name: user.name,
       userId: user.value,
-      khalaBill: matchedItem?.khalaBill || 0,
+      balance: matchedItem?.balance || 0,
       khalaBillList: matchedItem?.khalaBillList,
       isPaid: matchedItem?.isPaid || "",
     };

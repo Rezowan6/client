@@ -23,7 +23,7 @@ const MonthlyCurrentBill = () => {
 
   const columns = [
     { key: "date", label: "Date" },
-    { key: "currentBill", label: "CurrentBill" },
+    { key: "balance", label: "Balance" },
     { key: "isPaid", label: "Status" },
   ];
 
@@ -31,7 +31,7 @@ const MonthlyCurrentBill = () => {
     edit: (item) => {
       navigate("/current-bill", {
         state: {
-          editCurrentBill: item,
+          editBill: item,
           userId: id || userMonthlyData?._id,
         },
       });

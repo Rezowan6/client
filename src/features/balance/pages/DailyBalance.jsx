@@ -14,7 +14,7 @@ const DailyMeals = () => {
 
   const columns = [
     { key: "day", label: "Day" },
-    { key: "tk", label: "Balance" },
+    { key: "balance", label: "Balance" },
   ];
 
   const actions = useTableActions(

@@ -25,7 +25,7 @@ const MonthlyKhalaBill = () => {
 
   const columns = [
     { key: "date", label: "Date" },
-    { key: "khalaBill", label: "KhalaBill" },
+    { key: "balance", label: "Balance" },
     { key: "isPaid", label: "Status" },
   ];
 
@@ -33,7 +33,7 @@ const MonthlyKhalaBill = () => {
     edit: (item) => {
       navigate("/khala-bill", {
         state: {
-          editKhalaBill: item,
+          editBill: item,
           userId: id || userMonthlyData?._id,
         },
       });

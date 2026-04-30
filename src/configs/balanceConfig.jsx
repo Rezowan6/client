@@ -22,7 +22,7 @@ const balanceConfig = {
       { key: "name", label: "Name" },
       { key: "totalTk", label: "Balance" },
       {
-        key: "tk",
+        key: "balance",
         label: "AddBalance",
         render: (row, onAddBalance) => {
           return (

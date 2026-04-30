@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import Form from "../../components/form/Form";
 import Loading from "../../components/loading/Loding";
 import Title from "../../components/title/Title";
@@ -14,8 +12,6 @@ import { eggRateValidator } from "../../utils/validate/validateData";
 import eggRateConfig from "./../../configs/eggRateConfig";
 
 const EggRate = () => {
-  const navigate = useNavigate();
-
   const [createEggRate] = useAddEggRateMutation();
   const { data, isLoading } = useGetEggRateQuery();
 
@@ -41,7 +37,6 @@ const EggRate = () => {
       const res = await createEggRate(payload).unwrap();
       showAlert("Success", res?.message || "Egg rate added success!");
       resetForm();
-      navigate("/admin-dashboard")
     } catch (error) {
       showAlert("Error", error?.response?.data?.message || "Egg added Failed!");
       resetForm();

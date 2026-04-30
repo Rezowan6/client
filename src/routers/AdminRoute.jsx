@@ -6,7 +6,7 @@ const AdminRoute = () => {
   const user = getLocalUser();
 
   if (user?.role !== "admin") {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/profile" replace />;
   }
 
   return <Outlet />;
