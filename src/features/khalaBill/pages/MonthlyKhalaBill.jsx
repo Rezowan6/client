@@ -4,14 +4,14 @@ import Button from "../../../components/Button/Button";
 import Loading from "../../../components/loading/Loding";
 import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
-import { useGetKhalaBillQuery } from "../khalaBillApi";
+import { useGetKhalaBillHistoryQuery } from "../khalaBillApi";
 import { useTableActions } from "./../../../hooks/useTableAction";
 
 const MonthlyKhalaBill = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { data, isLoading } = useGetKhalaBillQuery();
+  const { data, isLoading } = useGetKhalaBillHistoryQuery();
 
   const users = data?.data?.users || [];
 
@@ -24,7 +24,11 @@ const MonthlyKhalaBill = () => {
   } = userMonthlyData || {};
 
   const columns = [
-    { key: "date", label: "Date" },
+    {
+      key: "date",
+      label: "Date",
+      render: (item) => new Date(item.date).toLocaleDateString("en-BD"),
+    },
     { key: "balance", label: "Balance" },
     { key: "isPaid", label: "Status" },
   ];

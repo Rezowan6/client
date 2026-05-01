@@ -98,12 +98,13 @@ const UsersBasaVara = () => {
 
   useEffect(() => {
     if (location.state?.editBasaVara) {
-      const { basaVara } = location.state.editBasaVara;
+      const data = location.state.editBasaVara;
+
       setEditId(location.state.userId);
 
       setValues({
         userId: location.state.userId,
-        basaVara: basaVara,
+        ...data
       });
     }
   }, [location.state, setValues, setEditId]);
@@ -124,7 +125,7 @@ const UsersBasaVara = () => {
     };
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading || users.length <= 0) return <Loading />;
 
   return (
     <section className="pb-20">

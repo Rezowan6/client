@@ -35,6 +35,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import AdminTransfer from "../pages/admin/AdminTransfer";
 import UserBalance from "../pages/user/UserBalance";
+import UserCurrentBill from "../pages/user/UserCurrentBill";
 
 const AppRoutes = () => {
   return (
@@ -42,15 +43,17 @@ const AppRoutes = () => {
       {/*  Public Routes */}
       <Route path="/verify-email/:token" element={<VerifyEmail />} />
       <Route path="/set-password/:token" element={<SetPassword />} />
-        <Route path="/login" element={<Login />} />
       <Route element={<PublicRoute />}>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Route>
 
       {/*  Protected Routes (All logged-in users) */}
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
+          <Route path="/user/balance" element={<UserBalance />} />
+          <Route path="/user/currentBill" element={<UserCurrentBill />} />
           <Route path="/profile" element={<UserDashboard />} />
           <Route path="/create-users" element={<CreateUser />} />
           <Route path="/get-users" element={<UserList />} />
@@ -64,7 +67,6 @@ const AppRoutes = () => {
 
           <Route path="/create-balance" element={<CreateBalance />} />
           <Route path="/balance/:id" element={<DailyBalance />} />
-          <Route path="/user/balance" element={<UserBalance />} />
 
           <Route path="/current-bill" element={<CurrentBillCreate />} />
           <Route path="/currentBill/:id" element={<MonthlyCurrentBill />} />

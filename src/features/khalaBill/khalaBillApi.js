@@ -5,8 +5,8 @@ export const khalabillApi = apiSlice.injectEndpoints({
     // add 
     addKhalaBill: builder.mutation({
       query: (data) => ({
-        url: "/admin/months/khala-bill",
-        method: "POST",
+        url: "/admin/months/khala-bill/pay",
+        method: "PATCH",
         data,
       }),
       invalidatesTags: ["KhalaBill"],
@@ -20,11 +20,18 @@ export const khalabillApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["KhalaBill"],
     }),
+    getKhalaBillHistory: builder.query({
+      query: () => ({
+        url: "/admin/months/khala-bill/history",
+        method: "GET",
+      }),
+      providesTags: ["KhalaBill"],
+    }),
     // update
     updateKhalaBill: builder.mutation({
       query: ({data}) => {
         return {
-        url: "/admin/months/khala-bill",
+        url: "/admin/months/khala-bill/update",
         method: "PATCH",
         data,
       }
@@ -36,7 +43,7 @@ export const khalabillApi = apiSlice.injectEndpoints({
       query: () => {
         return {
         url: "/admin/months/khala-bill/refresh",
-        method: "PATCH",
+        method: "POST",
       }
       },
       invalidatesTags: ["KhalaBill"],
@@ -44,5 +51,5 @@ export const khalabillApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useAddKhalaBillMutation, useGetKhalaBillQuery, useUpdateKhalaBillMutation, useMonthlyRefreshKhalaBillMutation } = khalabillApi;
+export const { useAddKhalaBillMutation, useGetKhalaBillQuery, useGetKhalaBillHistoryQuery, useUpdateKhalaBillMutation, useMonthlyRefreshKhalaBillMutation } = khalabillApi;
 

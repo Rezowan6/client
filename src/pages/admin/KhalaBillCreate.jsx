@@ -60,7 +60,7 @@ const KhalaBillCreate = () => {
     totalPaidUser = 0,
   } = data?.data || {};
 
-  const balanceSubmit = () => submit({ values, showAlert, resetForm });
+  const balanceSubmit = () => submit({ values, showAlert, resetForm, });
 
   // confirm before balance add
   const balanceAddConfirm = (data) => {

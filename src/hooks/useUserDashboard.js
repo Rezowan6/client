@@ -70,6 +70,9 @@ export const useUserDashboard = () => {
     {
       title: "Current Bill",
       value: currentBillPaid,
+      link: "/user/currentBill",
+      actionText: "View History",
+      type: "money",
       conditionalColor: currentBillPaid === "paid",
     },
   ];
