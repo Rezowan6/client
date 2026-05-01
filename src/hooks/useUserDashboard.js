@@ -1,13 +1,12 @@
-import { getLocalUser } from "../utils/localStorage/localStorage";
-import { useDashboardData } from './useDashboardData';
-import { useGetUsersBasaVaraQuery } from '../features/basavara/basaVaraApi';
-import { useGetKhalaBillQuery } from '../features/khalaBill/khalaBillApi';
-import { useGetCurrentBillQuery } from '../features/bills/currentBillsApi';
-
+import { useGetUsersBasaVaraQuery } from "../features/basavara/basaVaraApi";
+import { useGetCurrentBillQuery } from "../features/bills/currentBillsApi";
+import { useGetKhalaBillQuery } from "../features/khalaBill/khalaBillApi";
+import { getSafeUser } from "../utils/localStorage/localStorage";
+import { useDashboardData } from "./useDashboardData";
+import { useUserBalance } from "./useUserBalance";
 
 export const useUserDashboard = () => {
-  const user = getLocalUser() || {};
-  const { name = "", email = "", role = "", _id = "" } = user;
+  const { name = "", email = "", role = "", _id = "" } = getSafeUser();
 
   const { isLoading, users } = useDashboardData();
   const { data: usersBasaVara } = useGetUsersBasaVaraQuery();
@@ -17,14 +16,11 @@ export const useUserDashboard = () => {
   const userData =
     users?.usersData?.find((u) => String(u?.id) === String(_id)) || {};
 
-  const userBasaVara =
-    usersBasaVara?.data?.users?.find((u) => u?.userId === _id) || {};
+  const userBasaVara = useUserBalance(usersBasaVara) || {};
 
-  const khalaBill =
-    userKhalaBill?.data?.users?.find((u) => u?.userId === _id) || {};
+  const khalaBill = useUserBalance(userKhalaBill) || {};
 
-  const currentBill =
-    userCurrentBill?.data?.users?.find((u) => u?.userId === _id) || {};
+  const currentBill = useUserBalance(userCurrentBill) || {};
 
   const {
     balance = 0,
@@ -33,23 +29,29 @@ export const useUserDashboard = () => {
     expense = 0,
     totalMill = 0,
     totalMoney = 0,
-  } = userData;
+  } = userData || {};
 
-  const { isPaid: basaVaraBill = "unpaid" } = userBasaVara;
-  const { isPaid: khalaBillPaid = "unpaid" } = khalaBill;
-  const { isPaid: currentBillPaid = "unpaid" } = currentBill;
+  const { isPaid: basaVaraBill = "unpaid" } = userBasaVara || {};
+  const { isPaid: khalaBillPaid = "unpaid" } = khalaBill || {};
+  const { isPaid: currentBillPaid = "unpaid" } = currentBill || {};
 
   const dashboardCards = [
     {
       title: "Balance",
       value: totalMoney,
-      link: "/user/balance",
+      link: "/user/balance/history",
       actionText: "View History",
       type: "money",
     },
     { title: "Total Mill", value: totalMill },
     { title: "Egg Cost", value: eggCost },
-    { title: "Incidental Cost", value: incidentalCost, type: "money" },
+    {
+      title: "Incidental Cost",
+      value: incidentalCost,
+      link: "/user/incidantal/history",
+      actionText: "View History",
+      type: "money",
+    },
     { title: "Total Cost", value: expense, type: "money" },
     {
       title: "Remaining Balance",
@@ -60,17 +62,21 @@ export const useUserDashboard = () => {
     {
       title: "Basa Vara",
       value: basaVaraBill,
+      link: "/user/basaVara/history",
+      actionText: "View History",
       conditionalColor: basaVaraBill === "paid",
     },
     {
       title: "Khala Bill",
       value: khalaBillPaid,
+      link: "/user/khalaBill/history",
+      actionText: "View History",
       conditionalColor: khalaBillPaid === "paid",
     },
     {
       title: "Current Bill",
       value: currentBillPaid,
-      link: "/user/currentBill",
+      link: "/user/currentBill/history",
       actionText: "View History",
       type: "money",
       conditionalColor: currentBillPaid === "paid",

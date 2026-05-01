@@ -31,11 +31,14 @@ import BasaVara from "../pages/masMalik/BasaVara";
 import AdminTransfer from "../pages/admin/AdminTransfer";
 import MakeSubAdminMessMalik from "../pages/admin/MakeSubAdminMessMalik";
 import SetPassword from "../pages/auth/SetPassword";
-import UserBalance from "../pages/user/UserBalance";
-import UserCurrentBill from "../pages/user/UserCurrentBill";
+import UserBalanceHistory from './../pages/userDataHistory/UserBalanceHistory';
+import UserCurrentBillHistory from './../pages/userDataHistory/UserCurrentBillHistory';
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
+import UserKhalaBillHistory from './../pages/userDataHistory/UserKhalaBillHistory';
+import UserBasaVaraHistory from "../pages/userDataHistory/UserBasaVaraHistory";
+import UserIncidantalHistory from './../pages/userDataHistory/UserIncidantalHistory';
 
 const AppRoutes = () => {
   return (
@@ -52,8 +55,11 @@ const AppRoutes = () => {
       {/*  Protected Routes (All logged-in users) */}
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
-          <Route path="/user/balance" element={<UserBalance />} />
-          <Route path="/user/currentBill" element={<UserCurrentBill />} />
+          <Route path="/user/balance/history" element={<UserBalanceHistory />} />
+          <Route path="/user/currentBill/history" element={<UserCurrentBillHistory />} />
+          <Route path="/user/khalaBill/history" element={<UserKhalaBillHistory />} />
+          <Route path="/user/basaVara/history" element={<UserBasaVaraHistory />} />
+          <Route path="/user/incidantal/history" element={<UserIncidantalHistory />} />
           <Route path="/profile" element={<UserDashboard />} />
           <Route path="/create-users" element={<CreateUser />} />
           <Route path="/get-users" element={<UserList />} />

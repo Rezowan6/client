@@ -5,42 +5,35 @@ import Loading from "../../components/loading/Loding";
 import ReusableTable from "../../components/table/ReusableTable";
 import Title from "../../components/title/Title";
 import { useGetUsersBalanceQuery } from "../../features/balance/balanceApi";
-import { getLocalUser } from "../../utils/localStorage/localStorage";
+import { useUserBalance } from "../../hooks/useUserBalance";
+import { balanceColumns } from "../../constants/tableColumns";
 
-const UserBalance = () => {
+const UserBalanceHistory = () => {
   const navigate = useNavigate();
-  const user = getLocalUser();
-  const safeUser = user || {};
-  const { _id = "" } = safeUser;
 
   const { data: userBalance, isLoading } = useGetUsersBalanceQuery();
 
-  const balance =
-    userBalance?.data?.users?.find(
-      (user) => String(user?.userId) === String(_id),
-    ) || {};
+  const balance = useUserBalance(userBalance);
 
-  const { name, totalTk, dailyTk } = balance;
+  const { name="", totalTk=0, dailyTk=[] } = balance || {};
 
-  const columns = [
-    { key: "day", label: "Day" },
-    { key: "balance", label: "Balance" },
-  ];
+  const columns = balanceColumns
 
   if (isLoading) return <Loading />;
   return (
     <>
       <div className="pb-4 flex flex-col justify-between items-center sm:flex-row">
         <Title title={`Name: ${name}`} />
-        <Button
-          text="Go Back   "
-          onclickHandle={() => navigate("/profile")}
-        />
+        <Button text="Go Back   " onclickHandle={() => navigate("/profile")} />
       </div>
       <Title title={`Total: ${totalTk}`} />
-      <ReusableTable columns={columns} data={dailyTk || []} tableAction={false} />
+      <ReusableTable
+        columns={columns}
+        data={dailyTk || []}
+        tableAction={false}
+      />
     </>
   );
 };
 
-export default UserBalance;
+export default UserBalanceHistory;

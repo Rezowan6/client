@@ -4,27 +4,23 @@ import Button from "../../components/Button/Button";
 import Loading from "../../components/loading/Loding";
 import ReusableTable from "../../components/table/ReusableTable";
 import Title from "../../components/title/Title";
+import { currentBillColumns } from "../../constants/tableColumns";
 import { useGetCurrentBillHistoryQuery } from "../../features/bills/currentBillsApi";
-import { getLocalUser } from './../../utils/localStorage/localStorage';
+import { useUserBalance } from "../../hooks/useUserBalance";
 
-const UserCurrentBill = () => {
+const UserCurrentBillHistory = () => {
   const navigate = useNavigate();
-  const user = getLocalUser();
-  const safeUser = user || {};
-  const { _id = "" } = safeUser;
 
-  const { data: userBill, isLoading } = useGetCurrentBillHistoryQuery();
+  const { data: userBalance, isLoading } = useGetCurrentBillHistoryQuery();
+  const balance = useUserBalance(userBalance);
 
-  const balance =
-    userBill?.data?.users?.find(
-      (user) => String(user?.userId) === String(_id),
-    ) || {};
-  const { name="", totalCurrentBill=0, currentBillList=[] } = balance || {};
+  const {
+    name = "",
+    totalCurrentBill = 0,
+    currentBillList = [],
+  } = balance || {};
 
-  const columns = [
-    { key: "date", label: "Date", render: (item) => new Date(item.date).toLocaleDateString("en-BD",) },
-    { key: "balance", label: "Balance" },
-  ];
+  const columns = currentBillColumns;
 
   if (isLoading) return <Loading />;
   return (
@@ -43,4 +39,4 @@ const UserCurrentBill = () => {
   );
 };
 
-export default UserCurrentBill;
+export default UserCurrentBillHistory;
