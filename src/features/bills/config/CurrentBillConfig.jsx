@@ -22,7 +22,7 @@ const currentBillConfig = {
       { key: "name", label: "Name" },
       { key: "balance", label: "Balance" },
       {
-        key: "balance",
+        key: "addBalance",
         label: "AddBill",
         render: (row, onAddBalance) => {
           return (

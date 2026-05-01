@@ -42,10 +42,10 @@ const AppRoutes = () => {
       {/*  Public Routes */}
       <Route path="/verify-email/:token" element={<VerifyEmail />} />
       <Route path="/set-password/:token" element={<SetPassword />} />
+        <Route path="/login" element={<Login />} />
       <Route element={<PublicRoute />}>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
       </Route>
 
       {/*  Protected Routes (All logged-in users) */}

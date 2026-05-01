@@ -38,7 +38,7 @@ const UserBalance = () => {
         />
       </div>
       <Title title={`Total: ${totalTk}`} />
-      <ReusableTable columns={columns} data={dailyTk} tableAction={false} />
+      <ReusableTable columns={columns} data={dailyTk || []} tableAction={false} />
     </>
   );
 };

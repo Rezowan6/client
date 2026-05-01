@@ -60,7 +60,7 @@ const CurrentBills = () => {
     totalPaidUser = 0,
   } = data?.data || {};
 
-  const balanceSubmit = () => submit({ values, showAlert, resetForm });
+  const balanceSubmit = () => submit({ values, showAlert, resetForm, roleEdit: true });
 
   // confirm before balance add
   const balanceAddConfirm = (data) => {
@@ -118,9 +118,7 @@ const CurrentBills = () => {
     };
   });
 
-  console.log({itemsMap,users, allUserCurrentBill})
-
-  if (isLoading) return <Loading />;
+  if (isLoading || users.length <= 0) return <Loading />;
   return (
     <section className="pb-20">
       <Title title={`Total Paid: ${totalPaidUser}`} />

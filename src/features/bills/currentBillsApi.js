@@ -5,8 +5,8 @@ export const currentbillApi = apiSlice.injectEndpoints({
     // add Currentbill
     addCurrentBill: builder.mutation({
       query: (data) => ({
-        url: "/admin/months/current-bill",
-        method: "POST",
+        url: "/admin/months/current-bill/pay",
+        method: "PATCH",
         data,
       }),
       invalidatesTags: ["CurrentBill"],
@@ -20,11 +20,18 @@ export const currentbillApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["CurrentBill"],
     }),
+    getCurrentBillHistory: builder.query({
+      query: () => ({
+        url: "admin/months/current-bill/history",
+        method: "GET",
+      }),
+      providesTags: ["CurrentBill"],
+    }),
     // update
     updateCurrentBill: builder.mutation({
       query: ({data}) => {
         return {
-        url: "admin/months/current-bill",
+        url: "admin/months/current-bill/update",
         method: "PATCH",
         data,
       }
@@ -36,7 +43,7 @@ export const currentbillApi = apiSlice.injectEndpoints({
       query: () => {
         return {
         url: "admin/months/current-bill/refresh",
-        method: "PATCH",
+        method: "POST",
       }
       },
       invalidatesTags: ["CurrentBill"],
@@ -44,5 +51,5 @@ export const currentbillApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {useAddCurrentBillMutation, useGetCurrentBillQuery, useUpdateCurrentBillMutation, useMonthlyRefreshCurrentBillMutation } = currentbillApi;
+export const {useAddCurrentBillMutation, useGetCurrentBillQuery, useGetCurrentBillHistoryQuery, useUpdateCurrentBillMutation, useMonthlyRefreshCurrentBillMutation } = currentbillApi;
 

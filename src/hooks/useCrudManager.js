@@ -26,7 +26,7 @@ const useCrudManager = ({
 
   //   submit
   const submit = async ({ values, showAlert, resetForm, roleEdit=null, }) => {
-    console.log({values, editId})
+
     try {
       const payload = { ...values };
 

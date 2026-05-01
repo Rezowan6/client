@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 
 const DashboardCard = ({ ...data }) => {
-  const { title, value, link, actionText, type, conditionalColor } = data;
+
+  const { title, value, link, actionText, type, conditionalColor } = data || {};
   const content = (
     <div
-      className={`bg-gray-700 hover:bg-cyan-900 hover:scale-105 transition flex items-center gap-12 p-4 rounded-xl shadow ${
+      className={`bg-gray-700 hover:bg-cyan-900 hover:scale-105 transition flex items-center gap-8 p-4 rounded-xl shadow ${
         conditionalColor === undefined
           ? ""
           : conditionalColor
             ? "text-green-500"
-            : "text-rose-500"
+            : "text-red-500"
       }`}
     >
       <div>
