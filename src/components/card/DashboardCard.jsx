@@ -5,7 +5,7 @@ const DashboardCard = ({ ...data }) => {
   const { title, value, link, actionText, type, conditionalColor } = data || {};
   const content = (
     <div
-      className={`bg-gray-700 hover:bg-cyan-900 hover:scale-105 transition flex items-center gap-8 p-4 rounded-xl shadow ${
+      className={`bg-gray-700 hover:bg-cyan-900 hover:scale-105 transition flex items-center gap-4 lg:gap-8 p-4 rounded-xl shadow ${
         conditionalColor === undefined
           ? ""
           : conditionalColor

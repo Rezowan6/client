@@ -9,15 +9,15 @@ const makeSubAdminConfig = {
         required: true,
       },
       {
-        name: "sub_admin",
+        name: "subAdmin",
         type: "checkbox",
-        label: "sub_admin",
+        label: "subAdmin",
         dataGroup:"role",
       },
       {
-        name: "mess_malik",
+        name: "messMalik",
         type: "checkbox",
-        label: "mess_malik",
+        label: "messMalik",
         dataGroup:"role",
       },
       {

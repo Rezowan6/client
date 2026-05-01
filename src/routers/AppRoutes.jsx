@@ -5,7 +5,6 @@ import CostAdd from "../pages/admin/CostAdd";
 import CreateBalance from "../pages/admin/CreateBalance";
 import CreateUser from "../pages/admin/CreateUser";
 import IncidentalExpenses from "../pages/admin/IncidentalExpenses";
-import Make_subAdminMess_malik from "../pages/admin/Make_subAdminMess_malik";
 import MillUpdate from "../pages/admin/MillUpdate";
 import UserList from "../pages/admin/UserList";
 import Login from "../pages/auth/Login";
@@ -29,13 +28,14 @@ import EggRate from "../pages/admin/EggRate";
 import KhalaBillCreate from "../pages/admin/KhalaBillCreate";
 import BasaVara from "../pages/masMalik/BasaVara";
 // route
+import AdminTransfer from "../pages/admin/AdminTransfer";
+import MakeSubAdminMessMalik from "../pages/admin/MakeSubAdminMessMalik";
 import SetPassword from "../pages/auth/SetPassword";
+import UserBalance from "../pages/user/UserBalance";
+import UserCurrentBill from "../pages/user/UserCurrentBill";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
-import AdminTransfer from "../pages/admin/AdminTransfer";
-import UserBalance from "../pages/user/UserBalance";
-import UserCurrentBill from "../pages/user/UserCurrentBill";
 
 const AppRoutes = () => {
   return (
@@ -79,10 +79,7 @@ const AppRoutes = () => {
 
           {/*  Admin Only Routes */}
           <Route element={<AdminRoute />}>
-            <Route
-              path="/make-sub-admin"
-              element={<Make_subAdminMess_malik />}
-            />
+            <Route path="/make-sub-admin" element={<MakeSubAdminMessMalik />} />
             <Route path="/egg-rate" element={<EggRate />} />
             <Route path="/egg/:id" element={<DailayEggIncidantal />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />

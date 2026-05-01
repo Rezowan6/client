@@ -8,10 +8,10 @@ import useCrudManager from "../../hooks/useCrudManager";
 import useForm from "../../hooks/useForm";
 import { useTableActions } from "../../hooks/useTableAction";
 import { validateRole } from "../../utils/validate/validateData";
-import ReusableCrudPage from "./../../components/pages/ReusableCrudPage";
-import makeSubAdminConfig from "./../../configs/makeSub_admin";
+import ReusableCrudPage from "../../components/pages/ReusableCrudPage";
+import makeSubAdminConfig from "../../configs/makeSub_admin";
 
-const Make_subAdminMess_malik = () => {
+const MakeSubAdminMessMalik = () => {
   const { alertData, showAlert, showConfirm, closeAlert, confirmAction } =
     useAlert();
 
@@ -87,4 +87,4 @@ const Make_subAdminMess_malik = () => {
   );
 };
 
-export default Make_subAdminMess_malik;
+export default MakeSubAdminMessMalik;
