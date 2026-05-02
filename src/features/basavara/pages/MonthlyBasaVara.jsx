@@ -41,13 +41,14 @@ const MonthlyBasaVara = () => {
     <>
       <div className="pb-4 flex flex-col justify-between items-center sm:flex-row">
         <Title title={`Name: ${name}`} />
-        <Title title={`Name: ${totalBasaVara}`} />
+        <Title title={`Total: ${totalBasaVara}`} />
         <Button
           text="Go Back   "
           onclickHandle={() => navigate("/basa-vara")}
         />
       </div>
-      <ReusableTable columns={columns} data={basaVaraList} actions={actions} />
+
+      <ReusableTable columns={columns} data={basaVaraList} actions={actions} title="Basa-Vara" />
     </>
   );
 };

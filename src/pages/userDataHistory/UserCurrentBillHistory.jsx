@@ -27,10 +27,11 @@ const UserCurrentBillHistory = () => {
     <>
       <div className="pb-4 flex flex-col justify-between items-center sm:flex-row">
         <Title title={`Name: ${name}`} />
+        <Title title={`Total: ${totalCurrentBill}`} />
         <Button text="Go Back   " onclickHandle={() => navigate("/profile")} />
       </div>
-      <Title title={`Total: ${totalCurrentBill}`} />
       <ReusableTable
+        title="Current Bill History"
         columns={columns}
         data={currentBillList || []}
         tableAction={false}

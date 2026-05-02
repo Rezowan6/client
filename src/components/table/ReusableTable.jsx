@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import Header from "../title/Header";
 
 const ReusableTable = ({
+  title = "",
   tableAction = true,
   link = null,
   linkRoutes,
@@ -11,9 +13,9 @@ const ReusableTable = ({
   onSelectUser,
   selectedUsers = [],
 }) => {
-
   return (
     <div className="w-full overflow-x-auto pb-10">
+      <Header title={`${title}`} />
       <table className="w-full text-center border-collapse">
         {/* table header */}
         <thead className="sticky top-0 bg-gray-900 z-10">

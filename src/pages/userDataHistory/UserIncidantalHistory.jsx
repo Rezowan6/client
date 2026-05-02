@@ -35,6 +35,7 @@ const UserIncidantalHistory = () => {
         <Title title={`Total Egg: ${totalEgg}`} />
       </div>
       <ReusableTable
+        title="Other Cost History"
         columns={columns}
         data={dailyData || []}
         tableAction={false}
