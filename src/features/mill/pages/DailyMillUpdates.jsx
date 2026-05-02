@@ -55,13 +55,12 @@ const DailyMillUpdates = () => {
 
   useEffect(() => {
     if (location.state?.editDailyMill) {
-      const { day, mill } = location.state.editDailyMill;
+      const data = location.state.editDailyMill;
       setEditId(location.state.userId)
 
       setValues({
         userId: location.state.userId,
-        mill: mill,
-        day: day,
+        ...data,
       });
     }
   }, [location.state, setValues, setEditId]);

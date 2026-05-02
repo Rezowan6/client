@@ -4,6 +4,7 @@ import EditBtn from "../../../components/Button/EditBtn";
 import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
 import { useTableActions } from "../../../hooks/useTableAction";
+import { balanceColumns } from "../../../constants/tableColumns";
 
 const DailyMeals = () => {
   const navigate = useNavigate();
@@ -12,10 +13,7 @@ const DailyMeals = () => {
 
   const { name, totalTk, dailyTk } = location.state;
 
-  const columns = [
-    { key: "day", label: "Day" },
-    { key: "balance", label: "Balance" },
-  ];
+  const columns = balanceColumns;
 
   const actions = useTableActions(
     {

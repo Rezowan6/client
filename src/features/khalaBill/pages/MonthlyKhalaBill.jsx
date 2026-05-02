@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Button from "../../../components/Button/Button";
 import Loading from "../../../components/loading/Loding";
@@ -6,39 +6,30 @@ import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
 import { useGetKhalaBillHistoryQuery } from "../khalaBillApi";
 import { useTableActions } from "./../../../hooks/useTableAction";
+import { useUserDynamicData } from "./../../../hooks/user/useUserDynamicData";
+import { khalaBillColumns } from './../../../constants/tableColumns';
 
 const MonthlyKhalaBill = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const { data, isLoading } = useGetKhalaBillHistoryQuery();
 
-  const users = data?.data?.users || [];
-
-  const userMonthlyData = users?.find((user) => user?.userId === id) || {};
+  const { user: monthlyKhalaBill, navigate } = useUserDynamicData(data, id);
 
   const {
     name: userName = "",
     totalKhalaBill = 0,
     khalaBillList: userBillList = [],
-  } = userMonthlyData || {};
+  } = monthlyKhalaBill || {};
 
-  const columns = [
-    {
-      key: "date",
-      label: "Date",
-      render: (item) => new Date(item.date).toLocaleDateString("en-BD"),
-    },
-    { key: "balance", label: "Balance" },
-    { key: "isPaid", label: "Status" },
-  ];
+  const columns = khalaBillColumns
 
   const actions = useTableActions({
     edit: (item) => {
       navigate("/khala-bill", {
         state: {
           editBill: item,
-          userId: id || userMonthlyData?._id,
+          userId: id || monthlyKhalaBill?._id,
         },
       });
     },

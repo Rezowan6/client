@@ -63,13 +63,12 @@ const CreateBalance = () => {
 
   useEffect(() => {
     if (location.state?.editDailyTk) {
-      const { day, balance } = location.state.editDailyTk;
+      const data = location.state.editDailyTk;
       setEditId(location.state.userId);
 
       setValues({
         userId: location.state.userId,
-        balance,
-        day,
+        ...data,
       });
     }
   }, [location.state, setValues, setEditId]);

@@ -4,10 +4,8 @@ export const basaVaraColumns = [
     label: "Date",
     render: (item) => new Date(item.date).toLocaleDateString("en-BD"),
   },
-  {
-    key: "basaVara",
-    label: "Balance",
-  },
+  { key: "basaVara", label: "Balance" },
+  { key: "isPaid", label: "Status" },
 ];
 
 export const currentBillColumns = [
@@ -17,6 +15,7 @@ export const currentBillColumns = [
     render: (item) => new Date(item.date).toLocaleDateString("en-BD"),
   },
   { key: "balance", label: "Balance" },
+  { key: "isPaid", label: "Status" },
 ];
 
 export const khalaBillColumns = [
@@ -26,10 +25,15 @@ export const khalaBillColumns = [
     render: (item) => new Date(item.date).toLocaleDateString("en-BD"),
   },
   { key: "balance", label: "Balance" },
+  { key: "isPaid", label: "Status" },
 ];
 
 export const balanceColumns = [
-  { key: "day", label: "Day" },
+  {
+    key: "date",
+    label: "Date",
+    render: (item) => new Date(item.date).toLocaleDateString("en-BD"),
+  },
   { key: "balance", label: "Balance" },
 ];
 

@@ -1,36 +1,27 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Button from "../../../components/Button/Button";
 import Loading from "../../../components/loading/Loding";
 import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
+import { currentBillColumns } from "../../../constants/tableColumns";
+import { useUserDynamicData } from "../../../hooks/user/useUserDynamicData";
 import { useGetCurrentBillHistoryQuery } from "../currentBillsApi";
 import { useTableActions } from "./../../../hooks/useTableAction";
 
 const MonthlyCurrentBill = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const { data, isLoading } = useGetCurrentBillHistoryQuery();
 
-  const users = data?.data?.users || [];
-  // console.log(users)
-  const userMonthlyData = users?.find((user) => user?.userId === id) || {};
+  const { user: monthlyCurrentBills, navigate } = useUserDynamicData(data, id);
   const {
-    name: userName = "",
+    name = "",
     totalCurrentBill = 0,
-    currentBillList: usercurrentBillList = [],
-  } = userMonthlyData || {};
+    currentBillList = [],
+  } = monthlyCurrentBills || {};
 
-  const columns = [
-    {
-      key: "date",
-      label: "Date",
-      render: (item) => new Date(item.date).toLocaleDateString("en-BD"),
-    },
-    { key: "balance", label: "Balance" },
-    { key: "isPaid", label: "Status" },
-  ];
+  const columns = currentBillColumns;
 
   const actions = useTableActions({
     edit: (item) => {
@@ -48,7 +39,7 @@ const MonthlyCurrentBill = () => {
   return (
     <>
       <div className="pb-4 flex flex-col justify-between items-center sm:flex-row">
-        <Title title={`Name: ${userName}`} />
+        <Title title={`Name: ${name}`} />
         <Title title={`Total: ${totalCurrentBill}`} />
         <Button
           text="Go Back   "
@@ -57,7 +48,7 @@ const MonthlyCurrentBill = () => {
       </div>
       <ReusableTable
         columns={columns}
-        data={usercurrentBillList}
+        data={currentBillList}
         actions={actions}
       />
     </>

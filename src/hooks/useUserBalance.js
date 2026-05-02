@@ -1,4 +1,4 @@
-import { getUserBalance } from "../utils/balance/balance";
+import { getUserBalance } from "../utils/user/getUserBalance";
 import { getSafeUser } from "../utils/localStorage/localStorage";
 
 export const useUserBalance = (userBalance) => {
