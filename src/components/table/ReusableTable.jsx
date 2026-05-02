@@ -53,12 +53,12 @@ const ReusableTable = ({
                     {index + 1}{" "}
                   </td>
 
-                  {columns.map((col) => {
+                  {columns.map((col, i) => {
                     const isSelect = col.key === "select";
 
                     return (
                       <td
-                        key={col.key}
+                        key={col.key || i}
                         className="border px-2 py-2 text-xs sm:text-sm"
                       >
                         {col.render
@@ -87,7 +87,7 @@ const ReusableTable = ({
                         {/*  Other Actions */}
                         {actions.map((action, i) => (
                           <span
-                            key={i}
+                            key={item._id || i}
                             onClick={() => action.onClick(item)}
                             className="cursor-pointer inline-flex"
                           >

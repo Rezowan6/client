@@ -48,7 +48,7 @@ const MonthlyBasaVara = () => {
         />
       </div>
 
-      <ReusableTable columns={columns} data={basaVaraList} actions={actions} title="Basa-Vara" />
+      <ReusableTable columns={columns} data={basaVaraList} actions={actions} title="Basa-Vara History" />
     </>
   );
 };

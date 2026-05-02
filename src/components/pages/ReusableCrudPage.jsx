@@ -36,13 +36,13 @@ const ReusableCrudPage = ({
     <>
     <Title title={title} />
       <section
-        className={`flex justify-center items-center mt-6 min-h-[60vh]`}
+        className={`flex justify-center items-center min-h-[45vh] lg:min-h-[60vh]`}
       >
         <div className="shadow-[0_0_50px_#0ef] p-10 rounded-2xl">
           {/* FORM */}
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-4 justify-center items-center w-full"
+            className="flex flex-col gap-4 justify-center items-center lg:pt-6 w-full"
           >
             {config.form.fields.map((field) => {
               return (
@@ -63,7 +63,7 @@ const ReusableCrudPage = ({
       </section>
 
       {/* TOTAL */}
-        <div className="text-2xl text-cyan-500 text-end pb-4">
+        <div className="text-2xl text-cyan-500 text-end">
           <h3>
            {totalText}:{grandTotal || 0}
           </h3>

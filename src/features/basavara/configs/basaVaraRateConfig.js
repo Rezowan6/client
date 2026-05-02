@@ -1,4 +1,5 @@
-const basaVaraRateConfig = {
+const basaVaraRateFunc = (editId) => {
+  const basaVaraRateConfig = {
   title: "BasaVara-Rate",
   form: {
     fields: [
@@ -15,8 +16,11 @@ const basaVaraRateConfig = {
     ],
   },
     buttons: [
-      { type: "submit", text: "Submit", action: "submit" },
+      { type: "submit", text:`${editId ? "Update" : "Submit"}`, action: "submit" },
     ],
 }
 
-export default basaVaraRateConfig;
+return basaVaraRateConfig;
+}
+
+export default basaVaraRateFunc;

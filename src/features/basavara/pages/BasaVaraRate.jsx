@@ -8,23 +8,30 @@ import {
   useGetUsersBasaVaraRateQuery,
   useUpdateBasaVaraRateMutation,
 } from "../basaVaraRateApi";
+import EditBtn from "./../../../components/Button/EditBtn";
+import Title from "./../../../components/title/Title";
 import useCrudManager from "./../../../hooks/useCrudManager";
-import basaVaraRateConfig from "./../configs/basaVaraRateConfig";
+import basaVaraRateFunc from "./../configs/basaVaraRateConfig";
 
 const BasaVaraRate = () => {
   const { alertData, showAlert, closeAlert, showConfirm, confirmAction } =
     useAlert();
 
-  const { values, errors, handleChange, handleSubmit, resetForm } = useForm(
-    { balance1: "", balance2: "" },
-    basaVaraRateValidator,
-  );
-
-  const { isLoading, submit } = useCrudManager({
+  const { values, setValues, errors, handleChange, handleSubmit, resetForm } =
+    useForm({ balance1: "", balance2: "" }, basaVaraRateValidator);
+  const {
+    items = [],
+    setEditId,
+    editId,
+    isLoading,
+    submit,
+  } = useCrudManager({
     useAddMutation: useAddBasaVaraRateMutation,
     useGetQuery: useGetUsersBasaVaraRateQuery,
     useUpdateMutation: useUpdateBasaVaraRateMutation,
   });
+
+  const basaVaraRateConfig = basaVaraRateFunc(editId);
 
   const handleConfirm = () => {
     const payload = {
@@ -35,10 +42,35 @@ const BasaVaraRate = () => {
     );
   };
 
+  const editRate = (rates) => {
+    setEditId(rates || true);
+    setValues((prev) => ({
+      ...prev,
+      balance1: rates[0],
+      balance2: rates[1],
+    }));
+  };
+
   if (isLoading) return <Loading />;
   return (
-    <div>
-      <div className="mt-32 md:mt-0">
+    <>
+      <Title title="Mass Malik" />
+      <div className="mt-6 md:mt-0">
+        <div className="flex justify-evenly lg:justify-start gap-4">
+          {items?.basaVaraRate?.map((rate, i) => {
+            return (
+              <div
+                key={i}
+                className="px-10 py-3 shadow-glow bg-emerald-800/50 hover:bg-emerald-800/60 rounded-md cursor-pointer"
+              >
+                {"Rate"}: {rate}
+                <button onClick={() => editRate(items?.basaVaraRate || [])}>
+                  <EditBtn action="edit" />
+                </button>
+              </div>
+            );
+          })}
+        </div>
         <Form
           config={basaVaraRateConfig}
           values={values}
@@ -51,7 +83,7 @@ const BasaVaraRate = () => {
           confirmAction={confirmAction}
         />
       </div>
-    </div>
+    </>
   );
 };
 
