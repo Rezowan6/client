@@ -8,29 +8,11 @@ export const subAdminNav = [
     ],
   },
   {
-    group: "User",
-    links: [
-      {
-        name: "User List",
-        path: "/get-users",
-      },
-      {
-        name: "Balance",
-        path: "/create-balance",
-      },
-    ],
-  },
-    {
     group: "Billing",
     links: [
-      {
-        name: "Current Bill",
-        path: "/current-bill",
-      },
-      {
-        name: "Khala Bill",
-        path: "/khala-bill",
-      },
+      { name: "Balance", path: "/create-balance" },
+      { name: "Current Bill", path: "/current-bill" },
+      { name: "Khala Bill", path: "/khala-bill" },
     ],
   },
 ];
