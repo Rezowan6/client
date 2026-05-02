@@ -4,6 +4,7 @@ import Button from "../../../components/Button/Button";
 import Loading from "../../../components/loading/Loding";
 import ReusableTable from "../../../components/table/ReusableTable";
 import Title from "../../../components/title/Title";
+import { mealColumns } from "../../../constants/tableColumns";
 import { useTableActions } from "../../../hooks/useTableAction";
 import { useGetUsersMillQuery } from "../millApi";
 
@@ -17,7 +18,7 @@ const DailyMeals = () => {
   const users = data?.data?.users || [];
   const userDailyMill =
     users?.find((user) => String(user?.userId) === String(id)) || {};
-    
+
   const {
     name: userName = "",
     totalMill: userTotalMill = 0,
@@ -26,10 +27,7 @@ const DailyMeals = () => {
 
   const { name = "", totalMill = 0, dailyMill = [] } = userDailyMill || {};
 
-  const columns = [
-    { key: "day", label: "Day" },
-    { key: "mill", label: "Meal" },
-  ];
+  const columns = mealColumns;
 
   const actions = useTableActions({
     edit: (item) => {

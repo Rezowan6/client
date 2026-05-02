@@ -5,12 +5,13 @@ const ReusableTable = ({
   link = null,
   linkRoutes,
   columns,
-  data,
+  data = [],
   actions = [],
   quickAdd,
   onSelectUser,
   selectedUsers = [],
 }) => {
+
   return (
     <div className="w-full overflow-x-auto pb-10">
       <table className="w-full text-center border-collapse">
@@ -39,7 +40,7 @@ const ReusableTable = ({
         {/* table body */}
         <tbody>
           {data.length ? (
-            data.map((item, index) => {
+            data?.map((item, index) => {
               return (
                 <tr
                   key={item._id || item.userId || index}

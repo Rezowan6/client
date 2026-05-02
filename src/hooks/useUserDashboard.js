@@ -8,10 +8,19 @@ import { useUserBalance } from "./useUserBalance";
 export const useUserDashboard = () => {
   const { name = "", email = "", role = "", _id = "" } = getSafeUser();
 
-  const { isLoading, users } = useDashboardData();
-  const { data: usersBasaVara } = useGetUsersBasaVaraQuery();
-  const { data: userKhalaBill } = useGetKhalaBillQuery();
-  const { data: userCurrentBill } = useGetCurrentBillQuery();
+  const { users, isLoading: userDataLoading } = useDashboardData();
+  const { data: usersBasaVara, isLoading: basaVaraLoading } =
+    useGetUsersBasaVaraQuery();
+  const { data: userKhalaBill, isLoading: khalaBillLoading } =
+    useGetKhalaBillQuery();
+  const { data: userCurrentBill, isLoading: currentBillLoading } =
+    useGetCurrentBillQuery();
+
+  const isLoading =
+    userDataLoading ||
+    basaVaraLoading ||
+    khalaBillLoading ||
+    currentBillLoading;
 
   const userData =
     users?.usersData?.find((u) => String(u?.id) === String(_id)) || {};
@@ -43,7 +52,12 @@ export const useUserDashboard = () => {
       actionText: "View History",
       type: "money",
     },
-    { title: "Total Mill", value: totalMill },
+    {
+      title: "Total Mill",
+      value: totalMill,
+      link: "/user/mill/history",
+      actionText: "View History",
+    },
     { title: "Egg Cost", value: eggCost },
     {
       title: "Incidental Cost",

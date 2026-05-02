@@ -33,6 +33,15 @@ export const balanceColumns = [
   { key: "balance", label: "Balance" },
 ];
 
+export const mealColumns = [
+  {
+    key: "date",
+    label: "Date",
+    render: (item) => new Date(item.date).toLocaleDateString("en-BD"),
+  },
+  { key: "mill", label: "Meal" },
+];
+
 export const incidantaExpensesColumns = [
   {
     key: "date",
